@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+  version="2.5">
+
+	<!-- Servlets -->
+  <servlet>
+    <servlet-name>servletDiProva</servlet-name>
+    <servlet-class>com.dlm.gwt.sample.cardmaster.server.ServletDiProvaServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>servletDiProva</servlet-name>
+    <url-pattern>/app/servletDiProva</url-pattern>
+  </servlet-mapping>
+  <!--
+  Quando un client fa una richiesta a quell'URL, ad esempio "http://localhost:8080/app/servletDiProva",
+  la servlet "ServletDiProva" (la cui classe è specificata come "com.dlm.gwt.sample.cardmaster.server.ServletDiProva")
+  viene eseguita per gestire la richiesta e restituire una risposta.
+  -->
+  
+  <listener>
+    <listener-class>com.dlm.gwt.sample.cardmaster.server.ListenerImpl</listener-class>
+  </listener>
+
+	<!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>CardMaster.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>
