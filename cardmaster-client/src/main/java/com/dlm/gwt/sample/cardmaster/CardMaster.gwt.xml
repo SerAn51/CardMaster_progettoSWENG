@@ -19,9 +19,11 @@
 
   <!-- Other module inherits                                      -->
   <inherits name="com.google.gwt.http.HTTP" />
+  <inherits name="com.google.gwt.place.Place" />
+  <inherits name="com.google.gwt.activity.Activity" />
 
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='com.dlm.gwt.sample.cardmaster.client.cardmaster'/>
+  <entry-point class='com.dlm.gwt.sample.cardmaster.client.view.LoginView'/>
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
