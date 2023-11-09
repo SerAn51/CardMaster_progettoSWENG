@@ -16,17 +16,17 @@ public class ModalPanel extends PopupPanel {
 
         // Aggiungi il profilo card come parte del contenuto
         FlowPanel cardContainer = new FlowPanel();
-        cardContainer.addStyleName("card-container");
+        cardContainer.addStyleName("headerModal-panelCard-container");
 
         HTML imageContainerProfile = new HTML("<div class='profileImage-container'></div>");
-        imageContainerProfile.setStyleName("stockProfileImage");
+        imageContainerProfile.setStyleName("headerModal-stockProfileImage");
 
         Label username = new Label(loggedUser.getUsername());
         Label email = new Label("Email: " + loggedUser.getEmail());
         Label age = new Label("Age: " + loggedUser.getAge());
         Label gender = new Label("Gender: " + loggedUser.getGender());
         Label news = new Label("Notification: " + loggedUser.getNews());
-        username.setStyleName("profileUsernameLabel");
+        username.setStyleName("headerModal-profileUsernameLabel");
         email.setStyleName("profileLabel");
         age.setStyleName("profileLabel");
         gender.setStyleName("profileLabel");

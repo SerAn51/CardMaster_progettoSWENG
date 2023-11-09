@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
+import org.mapdb.Serializer;
 
 public class Database {
 
@@ -157,6 +158,31 @@ public class Database {
             e.printStackTrace();
         }
         return loggedUser;
+    }
+
+    public List<Card> getMagicCards() {
+        System.out.println("---INIZIO getMagicCards---");
+
+        open();
+        System.out.println("PRIMO OPEN getMagicCards");
+        // Recupera la mappa dalla base di dati
+        Map<Integer, Card> map = db.hashMap("magic_cards")
+                .keySerializer(Serializer.INTEGER)
+                .valueSerializer(Serializer.JAVA)
+                .createOrOpen();
+        System.out.println("FORSE SECONDO OPEN getMagicCards (createOrOpen)");
+        // Estrai le carte dalla mappa e crea una lista
+            List<Card> cardList = new ArrayList<>();
+
+        for (Card card : map.values()) {
+            System.out.println("STO PER CARICARE LE CARTE");
+            cardList.add(card);
+            System.out.println("HO CARICATO UNA CARTA");
+        }
+        close();
+        System.out.println("---FINE getMagicCards---");
+        return cardList;
+        //TODO: gestire correttamente magic/pokemon/yugioh
     }
 
 }
