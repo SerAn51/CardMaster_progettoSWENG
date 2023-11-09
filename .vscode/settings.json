@@ -1,4 +1,23 @@
 {
     "java.compile.nullAnalysis.mode": "disabled",
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        ".vscode": true,
+        ".github/*.*": true,
+        ".github": true,
+        "**/README.md": true,
+        "README.md": true,
+        "**/pom.xml": true,
+        "**/.gitignore": true,
+        "**/target": true,
+        "JSON": true,
+        "**/*.xml": true
+    },
+    "explorerExclude.backup": {}
 }

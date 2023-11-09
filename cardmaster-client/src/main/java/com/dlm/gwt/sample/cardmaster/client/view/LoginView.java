@@ -78,18 +78,6 @@ public class LoginView extends Composite implements EntryPoint {
         HorizontalPanel logoPanel = null;
         try {
 
-            /**
-             * loginPanel
-             * loginTitle
-             * loginLogo
-             * loginLabel
-             * loginSignUpButton
-             * loginAskTxt
-             * loginSubscribeLink
-             * loginContainer
-             * loginInput
-             * 
-             * */
             container = new VerticalPanel();
             loginFormPanel = new VerticalPanel();
             loginFormPanel.setStyleName("loginPanel"); // Applica la classe CSS al pannello
@@ -133,6 +121,7 @@ public class LoginView extends Composite implements EntryPoint {
             HorizontalPanel horizontalPanel = new HorizontalPanel();
             horizontalPanel.add(askTxt);
             horizontalPanel.add(signupLink);
+            horizontalPanel.setStyleName("loginIscrivitiOra");
             loginFormPanel.add(horizontalPanel);
 
             // al click del bottone richiamo il metodo doLogin dell'activity corrispondente
