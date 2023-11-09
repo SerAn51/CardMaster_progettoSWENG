@@ -2,7 +2,6 @@ package com.dlm.gwt.sample.cardmaster.server;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import com.google.gson.Gson;
 
 // quando il server Jetty viene avviato/chiuso, se necessarie, si possono eseguire delle rispettive operazioni
 public class ListenerImpl implements ServletContextListener {
