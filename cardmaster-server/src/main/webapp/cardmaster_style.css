@@ -169,6 +169,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff;
 }
 
 /*-- FINE CSS LOGIN --*/
@@ -235,14 +236,460 @@ body {
   margin-bottom: .3rem;
   font-size: .9rem;
   font-weight: bold;
-  color: #000000;
+  color: #ffffff;
   transition: color .3s cubic-bezier(.25, .01, .25, 1) 0s;
   margin: 10px;
   font-size: 16px;
-  color: #0f0f0f;
 }
 
 /*-- FINE CSS SIGNUP --*/
 
-/*++ CSS HOME ++*/
+/*++ CSS HEADER ++*/
+.headerPanel {
+  padding: 10px;
+  margin: 0;
+  width: 100vw;
+  height: 110px;
+  background-color: transparent;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color .3s cubic-bezier(.25, .01, .25, 1) 0s, color .3s cubic-bezier(.25, .01, .25, 1) 0s, background .2s cubic-bezier(.25, .01, .25, 1) 0s;
+  background: rgba(255, 255, 255, 0.11);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
 
+.headerLogo {
+  background-image: url('/img/logo-no-background_left.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 800px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  margin-left: 3%;
+}
+
+.headerLogo:hover {
+  filter: brightness(85%);
+  transition-duration: 100ms;
+}
+
+.headerLogo:active {
+  filter: brightness(85%);
+}
+
+.headerLogoutButton {
+  --primary-color: #ff6666;
+  --secondary-color: #fff;
+  /*--hover-color: #be4848;*/
+  --hover-color: #c51d1d;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+}
+
+.headerLogoutButton:hover {
+  background-color: var(--hover-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+
+}
+
+.headerLogoutButton:active {
+  transform: scale(0.9);
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  transform: scale(0.90);
+  position: relative;
+}
+
+.headerLogoutLabel {
+  font-size: 20px;
+  margin-top: 3px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.headerLogoutImage {
+  background-image: url('/img/logout_logo.png');
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  margin-right: 8px;
+}
+
+.headerLogoutButton:hover .headerLogoutImage {
+  filter: brightness(85%);
+  transition-duration: 100ms;
+}
+
+.headerProfileButton {
+  --primary-color: #ff9966;
+  --secondary-color: #fff;
+  --hover-color: #e16323;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+  transition-duration: .3s;
+  transition-duration: 150ms;
+}
+
+.headerProfileButton:hover {
+  background-color: var(--hover-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+
+}
+
+.headerProfileButton:active {
+  transform: scale(0.9);
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  transform: scale(0.90);
+  position: relative;
+
+}
+
+.headerProfileLabel {
+  font-size: 20px;
+  margin-top: 3px;
+}
+
+.headerProfileButtonImage {
+  background-image: url('/img/profile_logo.png');
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  margin-right: 8px;
+}
+
+.headerProfileButtonImageMagic {
+  background-image: url('/img/profile-magic-trainer.png');
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  margin-right: 8px;
+}
+
+.headerProfileButtonImagePokemon {
+  background-image: url('/img/profile-pokemon-trainer.png');
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  margin-right: 8px;
+}
+
+.headerProfileButtonImageYugioh {
+  background-image: url('/img/profile-yugioh-trainer.png');
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  margin-right: 8px;
+}
+
+.headerProfileButton:hover .profileImage {
+  filter: brightness(85%);
+  transition-duration: 100ms;
+}
+
+.headerCustom-modal {
+  background-color: transparent;
+  border-radius: var(--border-radius);
+  border: 0px;
+  padding: 0px;
+  width: fit-content;
+  height: fit-content;
+  transform: translateY(0);
+  /* Inizialmente invisibile, fuori schermo */
+  transform-origin: top right;
+  transition: transform 0.3s ease-in-out;
+  /* Aggiungi una transizione di animazione */
+}
+
+.headerCustom-modal:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 0;
+  height: 0;
+  border-bottom: 25px solid #ff9966;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  z-index: 1000;
+}
+
+.gwt-PopupPanel {
+  border: 0px !important;
+  padding: 0px !important;
+  background: transparent !important;
+}
+
+.headerCustom-modal-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.headerGlass-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  /* Trasparenza nera */
+  z-index: 999;
+}
+
+.headerModal-panelCard-container {
+  background-color: #ff9966;
+  border-radius: var(--border-radius);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 50px 0px 50px 0px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden;
+  display: flex;
+  /* Abilita il layout flex per il contenitore */
+  flex-direction: column;
+  /* Imposta la direzione di layout su colonna */
+  align-items: center;
+  /* Centra verticalmente all'interno del contenitore */
+}
+
+.headerProfileLabel {
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.headerModal-profileUsernameLabel {
+  font-family: 'Nunito', sans-serif;
+  font-size: 45px;
+  font-weight: bolder;
+  margin-top: 5px;
+  margin-bottom: 35px;
+}
+
+.headerModal-stockProfileImage {
+  background-image: url('/img/stock-profile-icon.png');
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  padding: 20px;
+  height: 120px;
+  width: 120px;
+}
+
+/*-- FINE CSS HEADER --*/
+
+/*++ CSS HOME ++*/
+.homePanel {
+  background-image: url("img/triangle_background.png"), linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  background-size: cover;
+  background-blend-mode: multiply;
+  margin: 0;
+  height: 100vh;
+  padding: 0;
+  background-position: center top;
+}
+
+.homePanelMagic {
+  background-image: url("img/triangle_background_magic.png"), linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
+  background-size: cover;
+  background-blend-mode: multiply;
+  margin: 0;
+  height: 100vh;
+  padding: 0;
+  background-position: center top;
+}
+
+.homePanelPokemon {
+  background-image: url("img/triangle_background_pokemon.png"), linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
+  background-size: cover;
+  background-blend-mode: multiply;
+  margin: 0;
+  height: 100vh;
+  padding: 0;
+  background-position: center top;
+}
+
+.homePanelYugioh {
+  background-image: url("img/triangle_background_yugioh.png"), linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
+  background-size: cover;
+  background-blend-mode: multiply;
+  margin: 0;
+  height: 100vh;
+  padding: 0;
+  background-position: center top;
+}
+
+.homeProfileImage {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  background-image: url('/img/stock-profile-icon.png');
+  /*larghezza e altezza dell'avater*/
+  width: 170px;
+  height: 170px;
+}
+
+.homeProfileImage input[type="file"] {
+  display: none;
+}
+
+.homeProfileImage:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.homeChooseGamePanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
+.homeChooseMagicBtn {
+  background-image: url('/img/magicBtn.jpg');
+  /* sostituisci 'path/to/image.jpg' con il percorso dell'immagine che vuoi utilizzare */
+  background-size: cover;
+  background-position: center;
+  width: 300px;
+  height: 200px;
+  /* altezza del bottone */
+  border: none;
+  border-radius: var(--border-radius);
+  margin: 30px;
+  cursor: pointer;
+  transition-duration: .3s;
+}
+
+.homeChooseMagicBtn:hover {
+  transform: scale(1.1);
+  /* effetto di ingrandimento al passaggio del mouse */
+}
+
+.homeChooseMagicBtn:active {
+  transform: scale(0.9);
+  transition-duration: 150ms;
+}
+
+
+.homeChoosePokemonBtn {
+  background-image: url('/img/pokemonBtn.jpg');
+  /* sostituisci 'path/to/image.jpg' con il percorso dell'immagine che vuoi utilizzare */
+  background-size: cover;
+  background-position: center;
+  width: 300px;
+  height: 200px;
+  /* altezza del bottone */
+  border: none;
+  border-radius: var(--border-radius);
+  margin: 30px;
+  cursor: pointer;
+  transition-duration: .3s;
+}
+
+.homeChoosePokemonBtn:hover {
+  transform: scale(1.1);
+  /* effetto di ingrandimento al passaggio del mouse */
+}
+
+.homeChoosePokemonBtn:active {
+  transform: scale(0.9);
+  transition-duration: 150ms;
+}
+
+.homeChooseYugiohBtn {
+  background-image: url('/img/yugiohBtn.jpg');
+  /* sostituisci 'path/to/image.jpg' con il percorso dell'immagine che vuoi utilizzare */
+  background-size: cover;
+  background-position: center;
+  width: 300px;
+  height: 200px;
+  /* altezza del bottone */
+  border: none;
+  border-radius: var(--border-radius);
+  margin: 30px;
+  cursor: pointer;
+  transition-duration: .3s;
+}
+
+.homeChooseYugiohBtn:hover {
+  transform: scale(1.1);
+  /* effetto di ingrandimento al passaggio del mouse */
+}
+
+.homeChooseYugiohBtn:active {
+  transform: scale(0.9);
+  transition-duration: 150ms;
+}
+
+.homeChooseGameLabel {
+  font-family: 'Passion One', sans-serif;
+  font-size: 90px;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: none;
+  color: rgb(231, 231, 231);
+  text-align: center;
+  margin-top: -20px;
+  margin-bottom: 30px;
+}
+
+.homeWelcomeLabel {
+  font-family: 'Passion One', sans-serif;
+  font-size: 90px;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: none;
+  color: rgb(231, 231, 231);
+  text-align: center;
+  margin-top: 90px;
+  margin-bottom: 0px;
+}
+
+/*-- FINE CSS HOME --*/

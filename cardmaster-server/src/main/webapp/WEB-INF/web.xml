@@ -24,6 +24,15 @@
     <servlet-class>com.dlm.gwt.sample.cardmaster.server.SignUpServiceImpl</servlet-class>
   </servlet>
 
+  <servlet-mapping>
+    <servlet-name>db_getter</servlet-name>
+    <url-pattern>app/db_getter</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>db_getter</servlet-name>
+    <servlet-class>com.dlm.gwt.sample.cardmaster.server.DatabaseServiceImpl</servlet-class>
+  </servlet>
+
   <!--
   Quando un client fa una richiesta a quell'URL, ad esempio
   "http://localhost:8080/app/servletDiProva",

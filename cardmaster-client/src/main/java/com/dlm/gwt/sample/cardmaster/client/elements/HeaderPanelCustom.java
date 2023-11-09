@@ -42,26 +42,26 @@ public class HeaderPanelCustom {
         headerPanel.setStyleName("headerPanel");
 
         Button logoButton = new Button("");
-        logoButton.setStyleName("logoHeader");
+        logoButton.setStyleName("headerLogo");
         headerPanel.setWidget(0, 0, logoButton);
 
         // BOTTONE PROFILO - Crea un HorizontalPanel per contenere l'immagine e
         // l'etichetta
         HorizontalPanel panelWrapperProfileButtonElements = new HorizontalPanel();
         // BOTTONE PROFILO - Crea un'immagine e imposta il suo URL
-        HTML imageContainerProfileButton = new HTML("<div class='logoutImage-container'></div>");
+        HTML imageContainerProfileButton = new HTML("<div class='headerLogoutImage-container'></div>");
         // se la home e' di pokemon mostra un allenatore pokemon, ecc
-        imageContainerProfileButton.setStyleName("profileButtonImage" + this.gameNameHome);
+        imageContainerProfileButton.setStyleName("headerProfileButtonImage" + this.gameNameHome);
         // BOTTONE PROFILO - Crea un'etichetta per il testo del pulsante
         Label profileLabel = new Label("Profilo");
-        profileLabel.setStyleName("profileLabel");
+        profileLabel.setStyleName("headerProfileLabel");
         // BOTTONE PROFILO - Aggiungi l'immagine e l'etichetta al pannello orizzontale
         panelWrapperProfileButtonElements.add(imageContainerProfileButton);
         panelWrapperProfileButtonElements.add(profileLabel);
         // BOTTONE PROFILO - Crea un pulsante e aggiungi il pannello orizzontale al
         // pulsante
         Button profileButton = new Button();
-        profileButton.setStyleName("profileButton");
+        profileButton.setStyleName("headerProfileButton");
         profileButton.getElement().getStyle().setDisplay(Display.INLINE_BLOCK); // Per visualizzare il pulsante
                                                                                 // orrettamente
         profileButton.getElement().getStyle().setVerticalAlign(VerticalAlign.MIDDLE); // Per allineare l'immagine e
@@ -86,7 +86,7 @@ public class HeaderPanelCustom {
                 } else {
                     // Crea la finestra modale
                     modal = new ModalPanel(loggedUser);
-                    modal.addStyleName("custom-modal"); // Aggiungi la classe show quando mostri la finestra modale
+                    modal.addStyleName("headerCustom-modal"); // Aggiungi la classe show quando mostri la finestra modale
                     modal.setPopupPositionAndShow(new PositionCallback() {
                         @Override
                         public void setPosition(int offsetWidth, int offsetHeight) {
@@ -117,7 +117,7 @@ public class HeaderPanelCustom {
                             glassPanel.removeFromParent();
                         }
                     });
-                    focusPanel.addStyleName("glass-panel");
+                    focusPanel.addStyleName("headerGlass-panel");
                     glassPanel.add(focusPanel);
 
                     profileButton.getElement().getStyle().setZIndex(1000); // Imposta il valore di z-index del bottone
@@ -137,18 +137,18 @@ public class HeaderPanelCustom {
         // l'etichetta
         HorizontalPanel panelWrapperLogoutButtonElements = new HorizontalPanel();
         // BOTTONE LOGOUT - Crea un'immagine e imposta il suo URL
-        HTML imageContainerLogoutButton = new HTML("<div class='logoutImage-container'></div>");
-        imageContainerLogoutButton.setStyleName("logoutImage");
+        HTML imageContainerLogoutButton = new HTML("<div class='headerLogoutImage-container'></div>");
+        imageContainerLogoutButton.setStyleName("headerLogoutImage");
         // BOTTONE LOGOUT - Crea un'etichetta per il testo del pulsante
         Label logoutLabel = new Label("Logout");
-        logoutLabel.setStyleName("logoutLabel");
+        logoutLabel.setStyleName("headerLogoutLabel");
         // BOTTONE LOGOUT - Aggiungi l'immagine e l'etichetta al pannello orizzontale
         panelWrapperLogoutButtonElements.add(imageContainerLogoutButton);
         panelWrapperLogoutButtonElements.add(logoutLabel);
         // BOTTONE LOGOUT - Crea un pulsante e aggiungi il pannello orizzontale al
         // pulsante
         Button logoutButton = new Button();
-        logoutButton.setStyleName("logoutButton");
+        logoutButton.setStyleName("headerLogoutButton");
         logoutButton.getElement().getStyle().setDisplay(Display.INLINE_BLOCK); // Per visualizzare il pulsante
                                                                                // correttamente
         logoutButton.getElement().getStyle().setVerticalAlign(VerticalAlign.MIDDLE); // Per allineare l'immagine e
