@@ -116,6 +116,27 @@ public class Database {
         }
     }
 
+    public boolean signUp(String username, User user) {
+        try {
+            open(); // Apri il database
+
+            Map<String, User> map = (Map<String, User>) db.hashMap("user").createOrOpen();
+            if (map.containsKey(username)) {
+                return false;
+            }
+
+            map.put(username, user); //qui sfrutto il fatto che User sia serializable
+            db.commit();
+        } catch (Exception e) {
+            System.out.println("L'errore e' nel register");
+            e.printStackTrace();
+            return false;
+        } finally {
+            close(); // Chiudi il database
+        }
+        return true;
+    }
+
     public User login(String username, String password) {
         User loggedUser = null;
         try {
