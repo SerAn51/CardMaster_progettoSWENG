@@ -14,7 +14,6 @@ public class User implements Serializable {
     //private List<OwnedCard> ownedCards;
     //private List<WishedCard> wishedCards;
     private List<String> news;
-    //private String userImageBase64;
 
     public User(String username, String email) {
         this.username = username;
@@ -45,12 +44,6 @@ public class User implements Serializable {
     public String getGender() {
         return this.gender;
     }
-
-    /*
-    public String getUserImageBase64() {
-        return userImageBase64;
-    }
-    */
 
     /*
     public List<OwnedCard> getOwnedCards() {
@@ -102,10 +95,4 @@ public class User implements Serializable {
             this.news = new ArrayList<String>();
         this.news = notifications;
     }
-
-    /*
-    public void setUserImageBase64(String userImageBase64) {
-        this.userImageBase64 = userImageBase64;
-    }
-    */
 }
