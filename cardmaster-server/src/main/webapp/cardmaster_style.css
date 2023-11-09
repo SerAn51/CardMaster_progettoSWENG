@@ -1,7 +1,7 @@
 :root {
-  /* Definisci la variabile con il valore desiderato */
   --border-radius: 20px;
-  --white-color: #fff
+  --white-color: #fff;
+  --font-family: 'Nunito', sans-serif;
 }
 
 body {
@@ -129,7 +129,7 @@ body {
 
 .loginTitle {
   font-size: 50px;
-  font-family: 'Nunito', sans-serif;
+  font-family: var(--font-family);
   font-weight: bold;
   color: var(--white-color);
   margin-bottom: 10px;
@@ -161,9 +161,88 @@ body {
   justify-content: center;
 }
 
+
+.loginIscrivitiOra {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /*-- FINE CSS LOGIN --*/
 
 
 
 
-/*-- CSS SIGNUP --*/
+/*++ CSS SIGNUP ++*/
+
+.backButton {
+  background-color: transparent;
+  font-size: 16px;
+  padding: 8px 16px;
+  margin-bottom: 4%;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: rgb(0, 51, 102);
+  font-weight: bold;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  color: rgb(49, 55, 203);
+}
+
+.backButton:active {
+  color: rgb(61, 67, 246);
+  transform: scale(0.95);
+}
+
+.signUpContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  border-radius: var(--border-radius);
+}
+
+.signUpForm {
+  padding: 40px;
+  width: fit-content;
+  max-height: fit-content;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.7px);
+  -webkit-backdrop-filter: blur(11.7px);
+}
+
+.signUpInputListBox {
+  max-width: 90%;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.19);
+  border-radius: var(--border-radius);
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color .3s cubic-bezier(.25, .01, .25, 1) 0s, color .3s cubic-bezier(.25, .01, .25, 1) 0s, background .2s cubic-bezier(.25, .01, .25, 1) 0s;
+}
+
+.signUpLabel {
+  display: block;
+  margin-bottom: .3rem;
+  font-size: .9rem;
+  font-weight: bold;
+  color: #000000;
+  transition: color .3s cubic-bezier(.25, .01, .25, 1) 0s;
+  margin: 10px;
+  font-size: 16px;
+  color: #0f0f0f;
+}
+
+/*-- FINE CSS SIGNUP --*/
+
+/*++ CSS HOME ++*/
+

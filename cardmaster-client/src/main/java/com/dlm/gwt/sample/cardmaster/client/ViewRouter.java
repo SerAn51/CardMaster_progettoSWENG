@@ -6,6 +6,7 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import com.dlm.gwt.sample.cardmaster.client.view.LoginView;
+import com.dlm.gwt.sample.cardmaster.client.view.SignUpView;
 
 //Questa classe gestisce la navigazione tra view (reindirizzamenti del sito o navigazione con frecce browser built-in)
 public class ViewRouter implements ValueChangeHandler<String> {
@@ -41,7 +42,7 @@ public class ViewRouter implements ValueChangeHandler<String> {
                 toLoginPage();
                 break;
             case "signUp":
-                // toSignUpPage();
+                toSignUpPage();
                 break;
             case "home":
                 // toHome();
@@ -64,11 +65,11 @@ public class ViewRouter implements ValueChangeHandler<String> {
         RootPanel.get().add(loginPage);
     }
 
-    // private void toSignUpPage() {
-    // RootPanel.get().clear();
-    // SignUpView signUpPage = new SignUpView();
-    // RootPanel.get().add(signUpPage);
-    // }
+    private void toSignUpPage() {
+        RootPanel.get().clear();
+        SignUpView signUpPage = new SignUpView();
+        RootPanel.get().add(signUpPage);
+    }
 
     // private void toHome() {
     // RootPanel.get().clear();
