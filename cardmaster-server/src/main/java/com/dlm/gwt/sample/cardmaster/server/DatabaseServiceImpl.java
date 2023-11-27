@@ -16,9 +16,9 @@ import java.util.List;
 public class DatabaseServiceImpl extends RemoteServiceServlet implements DatabaseService {
 
     @Override
-    public List<Card> getMagicCards() {
-        System.out.println("SONO DatabaseServiceImpl, STO AVVIANDO getMagicCards");
-        return Database.getInstance().getMagicCards();
+    public List<Card> getCards(String gameName) {
+        //System.out.println("SONO DatabaseServiceImpl, STO AVVIANDO getCards");
+        return Database.getInstance().getCards(gameName);
     }
 
 }

@@ -47,8 +47,6 @@ public class HomeGameView extends Composite {
 
         RootPanel.get().add(panel);
 
-        showAllCardsBtn.addClickHandler(event -> homeGameActivity.showCards(panel));
-
         // TODO: visualizza carte
         /*
          * - Campo ricerca

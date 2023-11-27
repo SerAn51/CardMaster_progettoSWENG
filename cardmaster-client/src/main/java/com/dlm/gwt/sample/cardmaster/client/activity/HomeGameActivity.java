@@ -33,17 +33,6 @@ public class HomeGameActivity extends AbstractActivity {
     public void start(AcceptsOneWidget containerWidget, EventBus eventBus) {
         // Aggiungi la vista al contenitore
         containerWidget.setWidget(view);
-
-        // Aggiungi gli handler degli eventi necessari alla vista
-        view.setHomeMagicHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                // Ottieni l'email e la password dalla vista
-                Panel panel = view.getMainPanel();
-                showCards(panel);
-            }
-        });
-
     }
 
     public void toHome() {
@@ -51,27 +40,6 @@ public class HomeGameActivity extends AbstractActivity {
         String token = "home";
         History.newItem(token);
         new ViewRouter().handleRouteChange(token);//vai a vedere la url perche' ho cambiato il token
-    }
-
-    //TODO: non usare il panel, ritornare solo la lista di carte
-    public void showCards(Panel panel) {
-        System.out.println("SONO HomeMagicView E STO PER CHIEDERE getMagicCards");
-        //TODO: chiamare il giusto metodo in base al gioco
-        databaseService.getMagicCards(new AsyncCallback<List<Card>>() {
-            @Override
-            public void onSuccess(List<Card> cards) {
-                for (Card card : cards) {
-                    // Stampa le informazioni della carta
-                    Label data = new Label(card.getNome());
-                    panel.add(data);
-                }
-            }
-            @Override
-            public void onFailure(Throwable caught) {
-                // Gestisci l'errore durante la chiamata al servizio database
-                Window.alert("Errore: " + caught.getMessage());
-            }
-        });
     }
 
 }
