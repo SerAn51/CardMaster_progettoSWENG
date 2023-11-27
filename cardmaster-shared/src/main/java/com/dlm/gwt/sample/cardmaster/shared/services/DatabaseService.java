@@ -9,5 +9,5 @@ import java.util.List;
 @RemoteServiceRelativePath("db_getter")
 public interface DatabaseService extends RemoteService {
 
-    List<Card> getMagicCards();
+    List<Card> getCards(String gameName);
 }

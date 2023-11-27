@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface DatabaseServiceAsync {
 
-    void getMagicCards(AsyncCallback<List<Card>> callback) throws IllegalArgumentException;
+    void getCards(String gameName, AsyncCallback<List<Card>> callback) throws IllegalArgumentException;
 
 }
