@@ -39,7 +39,22 @@ public class HomeGameActivity extends AbstractActivity {
         // apri la pagina di gestione delle carte di magic/pokemon/yugioh
         String token = "home";
         History.newItem(token);
-        new ViewRouter().handleRouteChange(token);//vai a vedere la url perche' ho cambiato il token
+        new ViewRouter().handleRouteChange(token);// vai a vedere la url perche' ho cambiato il token
     }
 
+    public void getCards(String gameName) {
+        databaseService.getCards(gameName, new AsyncCallback<List<Card>>() {
+            @Override
+            public void onSuccess(List<Card> cards) {
+                // richiama il metodo della view che mostra le carte
+                view.showGrid(cards);
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                // Gestisci l'errore durante la chiamata al servizio database
+                Window.alert("Errore HomeGameActivity.getCards: " + caught.getMessage());
+            }
+        });
+    }
 }

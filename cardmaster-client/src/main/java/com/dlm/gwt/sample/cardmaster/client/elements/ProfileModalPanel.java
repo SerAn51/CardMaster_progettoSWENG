@@ -7,12 +7,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class ModalPanel extends PopupPanel {
+public class ProfileModalPanel extends PopupPanel {
 
-    public ModalPanel(User loggedUser) {
+    public ProfileModalPanel(User loggedUser) {
         // Contenuto della finestra modale
         VerticalPanel content = new VerticalPanel();
-        content.setStyleName("custom-modal"); // Applica la classe CSS al pannello
 
         // Aggiungi il profilo card come parte del contenuto
         FlowPanel cardContainer = new FlowPanel();
@@ -23,21 +22,21 @@ public class ModalPanel extends PopupPanel {
 
         Label username = new Label(loggedUser.getUsername());
         Label email = new Label("Email: " + loggedUser.getEmail());
-        Label age = new Label("Age: " + loggedUser.getAge());
-        Label gender = new Label("Gender: " + loggedUser.getGender());
-        Label news = new Label("Notification: " + loggedUser.getNews());
+        Label age = new Label("Eta': " + loggedUser.getAge());
+        Label gender = new Label("Sesso: " + loggedUser.getGender());
+        // CODICE BOTTONE PAGINA EXCHANGE
+
+        // TODO: Button exchangePageButton;
         username.setStyleName("headerModal-profileUsernameLabel");
         email.setStyleName("profileLabel");
         age.setStyleName("profileLabel");
         gender.setStyleName("profileLabel");
-        news.setStyleName("profileLabel");
 
         cardContainer.add(imageContainerProfile);
         cardContainer.add(username);
         cardContainer.add(email);
         cardContainer.add(age);
         cardContainer.add(gender);
-        cardContainer.add(news);
 
         content.add(cardContainer);
 
