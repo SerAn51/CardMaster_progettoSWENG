@@ -22,12 +22,13 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 public class HeaderPanelCustom {
 
-    private ModalPanel modal = null;
+    private ProfileModalPanel modal = null;
     private HTMLPanel glassPanel = null;
     private User loggedUser;
     private String gameNameHome;
 
-    // Passare esattamente ""(stringa vuota) || Magic || Pokemon || Yugioh, e' case sensitive
+    // Passare esattamente ""(stringa vuota) || Magic || Pokemon || Yugioh, e' case
+    // sensitive
     public HeaderPanelCustom(User loggedUser, String gameNameHome) {
         this.loggedUser = loggedUser;
         this.gameNameHome = gameNameHome;
@@ -85,8 +86,9 @@ public class HeaderPanelCustom {
                     }
                 } else {
                     // Crea la finestra modale
-                    modal = new ModalPanel(loggedUser);
-                    modal.addStyleName("headerCustom-modal"); // Aggiungi la classe show quando mostri la finestra modale
+                    modal = new ProfileModalPanel(loggedUser);
+                    modal.addStyleName("headerCustom-modal"); // Aggiungi la classe show quando mostri la finestra
+                                                              // modale
                     modal.setPopupPositionAndShow(new PositionCallback() {
                         @Override
                         public void setPosition(int offsetWidth, int offsetHeight) {

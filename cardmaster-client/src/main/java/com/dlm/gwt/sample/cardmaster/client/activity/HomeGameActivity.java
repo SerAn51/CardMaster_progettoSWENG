@@ -3,15 +3,11 @@ package com.dlm.gwt.sample.cardmaster.client.activity;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
 import com.dlm.gwt.sample.cardmaster.shared.services.DatabaseServiceAsync;
 import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
 import com.dlm.gwt.sample.cardmaster.client.ViewRouter;
 import com.dlm.gwt.sample.cardmaster.client.view.HomeGameView;
 
@@ -39,7 +35,22 @@ public class HomeGameActivity extends AbstractActivity {
         // apri la pagina di gestione delle carte di magic/pokemon/yugioh
         String token = "home";
         History.newItem(token);
-        new ViewRouter().handleRouteChange(token);//vai a vedere la url perche' ho cambiato il token
+        new ViewRouter().handleRouteChange(token);// vai a vedere la url perche' ho cambiato il token
     }
 
+    public void getCards(String gameName) {
+        databaseService.getCards(gameName, new AsyncCallback<List<Card>>() {
+            @Override
+            public void onSuccess(List<Card> cards) {
+                // richiama il metodo della view che mostra le carte
+                view.showGrid(cards);
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                // Gestisci l'errore durante la chiamata al servizio database
+                Window.alert("Errore HomeGameActivity.getCards: " + caught.getMessage());
+            }
+        });
+    }
 }
