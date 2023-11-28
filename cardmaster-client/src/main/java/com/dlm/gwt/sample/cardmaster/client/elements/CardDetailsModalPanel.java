@@ -62,6 +62,10 @@ public class CardDetailsModalPanel extends PopupPanel {
         Button removeWishedButton = new Button("Rimuovi dalle wished");
 
         // TODO: aggiungi eventi per i bottoni
+        // al click del bottone, aggiungere la carta alle owned
+        addOwnedButton.addClickHandler(event -> {
+            addOrUpdateCardConditionModalPanel(card, false);
+        });
 
         // TODO: gestire mostra tutte/ mostra owned/ mostra wished
         // campo enum in card e controllo quel campo
@@ -130,5 +134,16 @@ public class CardDetailsModalPanel extends PopupPanel {
         cardDetailsContainer.add(cardSmallImageUrlLabel);
         cardDetailsContainer.add(cardCondition);
 
+    }
+
+    private void addOrUpdateCardConditionModalPanel(Card card, Boolean isOwned) {
+        HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
+        AddOrUpdateCardConditionModalPanel addCardModalPanel = new AddOrUpdateCardConditionModalPanel(card,homeGameActivity, isOwned, hidePopup);
+        // Mostra il modal panel
+        addCardModalPanel.center();
+        addCardModalPanel.show();
+
+        // Crea e mostra il GlassPanel con il gestore di eventi
+        hidePopup.initialize(addCardModalPanel);
     }
 }

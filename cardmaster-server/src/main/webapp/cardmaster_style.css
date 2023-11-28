@@ -1422,4 +1422,24 @@ body::-webkit-scrollbar {
   background: transparent !important;
 }
 
+.addCardConditionModalPanel {
+  background-color: #ff9966;
+  border-radius: var(--border-radius);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 50px 0px 50px 0px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden;
+  display: flex;
+  /* Abilita il layout flex per il contenitore /
+  flex-direction: column;
+  / Imposta la direzione di layout su colonna /
+  align-items: center;
+  / Centra verticalmente all'interno del contenitore */
+}
+
 /* -- FINE POPUP PANEL DEL SITO -- */

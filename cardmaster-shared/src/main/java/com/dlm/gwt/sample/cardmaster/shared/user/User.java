@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import com.dlm.gwt.sample.cardmaster.shared.card.Card;
+
 public class User implements Serializable {
 
     private String username;
@@ -11,19 +14,21 @@ public class User implements Serializable {
     private String password; // forse va cercato il binary per gestirlo meglio, oppure on metterlo proprio
     private int age;
     private String gender;
-    //private List<OwnedCard> ownedCards;
-    //private List<WishedCard> wishedCards;
-    private List<String> news;
+    private List<Card> ownedCards;
+    private List<Card> wishedCards;
 
-    public User(String username, String email) {
+    public User(String username, String email, String password, int age, String gender) {
         this.username = username;
         this.email = email;
-        //this.ownedCards = new ArrayList<OwnedCard>();
-        //this.wishedCards = new ArrayList<WishedCard>();
+        this.password = password;
+        this.age = age;
+        this.gender = gender;
+        this.ownedCards = new ArrayList<>();
+        this.wishedCards = new ArrayList<>();
     }
 
     public User() {
-    };
+    }
 
     public String getUsername() {
         return this.username;
@@ -45,20 +50,13 @@ public class User implements Serializable {
         return this.gender;
     }
 
-    /*
-    public List<OwnedCard> getOwnedCards() {
-        return ownedCards;
+    public List<Card> getOwnedCards() {
+        return this.ownedCards;
     }
 
-    public List<WishedCard> getWishedCards() {
-        return wishedCards;
+    public List<Card> getWishedCards() {
+        return this.wishedCards;
     }
-    */
-
-    public List<String> getNews() {
-        return news;
-    }
-
 
     public void setUsername(String username) {
         this.username = username;
@@ -80,19 +78,12 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    /*
-    public void setOwnedCards(List<OwnedCard> owned) {
-        this.ownedCards = owned;
+    public void addOwnedCard(Card card) {
+        this.ownedCards.add(card);
     }
 
-    public void setWishedCards(List<WishedCard> wished) {
-        this.wishedCards = wished;
+    public void addWishedCard(Card card) {
+        this.wishedCards.add(card);
     }
-    */
 
-    public void setNews(List<String> notifications) {
-        if(notifications == null)
-            this.news = new ArrayList<String>();
-        this.news = notifications;
-    }
 }
