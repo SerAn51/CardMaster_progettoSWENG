@@ -39,7 +39,6 @@ public class SignUpActivity extends AbstractActivity {
                 }
             });
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -53,23 +52,23 @@ public class SignUpActivity extends AbstractActivity {
         String gender = view.getGender();
 
         if (username.isEmpty()) {
-            Window.alert("Insert a username");
+            Window.alert("Inserisci un nome utente");
             return;
         }
         if (!password.equals(secondPsw)) {
-            Window.alert("The two password are not the same");
+            Window.alert("Le due password non corrispondono");
             return;
         }
         if (!email.contains("@") || !(email.contains(".it") || email.contains(".com"))) {
-            Window.alert("Please insert a valid email");
+            Window.alert("Inserisci un'email valida");
             return;
         }
         if (age.isEmpty()) {
-            Window.alert("Please insert a valid age");
+            Window.alert("Inserisci un'età valida");
             return;
         }
         if (gender.isEmpty()) {
-            Window.alert("Please insert a valid gender");
+            Window.alert("Inserisci un genere valido");
             return;
         }
 
@@ -83,14 +82,13 @@ public class SignUpActivity extends AbstractActivity {
             public void onSuccess(Boolean result) {
                 if (result) {
                     // Login avvenuto con successo
-                    Window.alert("Signed up successfully!");
+                    Window.alert("Ti sei registrato correttamente!");
                     SessionUser.getInstance().setSessionUser(newUser);
                     String token = "home";
                     History.newItem(token);
                     new ViewRouter().handleRouteChange(token);
                 } else {
                     // Registration failed
-                    // TODO: essere piu' specifici su cosa l'utente ha sbagliato
                     Window.alert("Informazioni non valide");
                 }
             }
