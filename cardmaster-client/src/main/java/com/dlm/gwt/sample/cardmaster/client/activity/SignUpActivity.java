@@ -52,43 +52,42 @@ public class SignUpActivity extends AbstractActivity {
         String gender = view.getGender();
 
         if (username.isEmpty()) {
-            Window.alert("Inserisci un nome utente");
+            Window.alert("Insert a username");
             return;
         }
         if (!password.equals(secondPsw)) {
-            Window.alert("Le due password non corrispondono");
+            Window.alert("The two password are not the same");
             return;
         }
         if (!email.contains("@") || !(email.contains(".it") || email.contains(".com"))) {
-            Window.alert("Inserisci un'email valida");
+            Window.alert("Please insert a valid email");
             return;
         }
         if (age.isEmpty()) {
-            Window.alert("Inserisci un'età valida");
+            Window.alert("Please insert a valid age");
             return;
         }
         if (gender.isEmpty()) {
-            Window.alert("Inserisci un genere valido");
+            Window.alert("Please insert a valid gender");
             return;
         }
 
-        User newUser = new User(username, email);
-        newUser.setPassword(password);
-        newUser.setAge(Integer.parseInt(view.getAge()));
-        newUser.setGender(view.getGender());
+        // Crea un nuovo utente in ram
+        User newUser = new User(username, email, password, Integer.parseInt(view.getAge()), view.getGender());
 
         signupService.signUp(username, newUser, new AsyncCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean result) {
                 if (result) {
                     // Login avvenuto con successo
-                    Window.alert("Ti sei registrato correttamente!");
+                    Window.alert("Signed up successfully!");
                     SessionUser.getInstance().setSessionUser(newUser);
                     String token = "home";
                     History.newItem(token);
                     new ViewRouter().handleRouteChange(token);
                 } else {
                     // Registration failed
+                    // TODO: essere piu' specifici su cosa l'utente ha sbagliato
                     Window.alert("Informazioni non valide");
                 }
             }

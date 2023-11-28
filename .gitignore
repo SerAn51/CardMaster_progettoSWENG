@@ -252,3 +252,6 @@ buildNumber.properties
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven,intellij,eclipse,visualstudiocode
+.DS_Store
+cardmaster-server/database.db
+cardmaster-server/database.db
