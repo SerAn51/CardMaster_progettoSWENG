@@ -48,8 +48,6 @@ public class LoginActivity extends AbstractActivity {
             @Override
             public void onSuccess(User loggedUser) {
                 if (loggedUser != null) {
-                    // Login avvenuto con successo
-                    Window.alert("Access granted");
                     SessionUser.getInstance().setSessionUser(loggedUser);
                     String token = "home";
                     History.newItem(token);
@@ -57,7 +55,7 @@ public class LoginActivity extends AbstractActivity {
                     // Esegui azioni per la navigazione o l'aggiornamento della vista
                 } else {
                     // Login fallito
-                    Window.alert("Invalid credentials");
+                    Window.alert("Credenziali non valide");
                 }
             }
 
