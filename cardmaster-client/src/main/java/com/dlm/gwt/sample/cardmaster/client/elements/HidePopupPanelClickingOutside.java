@@ -9,15 +9,13 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 public class HidePopupPanelClickingOutside {
 
-    private PopupPanel modalPanel;
+    HTMLPanel glassPanel = new HTMLPanel("<div class='glass-panel'></div>");
 
-    public HidePopupPanelClickingOutside(final PopupPanel modalPanel) {
-        this.modalPanel = modalPanel;
+    public HidePopupPanelClickingOutside() {
     }
 
-    public void initialize() {
+    public void initialize(PopupPanel modalPanel) {
         // Crea e mostra il GlassPanel
-        HTMLPanel glassPanel = new HTMLPanel("<div class='glass-panel'></div>");
         FocusPanel focusPanel = new FocusPanel();
         focusPanel.addClickHandler(new ClickHandler() {
             @Override
@@ -35,5 +33,10 @@ public class HidePopupPanelClickingOutside {
         modalPanel.getElement().getStyle().setZIndex(1000);
 
         RootPanel.get().add(glassPanel);
+    }
+
+    // metodo per nascondere glassPanel
+    public void destroy() {
+        glassPanel.removeFromParent();
     }
 }

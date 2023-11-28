@@ -54,8 +54,8 @@ public abstract class CardView extends Composite {
     }
 
     private void hidePopupPanelClickingOutside(PopupPanel modalPanel) {
-        HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside(modalPanel);
-        hidePopup.initialize();
+        HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
+        hidePopup.initialize(modalPanel);
     }
 
 }

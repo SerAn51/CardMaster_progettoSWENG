@@ -3,15 +3,11 @@ package com.dlm.gwt.sample.cardmaster.client.activity;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
 import com.dlm.gwt.sample.cardmaster.shared.services.DatabaseServiceAsync;
 import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
 import com.dlm.gwt.sample.cardmaster.client.ViewRouter;
 import com.dlm.gwt.sample.cardmaster.client.view.HomeGameView;
 

@@ -34,7 +34,6 @@ public class CardMagicView extends CardView {
 
     protected Widget createSpecificCard() {
         Panel card = new VerticalPanel();
-        // card.setStyleName("miniBody");
 
         Panel cardWrap = new VerticalPanel();
         cardWrap.setStyleName("card-wrap");
@@ -52,12 +51,6 @@ public class CardMagicView extends CardView {
 
         cardColor.add(typeSymbol);
 
-        // Label cardText = new Label(this.description);
-        // cardText.setStyleName("card-text");
-
-        /**
-         * Card content
-         */
         Panel cardContent = new VerticalPanel();
         cardContent.setStyleName("card-content");
 
@@ -74,8 +67,6 @@ public class CardMagicView extends CardView {
 
         cardContent.add(nameLabel);
         cardContent.add(pokemonType);
-
-        // cardHeader.add(typeSymbol);
 
         cardWrap.add(cardHeader);
         cardWrap.add(cardContent);

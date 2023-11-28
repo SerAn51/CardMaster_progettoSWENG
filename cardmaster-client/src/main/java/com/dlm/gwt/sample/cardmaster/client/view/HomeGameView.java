@@ -2,8 +2,6 @@ package com.dlm.gwt.sample.cardmaster.client.view;
 
 import java.util.List;
 
-import org.apache.tapestry.wml.Deck;
-
 import com.dlm.gwt.sample.cardmaster.client.activity.CardViewFactory;
 import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
 import com.dlm.gwt.sample.cardmaster.client.elements.HeaderPanelCustom;
@@ -34,17 +32,15 @@ public class HomeGameView extends Composite {
     Button addWishedButton;
 
     public HomeGameView(String gameName) {
-        homeGameActivity = new HomeGameActivity(this, databaseServiceAsync, gameName);
+        this.gameName = gameName;
+        this.homeGameActivity = new HomeGameActivity(this, databaseServiceAsync, gameName);
 
         // define ui
         FlowPanel containerPanel = new FlowPanel();
         containerPanel.setStyleName("homePanel" + gameName);
 
-        mainPanel = viewPanel();
-        containerPanel.add(mainPanel);
-
-        // Aggiungere il containerPanel alla RootLayoutPanel
-        RootLayoutPanel.get().add(containerPanel);
+        this.mainPanel = viewPanel();
+        containerPanel.add(this.mainPanel);
 
         // Imposta il widget principale come contenuto del Composite
         initWidget(containerPanel);
@@ -59,7 +55,7 @@ public class HomeGameView extends Composite {
         windowPanel.add(headerPanel.createHeaderPanel());
 
         /* Bottoni per mostrare le sezioni delle carte */
-        VerticalPanel sidebar = new VerticalPanel();
+        Panel sidebar = new VerticalPanel();
 
         sidebar.setStyleName("sidebar");
 
@@ -71,24 +67,21 @@ public class HomeGameView extends Composite {
         return windowPanel;
     }
 
-    private Widget bodyTableCreator(VerticalPanel sidebar) {
-        bodyTable = new FlexTable();
+    private Widget bodyTableCreator(Panel sidebar) {
+        this.bodyTable = new FlexTable();
 
-        bodyTable.setWidget(0, 0, sidebar);
+        this.bodyTable.setWidget(0, 0, sidebar);
 
-        bodyTable.getFlexCellFormatter().setWidth(0, 0, "5%"); // show button
-        bodyTable.getFlexCellFormatter().setWidth(0, 1, "95%"); // prev button
-        // bodyTable.getFlexCellFormatter().setWidth(0, 2, "85%"); // card grid
-        // bodyTable.getFlexCellFormatter().setWidth(0, 3, "2.5%"); // next button
+        this.bodyTable.getFlexCellFormatter().setWidth(0, 0, "5%"); // show button
+        this.bodyTable.getFlexCellFormatter().setWidth(0, 1, "95%"); // prev button
 
-        return bodyTable;
+        return this.bodyTable;
     }
 
     public void showCards(List<Card> cards) {
 
         cardsGrid = new FlexTable();
         FlexTable localCardsGrid = new FlexTable();
-        cardsGrid.setStyleName("cardsFlexTable");
 
         int row = 0;
         int col = 0;
@@ -163,15 +156,14 @@ public class HomeGameView extends Composite {
     }
 
     /**
-     * Serve solo per evitare di avere un metodo troppo lungo e spezzare un po'
-     * il codice
+     * Crea la sidebar con i bottoni per mostrare le sezioni delle carte
      * 
      * @param sidebar
-     * @return
      */
-    private void createSidebar(VerticalPanel sidebar) {
+    private void createSidebar(Panel sidebar) {
 
-        
+        // TODO: aggiungere il bottone per i filtri
+
         Button showAllCardsButton = new Button("Mostra tutte");
         showAllCardsButton.addClickHandler(event -> {
             homeGameActivity.getCards(this.gameName);
@@ -206,9 +198,5 @@ public class HomeGameView extends Composite {
             showCards((List<Card>) elementList);
         }
 
-    }
-
-    public VerticalPanel getMainPanel() {
-        return this.mainPanel;
     }
 }

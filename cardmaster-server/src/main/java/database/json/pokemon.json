@@ -42,7 +42,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh10/213",
@@ -64,7 +64,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "5ban Graphics",
@@ -76,7 +76,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "5ban Graphics",
@@ -99,7 +99,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Darkness"
+        "type": "Darkness"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh9/152",
@@ -110,7 +110,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Ryota Murayama",
@@ -122,7 +122,7 @@
         "normal": false,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass",
+        "type": "Grass",
         "description": "As if wielding a bow, it launches the arrow quills hidden among the feathers of its wings. Decidueye's shots never miss."
     },
     {
@@ -135,7 +135,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fairy"
+        "type": "Fairy"
     },
     {
         "illustrator": "Yuka Morii",
@@ -147,7 +147,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic",
+        "type": "Psychic",
         "description": "Its upper whiskers are sensors that survey its surroundings. Its lower whiskers are organs that shoot electricity."
     },
     {
@@ -160,7 +160,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "sowsow",
@@ -172,7 +172,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic",
+        "type": "Psychic",
         "description": "Its tail has a small brain of its own. Beware! If you get close, it may react to your scent by biting."
     },
     {
@@ -185,7 +185,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Atsuko Nishida",
@@ -197,7 +197,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Metal"
+        "type": "Metal"
     },
     {
         "illustrator": "Keiji Kinebuchi",
@@ -252,7 +252,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Hasuno",
@@ -264,7 +264,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "sui",
@@ -276,7 +276,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Shin Nagasawa",
@@ -288,7 +288,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Mitsuhiro Arita",
@@ -300,7 +300,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fire"
+        "type": "Fire"
     },
     {
         "illustrator": "Hideki Ishikawa",
@@ -312,7 +312,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "sui",
@@ -324,7 +324,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic",
+        "type": "Psychic",
         "description": "It has a calm and caring nature. Because its horn grows slowly, it prefers not to fight."
     },
     {
@@ -337,7 +337,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic",
+        "type": "Psychic",
         "description": "This Pokémon is said to have been born when a lonely spirit possessed a cold, leftover cup of tea."
     },
     {
@@ -350,7 +350,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Kouki Saitou",
@@ -362,7 +362,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "illustrator": "Mitsuhiro Arita",
@@ -374,7 +374,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Metal"
+        "type": "Metal"
     },
     {
         "name": "Fighting Energy",
@@ -395,7 +395,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Suwama Chiaki",
@@ -407,7 +407,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Atsuko Nishida",
@@ -419,7 +419,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Mizue",
@@ -431,7 +431,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "5ban Graphics",
@@ -443,7 +443,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Miki Tanaka",
@@ -455,7 +455,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "kirisAki",
@@ -466,7 +466,7 @@
         "normal": true,
         "reverse": false,
         "wPromo": false,
-        "types": "Fire",
+        "type": "Fire",
         "description": "It has a timid nature. If it is startled, the flames on its back burn more vigorously."
     },
     {
@@ -479,7 +479,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "Masakazu Fukuda",
@@ -491,7 +491,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "BERUBURI",
@@ -503,7 +503,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh11/TG12",
@@ -514,7 +514,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Toyste Beach",
@@ -537,7 +537,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "otumami",
@@ -549,7 +549,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water",
+        "type": "Water",
         "description": "It starts off battles by attacking with its rock-hard horn, but as soon as the opponent flinches, this Pokémon bites down and never lets go."
     },
     {
@@ -562,7 +562,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Kouki Saitou",
@@ -574,7 +574,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Darkness"
+        "type": "Darkness"
     },
     {
         "name": "Horsea",
@@ -584,7 +584,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Eske Yoshinob",
@@ -596,7 +596,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Keiji Kinebuchi",
@@ -619,7 +619,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "image": "https://assets.tcgdex.net/en/xy/xy12/94",
@@ -641,7 +641,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Dragon"
+        "type": "Dragon"
     },
     {
         "illustrator": "Ayaka Yoshida",
@@ -653,7 +653,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Fire"
+        "type": "Fire"
     },
     {
         "illustrator": "Mizue",
@@ -665,7 +665,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Hitoshi Ariga",
@@ -688,7 +688,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Lightning"
+        "type": "Lightning"
     },
     {
         "illustrator": "Kagemaru Himeno",
@@ -700,7 +700,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Anesaki Dynamic",
@@ -712,7 +712,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Fire",
+        "type": "Fire",
         "description": "It's skilled at both offense and defense, and it gets pumped up when cheered on. But if it starts showboating, it could put itself in a tough spot."
     },
     {
@@ -725,7 +725,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Darkness",
+        "type": "Darkness",
         "description": "It was bound to a fissure in an Odd Keystone as punishment for misdeeds 500 years ago."
     },
     {
@@ -738,7 +738,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "illustrator": "Mitsuhiro Arita",
@@ -750,7 +750,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "Tokumi Akabane",
@@ -773,7 +773,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Yoshinobu Saito",
@@ -829,7 +829,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Lightning"
+        "type": "Lightning"
     },
     {
         "illustrator": "Midori Harada",
@@ -841,7 +841,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "illustrator": "Keiji Kinebuchi",
@@ -853,7 +853,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Midori Harada",
@@ -865,7 +865,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Metal"
+        "type": "Metal"
     },
     {
         "illustrator": "Ken Sugimori",
@@ -877,7 +877,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fire"
+        "type": "Fire"
     },
     {
         "illustrator": "Yuka Morii",
@@ -889,7 +889,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Ken Sugimori",
@@ -901,7 +901,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fire"
+        "type": "Fire"
     },
     {
         "illustrator": "Naoyo Kimura",
@@ -913,7 +913,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "ConceptLab",
@@ -925,7 +925,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh9/141",
@@ -958,7 +958,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Darkness"
+        "type": "Darkness"
     },
     {
         "illustrator": "kirisAki",
@@ -970,7 +970,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water",
+        "type": "Water",
         "description": "Apparently the itch of its teething impels it to snap its jaws at anything in front of it."
     },
     {
@@ -983,7 +983,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water",
+        "type": "Water",
         "description": "Its body is covered in fluffy fur. The fur keeps it from feeling cold while it is rolling on ice."
     },
     {
@@ -996,7 +996,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Darkness",
+        "type": "Darkness",
         "description": "It protects itself with its durable skin. It's thought that this Pokémon will evolve once its skin has completely stretched out."
     },
     {
@@ -1009,7 +1009,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh10/046",
@@ -1020,7 +1020,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh9/TG03",
@@ -1031,7 +1031,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "5ban Graphics",
@@ -1043,7 +1043,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fire"
+        "type": "Fire"
     },
     {
         "illustrator": "Teeziro",
@@ -1055,7 +1055,7 @@
         "normal": false,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting",
+        "type": "Fighting",
         "description": "They live alone without forming packs. They will only listen to orders from Trainers who can draw out their true power."
     },
     {
@@ -1068,7 +1068,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh10/033",
@@ -1079,7 +1079,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "TOKIYA",
@@ -1091,7 +1091,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "illustrator": "Saki Hayashiro",
@@ -1103,7 +1103,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Mitsuhiro Arita",
@@ -1115,7 +1115,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Masakazu Fukuda",
@@ -1127,7 +1127,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Kagemaru Himeno",
@@ -1150,7 +1150,7 @@
         "normal": false,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting",
+        "type": "Fighting",
         "description": "When it contracts its body, over 220 pounds of sand sprays from its nose. If it ever runs out of sand, it becomes disheartened."
     },
     {
@@ -1174,7 +1174,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "name": "Fighting Energy",
@@ -1195,7 +1195,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "CR CG gangs",
@@ -1207,7 +1207,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "kodama",
@@ -1219,7 +1219,7 @@
         "normal": false,
         "reverse": true,
         "wPromo": false,
-        "types": "Darkness",
+        "type": "Darkness",
         "description": "It evolved after experiencing numerous fights. While crossing its arms, it lets out a shout that would make any opponent flinch."
     },
     {
@@ -1232,7 +1232,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Ken Sugimori",
@@ -1244,7 +1244,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "illustrator": "sui",
@@ -1256,7 +1256,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fire"
+        "type": "Fire"
     },
     {
         "illustrator": "Suwama Chiaki",
@@ -1268,7 +1268,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Sanosuke Sakuma",
@@ -1291,7 +1291,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh11/215",
@@ -1313,7 +1313,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh10/TG27",
@@ -1334,7 +1334,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Masakazu Fukuda",
@@ -1346,7 +1346,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Ken Sugimori",
@@ -1358,7 +1358,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Lightning"
+        "type": "Lightning"
     },
     {
         "illustrator": "Kouki Saitou",
@@ -1370,7 +1370,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Kyoko Umemoto",
@@ -1382,7 +1382,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting",
+        "type": "Fighting",
         "description": "Thanks to its thick claws, it's good at climbing trees. There are plenty of Sandslash that park themselves in trees and go right to sleep."
     },
     {
@@ -1395,7 +1395,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Kanako Eo",
@@ -1407,7 +1407,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Tomokazu Komiya",
@@ -1419,7 +1419,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Yuka Morii",
@@ -1431,7 +1431,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting",
+        "type": "Fighting",
         "description": "Its tentacles tear off easily, but it isn't alarmed when that happens—it knows they'll grow back. It's about as smart as a three-year-old."
     },
     {
@@ -1444,7 +1444,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Masakazu Fukuda",
@@ -1456,7 +1456,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fire"
+        "type": "Fire"
     },
     {
         "illustrator": "5ban Graphics",
@@ -1468,7 +1468,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "illustrator": "Mitsuhiro Arita",
@@ -1480,7 +1480,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "Sachiko Adachi",
@@ -1492,7 +1492,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fire"
+        "type": "Fire"
     },
     {
         "illustrator": "Mitsuhiro Arita",
@@ -1504,7 +1504,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Sekio",
@@ -1516,7 +1516,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Wataru Kawahara",
@@ -1528,7 +1528,7 @@
         "normal": false,
         "reverse": true,
         "wPromo": false,
-        "types": "Water",
+        "type": "Water",
         "description": "They say that during past strife, Gyarados would appear and leave blazing ruins in its wake."
     },
     {
@@ -1541,7 +1541,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "0313",
@@ -1553,7 +1553,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Mitsuhiro Arita",
@@ -1565,7 +1565,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Mitsuhiro Arita",
@@ -1577,7 +1577,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Mitsuhiro Arita",
@@ -1589,7 +1589,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "illustrator": "Shin Nagasawa",
@@ -1601,7 +1601,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Metal"
+        "type": "Metal"
     },
     {
         "illustrator": "Akira Komayama",
@@ -1613,7 +1613,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Lightning"
+        "type": "Lightning"
     },
     {
         "illustrator": "5ban Graphics",
@@ -1625,7 +1625,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Dragon"
+        "type": "Dragon"
     },
     {
         "illustrator": "Ken Sugimori",
@@ -1637,7 +1637,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Toyste Beach",
@@ -1660,7 +1660,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "PLANETA Mochizuki",
@@ -1672,7 +1672,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Fire"
+        "type": "Fire"
     },
     {
         "illustrator": "Kouki Saitou",
@@ -1684,7 +1684,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Shin-ichi Yoshikawa",
@@ -1695,7 +1695,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "Shigenori Negishi",
@@ -1707,7 +1707,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting",
+        "type": "Fighting",
         "description": "The legs freely contract and stretch. The stretchy legs allow it to hit a distant foe with a rising kick."
     },
     {
@@ -1720,7 +1720,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "Ken Sugimori",
@@ -1732,7 +1732,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "5ban Graphics",
@@ -1744,7 +1744,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "Hisao Nakamura",
@@ -1756,7 +1756,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "illustrator": "Yukiko Baba",
@@ -1768,7 +1768,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Kent Kanetsuna/Direc. Shinji Higuchi",
@@ -1780,7 +1780,7 @@
         "normal": false,
         "reverse": true,
         "wPromo": false,
-        "types": "Metal",
+        "type": "Metal",
         "description": "Its wings are not used for flying. They are flapped at high speed to adjust its body temperature."
     },
     {
@@ -1793,7 +1793,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "5ban Graphics",
@@ -1805,7 +1805,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh11/143",
@@ -1816,7 +1816,7 @@
         "normal": false,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Mitsuhiro Arita",
@@ -1828,7 +1828,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "illustrator": "5ban Graphics",
@@ -1851,7 +1851,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Akira Komayama",
@@ -1863,7 +1863,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting",
+        "type": "Fighting",
         "description": "Passimian live in groups of about 20, with each member performing an assigned role. Through cooperation, the group survives."
     },
     {
@@ -1896,7 +1896,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic",
+        "type": "Psychic",
         "description": "It's capable of flying faster than 120 mph. It battles alongside Dreepy and dotes on them until they successfully evolve."
     },
     {
@@ -1919,7 +1919,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Yukiko Baba",
@@ -1931,7 +1931,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "5ban Graphics",
@@ -1953,7 +1953,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Metal"
+        "type": "Metal"
     },
     {
         "illustrator": "Toyste Beach",
@@ -1987,7 +1987,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Ryo Ueda",
@@ -1999,7 +1999,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Kouki Saitou",
@@ -2011,7 +2011,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "name": "Swanna",
@@ -2021,7 +2021,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "Kagemaru Himeno",
@@ -2033,7 +2033,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Metal"
+        "type": "Metal"
     },
     {
         "illustrator": "Kagemaru Himeno",
@@ -2045,7 +2045,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "Shigenori Negishi",
@@ -2057,7 +2057,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Souichirou Gunjima",
@@ -2069,7 +2069,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting",
+        "type": "Fighting",
         "description": "Searching for an opponent to test its skills against, it emerges onto land. Once the battle is over, it returns to the sea."
     },
     {
@@ -2082,7 +2082,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Kouki Saitou",
@@ -2094,7 +2094,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Lightning"
+        "type": "Lightning"
     },
     {
         "illustrator": "Kent Kanetsuna",
@@ -2106,7 +2106,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Water"
+        "type": "Water"
     },
     {
         "illustrator": "MAHOU",
@@ -2118,7 +2118,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic",
+        "type": "Psychic",
         "description": "This Pokémon is said to have been born when a lonely spirit possessed a cold, leftover cup of tea."
     },
     {
@@ -2131,7 +2131,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Tika Matsuno",
@@ -2143,7 +2143,7 @@
         "normal": false,
         "reverse": false,
         "wPromo": false,
-        "types": "Grass",
+        "type": "Grass",
         "description": "The faint scent that emanates from its full blossom entices bug Pokémon to it."
     },
     {
@@ -2156,7 +2156,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Kagemaru Himeno",
@@ -2168,7 +2168,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "illustrator": "Naoyo Kimura",
@@ -2180,7 +2180,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "kodama",
@@ -2192,7 +2192,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Lightning",
+        "type": "Lightning",
         "description": "It manipulates the chemical makeup of its poison to produce electricity. The voltage is weak, but it can cause a tingling paralysis."
     },
     {
@@ -2205,7 +2205,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fairy"
+        "type": "Fairy"
     },
     {
         "image": "https://assets.tcgdex.net/en/sm/sm5/136",
@@ -2227,7 +2227,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting",
+        "type": "Fighting",
         "description": "Most of its body has the same composition as coal. Fittingly, this Pokémon was first discovered in coal mines about 400 years ago."
     },
     {
@@ -2240,7 +2240,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "Kimiya Masago",
@@ -2252,7 +2252,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Psychic"
+        "type": "Psychic"
     },
     {
         "illustrator": "Mitsuhiro Arita",
@@ -2264,7 +2264,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh9/091",
@@ -2275,7 +2275,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Darkness"
+        "type": "Darkness"
     },
     {
         "illustrator": "match",
@@ -2287,7 +2287,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "illustrator": "kodama",
@@ -2310,7 +2310,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Fighting"
+        "type": "Fighting"
     },
     {
         "image": "https://assets.tcgdex.net/en/swsh/swsh10.5/061",
@@ -2321,7 +2321,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Kagemaru Himeno",
@@ -2333,7 +2333,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     },
     {
         "illustrator": "Shin-ichi Yoshida",
@@ -2345,7 +2345,7 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Grass"
+        "type": "Grass"
     },
     {
         "illustrator": "Aya Kusube",
@@ -2357,6 +2357,6 @@
         "normal": true,
         "reverse": true,
         "wPromo": false,
-        "types": "Colorless"
+        "type": "Colorless"
     }
 ]

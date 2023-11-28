@@ -55,12 +55,6 @@ public class CardPokemonView extends CardView {
 
         cardColor.add(typeSymbol);
 
-        // Label cardText = new Label(this.description);
-        // cardText.setStyleName("card-text");
-
-        /**
-         * Card content
-         */
         Panel cardContent = new VerticalPanel();
         cardContent.setStyleName("card-content");
 
@@ -77,8 +71,6 @@ public class CardPokemonView extends CardView {
 
         cardContent.add(nameLabel);
         cardContent.add(pokemonType);
-
-        // cardHeader.add(typeSymbol);
 
         cardWrap.add(cardHeader);
         cardWrap.add(cardContent);
