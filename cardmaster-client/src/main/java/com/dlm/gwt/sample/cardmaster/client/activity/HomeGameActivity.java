@@ -12,6 +12,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.dlm.gwt.sample.cardmaster.client.ViewRouter;
 import com.dlm.gwt.sample.cardmaster.client.backendService.BackendService;
+import com.dlm.gwt.sample.cardmaster.client.elements.CardDetailsModalPanel;
+import com.dlm.gwt.sample.cardmaster.client.elements.HidePopupPanelClickingOutside;
+import com.dlm.gwt.sample.cardmaster.client.utils.CardListType;
 import com.dlm.gwt.sample.cardmaster.client.view.HomeGameView;
 
 import java.util.List;
@@ -24,6 +27,7 @@ public class HomeGameActivity extends AbstractActivity {
     private final BackendService backendService;
 
     String gameName;
+    private CardListType cardListType;
 
     public HomeGameActivity(HomeGameView view, DatabaseServiceAsync databaseService, String gameName) {
         this.view = view;
@@ -49,6 +53,7 @@ public class HomeGameActivity extends AbstractActivity {
         databaseService.getCards(gameName, new AsyncCallback<List<Card>>() {
             @Override
             public void onSuccess(List<Card> cards) {
+                cardListType = CardListType.SHOW_ALL_CARDS;
                 // richiama il metodo della view che mostra le carte
                 view.showGrid(cards);
             }
@@ -61,6 +66,8 @@ public class HomeGameActivity extends AbstractActivity {
         });
     }
 
+
+
     public void addCardToUserOwnedOrWished(Card card, Boolean isOwnedOrWished) {
 
         // aggiunti la carta alle possedute o desiderate dell'utente
@@ -68,6 +75,18 @@ public class HomeGameActivity extends AbstractActivity {
 
         // ora rendo persistente la carta nel database
         saveChangesInDB(this.loggedUser);
+    }
+
+    public void getOwnedOrWishedCards(String gameName, Boolean isOwnedOrWished) {
+        // se true stampi le owned, se false stampi le wished
+        if (isOwnedOrWished == true) {
+            List<Card> cardsOwned = this.loggedUser.getOwnedCards();
+            this.cardListType = CardListType.SHOW_OWNED_CARDS;
+            view.showGrid(cardsOwned);
+        }
+
+        // TODO: gestire caso wished
+
     }
 
     /* ++ METODI DI SUPPORTO ++ */
@@ -86,6 +105,14 @@ public class HomeGameActivity extends AbstractActivity {
                 Window.alert("Errore: " + caught.getMessage());
             }
         });
+    }
+
+    public void showCardDetailsModalPanel(Card card) {
+        CardDetailsModalPanel modalPanel = new CardDetailsModalPanel(this.loggedUser, card, this.gameName,
+                this.cardListType);
+        modalPanel.show();
+        HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
+        hidePopup.initialize(modalPanel);
     }
 
     /*  -- METODI DI SUPPORTO -- */

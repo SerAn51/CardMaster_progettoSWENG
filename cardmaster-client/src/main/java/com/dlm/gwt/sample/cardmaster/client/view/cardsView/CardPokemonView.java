@@ -1,8 +1,8 @@
 package com.dlm.gwt.sample.cardmaster.client.view.cardsView;
 
+import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
 import com.dlm.gwt.sample.cardmaster.client.view.CardView;
 import com.dlm.gwt.sample.cardmaster.shared.card.PokemonCard;
-import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.user.client.ui.*;
 
 public class CardPokemonView extends CardView {
@@ -18,8 +18,8 @@ public class CardPokemonView extends CardView {
     protected boolean wPromo;
     protected String type;
 
-    public CardPokemonView(PokemonCard card, User user, String gameName) {
-        super(card, user, gameName);
+    public CardPokemonView(PokemonCard card, HomeGameActivity homeGameActivity) {
+        super(card, homeGameActivity);
         this.card = card;
         this.type = card.getType() != "" ? card.getType() : "trainer";
         this.illustrator = card.getIllustrator();
@@ -55,6 +55,12 @@ public class CardPokemonView extends CardView {
 
         cardColor.add(typeSymbol);
 
+        // Label cardText = new Label(this.description);
+        // cardText.setStyleName("card-text");
+
+        /**
+         * Card content
+         */
         Panel cardContent = new VerticalPanel();
         cardContent.setStyleName("card-content");
 
@@ -71,6 +77,8 @@ public class CardPokemonView extends CardView {
 
         cardContent.add(nameLabel);
         cardContent.add(pokemonType);
+
+        // cardHeader.add(typeSymbol);
 
         cardWrap.add(cardHeader);
         cardWrap.add(cardContent);
