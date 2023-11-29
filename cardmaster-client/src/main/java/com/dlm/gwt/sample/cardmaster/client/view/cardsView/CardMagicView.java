@@ -1,8 +1,8 @@
 package com.dlm.gwt.sample.cardmaster.client.view.cardsView;
 
+import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
 import com.dlm.gwt.sample.cardmaster.client.view.CardView;
 import com.dlm.gwt.sample.cardmaster.shared.card.MagicCard;
-import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.user.client.ui.*;
 
 public class CardMagicView extends CardView {
@@ -17,8 +17,8 @@ public class CardMagicView extends CardView {
     protected boolean isPromo;
     protected boolean isReprint;
 
-    public CardMagicView(MagicCard card, User user, String gameName) {
-        super(card, user, gameName);
+    public CardMagicView(MagicCard card, HomeGameActivity homeGameActivity) {
+        super(card, homeGameActivity);
         this.card = card;
         this.type = card.getType();
         this.description = card.getDescription(); // Chiama il costruttore della classe astratta
@@ -34,6 +34,7 @@ public class CardMagicView extends CardView {
 
     protected Widget createSpecificCard() {
         Panel card = new VerticalPanel();
+        // card.setStyleName("miniBody");
 
         Panel cardWrap = new VerticalPanel();
         cardWrap.setStyleName("card-wrap");
@@ -51,6 +52,12 @@ public class CardMagicView extends CardView {
 
         cardColor.add(typeSymbol);
 
+        // Label cardText = new Label(this.description);
+        // cardText.setStyleName("card-text");
+
+        /**
+         * Card content
+         */
         Panel cardContent = new VerticalPanel();
         cardContent.setStyleName("card-content");
 
@@ -67,6 +74,8 @@ public class CardMagicView extends CardView {
 
         cardContent.add(nameLabel);
         cardContent.add(pokemonType);
+
+        // cardHeader.add(typeSymbol);
 
         cardWrap.add(cardHeader);
         cardWrap.add(cardContent);

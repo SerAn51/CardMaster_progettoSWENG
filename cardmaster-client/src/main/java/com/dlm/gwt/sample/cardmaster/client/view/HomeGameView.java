@@ -93,7 +93,7 @@ public class HomeGameView extends Composite {
             if (cards.get(i) instanceof Card) {
                 Card card = (Card) cards.get(i);
                 if (card.getGame().equalsIgnoreCase(this.gameName)) {
-                    cardViewFactory = new CardViewFactory(card, gameName, loggedUser);
+                    cardViewFactory = new CardViewFactory(card, this.homeGameActivity);
                     cardView = cardViewFactory.createCardView();
                     localCardsGrid.setWidget(row, col, cardView);
                     localCardsGrid.setStyleName("cardsGrid");
@@ -162,6 +162,7 @@ public class HomeGameView extends Composite {
      */
     private void createSidebar(Panel sidebar) {
 
+
         // TODO: aggiungere il bottone per i filtri
 
         Button showAllCardsButton = new Button("Mostra tutte");
@@ -169,7 +170,14 @@ public class HomeGameView extends Composite {
             homeGameActivity.getCards(this.gameName);
         });
 
+
+
         Button showOwnedCardsButton = new Button("Mostra owned");
+        showOwnedCardsButton.addClickHandler(event -> {
+            currentPage = 0;
+            homeGameActivity.getOwnedOrWishedCards(this.gameName, true);
+        });
+
         Button showWishedCardsButton = new Button("Mostra wished");
         Button showDeck = new Button("Mostra deck");
 

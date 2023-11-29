@@ -1,6 +1,7 @@
 package com.dlm.gwt.sample.cardmaster.client.elements;
 
 import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
+import com.dlm.gwt.sample.cardmaster.client.utils.CardListType;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
 import com.dlm.gwt.sample.cardmaster.shared.card.MagicCard;
 import com.dlm.gwt.sample.cardmaster.shared.card.PokemonCard;
@@ -22,7 +23,7 @@ public class CardDetailsModalPanel extends PopupPanel {
     private FlowPanel cardDetailsContainer;
     private User loggedUser;
 
-    public CardDetailsModalPanel(User loggedUser, Card card, String gameName, int i) {
+    public CardDetailsModalPanel(User loggedUser, Card card, String gameName, CardListType listType) {
 
         databaseServiceAsync = GWT.create(DatabaseService.class);
         this.homeGameActivity = new HomeGameActivity(null, databaseServiceAsync, gameName);
@@ -61,6 +62,22 @@ public class CardDetailsModalPanel extends PopupPanel {
         Button updatePropertiesButton = new Button("Aggiorna proprietà");
         Button removeWishedButton = new Button("Rimuovi dalle wished");
 
+        // se passo SHOW_ALL_CARDS, ho cliccato mostra tutte le carte
+        if (listType == CardListType.SHOW_ALL_CARDS) {
+            cardDetailsContainer.add(addOwnedButton);
+            cardDetailsContainer.add(addWishedButton);
+        }
+        // se passo SHOW_OWNED_CARDS, ho cliccato mostra owned
+        if (listType == CardListType.SHOW_OWNED_CARDS) {
+            cardDetailsContainer.add(removeOwnedButton);
+            cardDetailsContainer.add(updatePropertiesButton);
+        }
+        // se passo SHOW_WISHED_CARDS, ho cliccato mostra wished
+        if (listType == CardListType.SHOW_WISHED_CARDS) {
+            cardDetailsContainer.add(addOwnedButton);
+            cardDetailsContainer.add(removeWishedButton);
+        }
+
         // TODO: aggiungi eventi per i bottoni
         // al click del bottone, aggiungere la carta alle owned
         addOwnedButton.addClickHandler(event -> {
@@ -69,12 +86,6 @@ public class CardDetailsModalPanel extends PopupPanel {
 
         // TODO: gestire mostra tutte/ mostra owned/ mostra wished
         // campo enum in card e controllo quel campo
-        cardDetailsContainer.add(addOwnedButton);
-        cardDetailsContainer.add(addWishedButton);
-        cardDetailsContainer.add(removeOwnedButton);
-        cardDetailsContainer.add(removeWishedButton);
-        cardDetailsContainer.add(updatePropertiesButton);
-
         content.add(cardDetailsContainer);
 
         setWidget(content);

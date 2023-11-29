@@ -1,23 +1,19 @@
 package com.dlm.gwt.sample.cardmaster.client.view;
 
-import com.dlm.gwt.sample.cardmaster.client.elements.CardDetailsModalPanel;
-import com.dlm.gwt.sample.cardmaster.client.elements.HidePopupPanelClickingOutside;
+import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
-import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.user.client.ui.*;
 
 public abstract class CardView extends Composite {
 
     protected Card card;
     protected String description;
-    private User user;
-    private String gameName;
     private Panel cardShape;
+    private HomeGameActivity homeGameActivity;
 
-    public CardView(Card card, User user, String gameName) {
-        this.user = user;
+    public CardView(Card card, HomeGameActivity homeGameActivity) {
         this.card = card;
-        this.gameName = gameName;
+        this.homeGameActivity = homeGameActivity;
         this.cardShape = new VerticalPanel();
         initWidget(this.cardShape);
     }
@@ -31,15 +27,11 @@ public abstract class CardView extends Composite {
         Panel overlay = new VerticalPanel();
         overlay.setStyleName("overlay");
 
-        // TODO: gestire mostra tutte/ mostra owned/ mostra wished
         Button showDetails = new Button("Dettagli");
         showDetails.addClickHandler(event -> {
-            CardDetailsModalPanel cardDetailsModalPanel = new CardDetailsModalPanel(user,
-                    card, gameName, 1);
-            cardDetailsModalPanel.center();
-            cardDetailsModalPanel.show();
 
-            hidePopupPanelClickingOutside(cardDetailsModalPanel);
+            homeGameActivity.showCardDetailsModalPanel(card);
+
         });
 
         showDetails.setStyleName("card-btn");
@@ -51,11 +43,6 @@ public abstract class CardView extends Composite {
 
         cardShape.add(cardAddition); // Aggiunta del contenuto al pannello della carta
 
-    }
-
-    private void hidePopupPanelClickingOutside(PopupPanel modalPanel) {
-        HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
-        hidePopup.initialize(modalPanel);
     }
 
 }
