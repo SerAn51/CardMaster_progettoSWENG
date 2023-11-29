@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ManageDeckModalPanel extends PopupPanel {
 
@@ -18,7 +19,8 @@ public class ManageDeckModalPanel extends PopupPanel {
     private String deckName;
     private HidePopupPanelClickingOutside hidePopup;
 
-    public ManageDeckModalPanel(User loggedUser, String gameName, HomeGameActivity homeGameActivity, String deckName, HidePopupPanelClickingOutside hidePopup) {
+    public ManageDeckModalPanel(User loggedUser, String gameName, HomeGameActivity homeGameActivity, String deckName,
+            HidePopupPanelClickingOutside hidePopup) {
 
         this.loggedUser = loggedUser;
         this.gameName = gameName;
@@ -27,7 +29,7 @@ public class ManageDeckModalPanel extends PopupPanel {
         this.hidePopup = hidePopup;
 
         // Contenuto della finestra modale
-        HorizontalPanel content = new HorizontalPanel();
+        Panel content = new HorizontalPanel();
 
         // Zona carte gia' presenti nel deck
         cardsAlreadyAdded(content);
@@ -40,47 +42,96 @@ public class ManageDeckModalPanel extends PopupPanel {
 
     private void cardsAlreadyAdded(Panel content) {
         FlowPanel cardsAlreadyInDeckContainer = new FlowPanel();
-        cardsAlreadyInDeckContainer.addStyleName("initDeckContainer");
-        for (Card card : loggedUser.getDecks().get(deckName).getCards()) {
-            Label cardDetails = new Label(card.toString());
-            cardsAlreadyInDeckContainer.add(cardDetails);
+        cardsAlreadyInDeckContainer.setStyleName("popupContainer"); // Applica la classe CSS container
 
-            Button removeCardButton = new Button("Remove");
+        // Aggiungi l'etichetta "Carte disponibili"
+        Label label = new Label("Carte nel deck");
+        label.setStyleName("sticky-label"); // Applica la classe CSS sticky-label
+        cardsAlreadyInDeckContainer.add(label);
 
-            cardsAlreadyInDeckContainer.add(removeCardButton);
+        FlowPanel scrollableCards = new FlowPanel();
+        scrollableCards.setStyleName("scrollable-cards"); // Applica la classe CSS scrollable-cards
 
-            removeCardButton.addClickHandler(event -> {
-                homeGameActivity.removeCardFromDeck(card, this.deckName);
-                hide();
-                hidePopup.destroy();
-                homeGameActivity.getDecks(loggedUser, gameName);
-            });
+        if (loggedUser.getDecks().get(deckName).getCards().size() > 0) {
+
+            for (Card card : loggedUser.getDecks().get(deckName).getCards()) {
+
+                Panel cardInfo = new VerticalPanel();
+                Panel cardDetails = new VerticalPanel();
+                Label cardName = new Label(card.getName());
+                Label cardCondition = new Label(card.getCondition());
+                Panel buttonContainerPanel = new HorizontalPanel();
+                Button removeCardButton = new Button("Remove");
+                removeCardButton.addClickHandler(event -> {
+                    homeGameActivity.removeCardFromDeck(card, this.deckName);
+                    hide();
+                    hidePopup.destroy();
+                    homeGameActivity.getDecks(loggedUser, gameName);
+                });
+
+                removeCardButton.setStyleName("removeCardFromDeck");
+                cardInfo.setStyleName("card-details");
+                buttonContainerPanel.add(removeCardButton);
+                buttonContainerPanel.setStyleName("cardToDeck");
+                cardDetails.add(cardName);
+                cardDetails.add(cardCondition);
+                cardInfo.add(cardDetails);
+                cardInfo.add(buttonContainerPanel);
+
+                scrollableCards.add(cardInfo);
+            }
+        } else {
+            // FIXME: richiama il placeholder del homeGameActivity
+            Label noCards = new Label("Non ci sono carte nel deck");
+            scrollableCards.add(noCards);
         }
+        cardsAlreadyInDeckContainer.add(scrollableCards);
         content.add(cardsAlreadyInDeckContainer);
     }
 
     private void cardsAvailable(Panel content) {
         FlowPanel chooseCardContainer = new FlowPanel();
-        chooseCardContainer.addStyleName("initDeckContainer");
+        chooseCardContainer.setStyleName("popupContainer"); // Applica la classe CSS container
+
+        // Aggiungi l'etichetta "Carte disponibili"
+        Label label = new Label("Carte disponibili");
+        label.setStyleName("sticky-label"); // Applica la classe CSS sticky-label
+        chooseCardContainer.add(label);
+
+        FlowPanel scrollableCards = new FlowPanel();
+        scrollableCards.setStyleName("scrollable-cards"); // Applica la classe CSS scrollable-cards
 
         for (Card card : loggedUser.getOwnedCards()) {
             if (card.getGame().equals(gameName) && !loggedUser.getDecks().get(deckName).getCards().contains(card)) {
-                Label cardDetails = new Label(card.toString());
-                chooseCardContainer.add(cardDetails);
 
+                Panel cardInfo = new VerticalPanel();
+                Label cardName = new Label(card.getName());
+                Label cardCondition = new Label(card.getCondition());
+                Panel cardDetails = new VerticalPanel();
+                Panel buttonContainerPanel = new HorizontalPanel();
                 Button addCardButton = new Button("Add");
-
-                chooseCardContainer.add(addCardButton);
-
                 addCardButton.addClickHandler(event -> {
                     homeGameActivity.addCardToDeck(card, this.deckName);
                     hide();
                     hidePopup.destroy();
                     homeGameActivity.getDecks(loggedUser, gameName);
                 });
+
+                addCardButton.setStyleName("addCardToDeck");
+                cardInfo.setStyleName("card-details");
+                buttonContainerPanel.setStyleName("cardToDeck");
+
+                buttonContainerPanel.add(addCardButton);
+                cardDetails.add(cardName);
+                cardDetails.add(cardCondition);
+                cardInfo.add(cardDetails);
+                cardInfo.add(buttonContainerPanel);
+
+                scrollableCards.add(cardInfo);
             }
         }
 
+        chooseCardContainer.add(scrollableCards);
         content.add(chooseCardContainer);
     }
 }

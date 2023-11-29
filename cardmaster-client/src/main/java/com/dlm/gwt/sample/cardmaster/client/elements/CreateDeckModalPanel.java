@@ -18,6 +18,8 @@ public class CreateDeckModalPanel extends PopupPanel {
     public CreateDeckModalPanel(User loggedUser, String gameName, HomeGameActivity homeGameActivity,
             HidePopupPanelClickingOutside hidePopup) {
 
+        // TODO: togli gli input superflui
+        
         // Contenuto della finestra modale
         Panel content = new VerticalPanel();
 
@@ -71,5 +73,4 @@ public class CreateDeckModalPanel extends PopupPanel {
 
         setWidget(content);
     }
-
 }
