@@ -2,6 +2,7 @@ package com.dlm.gwt.sample.cardmaster.client;
 
 import com.dlm.gwt.sample.cardmaster.client.backendService.BackendService;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
+import com.dlm.gwt.sample.cardmaster.shared.card.Deck;
 import com.dlm.gwt.sample.cardmaster.shared.services.DatabaseServiceAsync;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,6 +38,58 @@ public class BackendServiceTest {
         // Hint: user.getOwnedCards() dovrebbe contenere la carta aggiunta.
 
         assertTrue(user.getOwnedCards().contains(mockCard));
+    }
 
+    @DisplayName("Testing createDeck")
+    @Test
+    public void testCreateDeck() {
+        User user = new User("mockUser", "mockPassword", "", 14, "Altro");
+        String gameName = "mockGameName";
+        String deckName = "mockDeckName";
+
+        backendService.createDeck(user, gameName, deckName);
+
+        assertTrue(user.getDecks().containsKey(deckName));
+    }
+
+    @DisplayName("Testing deleteDeck")
+    @Test
+    public void testDeleteDeck() {
+        User user = new User("mockUser", "mockPassword", "", 14, "Altro");
+        String deckName = "mockDeckName";
+        user.getDecks().put(deckName, new Deck(deckName, "mockGameName"));
+
+        backendService.deleteDeck(user, deckName);
+
+        assertFalse(user.getDecks().containsKey(deckName));
+    }
+
+    @DisplayName("Testing addCardToDeck")
+    @Test
+    public void testAddCardToDeck() {
+        User user = new User("mockUser", "mockPassword", "", 14, "Altro");
+        String deckName = "mockDeckName";
+        Deck deck = new Deck(deckName, "pokemon");
+        user.getDecks().put(deckName, deck);
+        Card card = new MockCard("mockCard", "mockType", "mockDescription");
+
+        backendService.addCardToDeck(user, deckName, card);
+
+        assertTrue(deck.getCards().contains(card));
+    }
+
+    @DisplayName("Testing removeCardFromDeck")
+    @Test
+    public void testRemoveCardFromDeck() {
+        User user = new User("mockUser", "mockPassword", "", 14, "Altro");
+        String deckName = "mockDeckName";
+        Deck deck = new Deck(deckName, "pokemon");
+        user.getDecks().put(deckName, deck);
+        Card card = new MockCard("mockCard", "mockType", "mockDescription");
+        deck.getCards().add(card);
+
+        backendService.removeCardFromDeck(user, deckName, card);
+
+        assertFalse(deck.getCards().contains(card));
     }
 }
