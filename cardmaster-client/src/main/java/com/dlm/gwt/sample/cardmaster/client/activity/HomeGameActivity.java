@@ -1,6 +1,7 @@
 package com.dlm.gwt.sample.cardmaster.client.activity;
 
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
+import com.dlm.gwt.sample.cardmaster.shared.card.Deck;
 import com.dlm.gwt.sample.cardmaster.shared.services.DatabaseServiceAsync;
 import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
@@ -17,7 +18,9 @@ import com.dlm.gwt.sample.cardmaster.client.elements.HidePopupPanelClickingOutsi
 import com.dlm.gwt.sample.cardmaster.client.utils.CardListType;
 import com.dlm.gwt.sample.cardmaster.client.view.HomeGameView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class HomeGameActivity extends AbstractActivity {
 
@@ -66,8 +69,6 @@ public class HomeGameActivity extends AbstractActivity {
         });
     }
 
-
-
     public void addCardToUserOwnedOrWished(Card card, Boolean isOwnedOrWished) {
 
         // aggiunti la carta alle possedute o desiderate dell'utente
@@ -115,5 +116,61 @@ public class HomeGameActivity extends AbstractActivity {
         hidePopup.initialize(modalPanel);
     }
 
-    /*  -- METODI DI SUPPORTO -- */
+    public void getDecks(User loggedUser, String gameName) {
+
+        List<Deck> decks = new ArrayList<>();
+        Map<String, Deck> userDecks = loggedUser.getDecks();
+
+        if (userDecks != null && !userDecks.isEmpty()) {
+            for (Deck deck : userDecks.values()) {
+                if (deck.getGame().equalsIgnoreCase(gameName)) {
+                    decks.add(deck);
+                }
+            }
+        }
+        // richiama il metodo della view che mostra i decks cosi' aggiornare visivamente
+        // la pagina
+        view.showDecks(decks);
+    }
+
+    public void deleteDeck(String deckName) {
+
+        // rimuovo il deck dalla "lista" di deck dell'utente
+        backendService.deleteDeck(this.loggedUser, deckName);
+
+        // toglo dall'intefaccia il deck eliminato
+        getDecks(loggedUser, deckName);
+
+        // ora rendo persistente il deck nel database
+        saveChangesInDB(this.loggedUser);
+    }
+
+    public void removeCardFromDeck(Card card, String deckName) {
+
+        // aggiorna il deck dell'utente
+        backendService.removeCardFromDeck(this.loggedUser, deckName, card);
+
+        // salva le modifiche all'utente nel db
+        saveChangesInDB(this.loggedUser);
+    }
+
+    public void addCardToDeck(Card card, String deckName) {
+
+        // aggiorna il deck dell'utente
+        backendService.addCardToDeck(this.loggedUser, deckName, card);
+
+        // salva le modifiche all'utente nel db
+        saveChangesInDB(this.loggedUser);
+    }
+
+    public void createDeck(String deckName) {
+
+        // creo il deck e lo aggiungo alla "lista" di deck dell'utente
+        backendService.createDeck(this.loggedUser, this.gameName, deckName);
+
+        // ora rendo persistente il deck nel database
+        saveChangesInDB(this.loggedUser);
+    }
+
+    /* -- METODI DI SUPPORTO -- */
 }

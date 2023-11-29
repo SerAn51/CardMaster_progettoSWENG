@@ -9,6 +9,7 @@
   --pokemonHeaderSymbolHeight: 16rem;
   --magicSymbolWidth: 16rem;
   --magicSymbolHeight: 16rem;
+  --popup-background-color: #241c59;
 }
 
 body {
@@ -1435,11 +1436,282 @@ body::-webkit-scrollbar {
   margin: 20px 0;
   overflow: hidden;
   display: flex;
-  /* Abilita il layout flex per il contenitore /
-  flex-direction: column;
-  / Imposta la direzione di layout su colonna /
-  align-items: center;
-  / Centra verticalmente all'interno del contenitore */
 }
 
 /* -- FINE POPUP PANEL DEL SITO -- */
+
+/* DECK */
+.decksGrid {
+  display: grid;
+  justify-content: center;
+  width: 109rem;
+  height: 45rem;
+  overflow-y: scroll;
+}
+
+.deckPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  min-height: 14rem;
+  min-width: 21rem;
+  /*! overflow-inline: visible; */
+  padding: 1rem;
+
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.38);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.6px);
+  -webkit-backdrop-filter: blur(11.6px);
+}
+
+.deckName {
+  font-family: var(--font-family);
+  font-size: 2.5rem;
+  color: #000000;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: rgb(231, 231, 231);
+  text-align: center;
+  max-width: 23rem;
+}
+
+.numberOfCards {
+  font-family: var(--font-family);
+  font-size: 1.5rem;
+  color: #000000;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: rgb(231, 231, 231);
+  text-align: center;
+  max-width: 23rem;
+}
+
+.deckButtonPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.openDeckButton {
+  background-image: url('/img/modDeck.svg');
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  transition: all 0.3s;
+}
+
+.openDeckButton:hover {
+  transform: scale(1.2);
+}
+
+
+.deleteDeckButton {
+  background-image: url('/img/trash.svg');
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  transition: all 0.3s;
+}
+
+.deleteDeckButton:hover {
+  transform: scale(1.2);
+}
+
+/* Stile per il pulsante di creazione del mazzo */
+.createDeckButton {
+  background-color: #29ca29;
+  color: white;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  font-size: 1.4rem;
+  font-weight: bolder;
+  margin-right: 7rem;
+}
+
+/* Stile quando il cursore è sopra il pulsante */
+.createDeckButton:hover {
+  background-color: darkgreen;
+  transform: scale(1.2);
+}
+
+/* Stile quando il pulsante è attivo/cliccato */
+.createDeckButton:active {
+  transform: scale(0.9);
+}
+
+.createDeckButton::after {
+  transform: scale(1.2);
+}
+
+.createDeckContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/*POPUP DECK */
+.popupContainer {
+  border-radius: var(--border-radius);
+  background-color: var(--popup-background-color);
+  display: grid;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  padding: 3rem;
+  overflow-y: scroll;
+  max-width: 16rem;
+  max-height: 40rem;
+  color: white;
+  font-family: var(--font-family);
+  font-weight: bold;
+  justify-items: center;
+  margin-right: 0.8rem;
+  overflow-x: hidden;
+}
+
+.popupContainer .createDeckButton {
+  margin: 0;
+}
+
+.popupContainer label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.popupContainer input[type="text"] {
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: var(--border-radius);
+}
+
+.bigLabelPopup {
+  font-family: var(--font-family);
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: rgb(230, 0, 0);
+  text-align: center;
+  max-width: 23rem;
+  margin-bottom: 1rem;
+}
+
+.createDeckButton {
+  background-color: #29ca29;
+  color: white;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  font-size: 1.4rem;
+  font-weight: bolder;
+  margin-right: 7rem;
+}
+
+/* Stile quando il cursore è sopra il pulsante */
+.createDeckButton:hover {
+  background-color: darkgreen;
+  transform: scale(1.2);
+}
+
+/* Stile quando il pulsante è attivo/cliccato */
+.createDeckButton:active {
+  transform: scale(0.9);
+}
+
+.createDeckButton::after {
+  transform: scale(1.2);
+}
+
+.createDeckContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+
+/* MANAGE DECK MODAL PANEL */
+.sticky-label {
+  position: sticky;
+  top: 0;
+  color: red;
+  padding: 8px;
+  z-index: 1;
+  font-family: var(--font-family);
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+.scrollable-cards {
+  max-height: 30rem;
+  overflow-y: auto;
+  padding-top: 1rem;
+  /*! display: grid; */
+  /*! justify-items: center; */
+  min-height: 30rem;
+  /*! min-width: 4rem; */
+  justify-content: center;
+  margin-left: 7rem;
+  /*! overflow-x: hidden; */
+}
+
+
+.card-details {
+  color: white;
+  font-family: var(--font-family);
+  font-size: 1.5rem;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 1rem;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+
+.cardToDeck .addCardToDeck {
+  background-color: #29ca29;
+  color: white;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  font-size: 1.4rem;
+  font-weight: bolder;
+  margin-right: 7rem;
+}
+
+.removeCardFromDeck {
+  background-color: #ca2929;
+  color: white;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  font-size: 1.4rem;
+  font-weight: bolder;
+  margin-right: 7rem;
+}
