@@ -4,8 +4,12 @@ import java.util.List;
 
 import com.dlm.gwt.sample.cardmaster.client.activity.CardViewFactory;
 import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
+import com.dlm.gwt.sample.cardmaster.client.elements.CreateDeckModalPanel;
 import com.dlm.gwt.sample.cardmaster.client.elements.HeaderPanelCustom;
+import com.dlm.gwt.sample.cardmaster.client.elements.HidePopupPanelClickingOutside;
+import com.dlm.gwt.sample.cardmaster.client.elements.ManageDeckModalPanel;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
+import com.dlm.gwt.sample.cardmaster.shared.card.Deck;
 import com.dlm.gwt.sample.cardmaster.shared.services.DatabaseService;
 import com.dlm.gwt.sample.cardmaster.shared.services.DatabaseServiceAsync;
 import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
@@ -162,15 +166,12 @@ public class HomeGameView extends Composite {
      */
     private void createSidebar(Panel sidebar) {
 
-
         // TODO: aggiungere il bottone per i filtri
 
         Button showAllCardsButton = new Button("Mostra tutte");
         showAllCardsButton.addClickHandler(event -> {
             homeGameActivity.getCards(this.gameName);
         });
-
-
 
         Button showOwnedCardsButton = new Button("Mostra owned");
         showOwnedCardsButton.addClickHandler(event -> {
@@ -180,6 +181,9 @@ public class HomeGameView extends Composite {
 
         Button showWishedCardsButton = new Button("Mostra wished");
         Button showDeck = new Button("Mostra deck");
+        showDeck.addClickHandler(event -> {
+            homeGameActivity.getDecks(this.loggedUser, this.gameName);
+        });
 
         // TODO: aggiungere eventi per i bottoni
         showAllCardsButton.setStyleName("sidebarButton");
@@ -195,6 +199,118 @@ public class HomeGameView extends Composite {
         sidebar.setStyleName("sidebar");
     }
 
+    public void showDecks(List<Deck> decks) {
+        Panel deckPanel = new VerticalPanel();
+        int elementsPerRow = 5;
+        int numberOfRows = (int) Math.ceil((double) decks.size() / elementsPerRow);
+
+        Grid showDecksGrid = new Grid(numberOfRows, elementsPerRow);
+        showDecksGrid.setStyleName("decksGrid");
+        VerticalPanel localPanel;
+        int deckIndex = 0;
+
+        for (int row = 0; row < numberOfRows; row++) {
+            for (int col = 0; col < elementsPerRow; col++) {
+                if (deckIndex < decks.size()) {
+                    Deck deck = decks.get(deckIndex);
+                    localPanel = new VerticalPanel();
+                    localPanel.setStyleName("deckPanel");
+
+                    Panel deckInfoPanel = new VerticalPanel();
+                    Label deckName = new Label(deck.getName());
+                    Label numberOfCards = new Label("Carte nel deck: " + String.valueOf(deck.getCards().size()));
+                    deckName.setStyleName("deckName");
+                    numberOfCards.setStyleName("numberOfCards");
+                    deckInfoPanel.add(deckName);
+                    deckInfoPanel.add(numberOfCards);
+                    deckViewBuilder(localPanel, deck, deckInfoPanel);
+
+                    showDecksGrid.setWidget(row, col, localPanel); // Aggiunta del pannello locale alla griglia nella
+                                                                   // posizione corrispondente
+                    deckIndex++;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        deckPanel.add(showDecksGrid);
+        deckPanel.add(getCreateDeckButton());
+        setInGrid(deckPanel); // Aggiungi il pannello del pulsante alla griglia
+    }
+
+    /**
+     * Costruisce il pannello che mostra il nome del deck e i pulsanti per gestirlo
+     * 
+     * @param showDecksPanel => pannello che contiene tutti i deck
+     * @param deck           => deck da mostrare
+     * @param deckName       => nome del deck
+     */
+    private void deckViewBuilder(Panel showDecksPanel, Deck deck, Widget deckName) {
+        showDecksPanel.add(deckName);
+        showDecksPanel.add(deckButtons(deck));
+    }
+
+    private Panel deckButtons(Deck deck) {
+        Panel localPanel = getDeleteDeckButton(deck, getManageDeckButton(deck));
+        localPanel.setStyleName("deckButtonPanel");
+        return localPanel;
+    }
+
+    private Button getManageDeckButton(Deck deck) {
+        Button manageDeckButton = new Button();
+        manageDeckButton.setStyleName("openDeckButton");
+
+        manageDeckButton.addClickHandler(event -> {
+
+            HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
+
+            ManageDeckModalPanel manageDeckModalPanel = new ManageDeckModalPanel(this.loggedUser,
+                    this.gameName, this.homeGameActivity, deck.getName(), hidePopup);
+            manageDeckModalPanel.center();
+            manageDeckModalPanel.show();
+
+            hidePopup.initialize(manageDeckModalPanel);
+        });
+        return manageDeckButton;
+    }
+
+    private Panel getDeleteDeckButton(Deck deck, Button manageDeckButton) {
+        Button deleteDeckButton = new Button();
+        deleteDeckButton.setStyleName("deleteDeckButton");
+
+        Panel deckButtonPanel = new HorizontalPanel();
+        deckButtonPanel.add(manageDeckButton);
+        deckButtonPanel.add(deleteDeckButton);
+
+        deleteDeckButton.addClickHandler(event -> {
+            homeGameActivity.deleteDeck(deck.getName());
+        });
+
+        return deckButtonPanel;
+    }
+
+    private Panel getCreateDeckButton() {
+        Panel localPanel = new HorizontalPanel();
+        Button createDeckButton = new Button("Crea deck");
+        createDeckButton.setStyleName("addDeckButton");
+
+        localPanel.add(createDeckButton);
+        localPanel.setStyleName("createDeckContainer");
+
+        createDeckButton.addClickHandler(event -> {
+            HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
+            CreateDeckModalPanel createDeckModalPanel = new CreateDeckModalPanel(this.loggedUser,
+                    this.gameName, this.homeGameActivity, hidePopup);
+            createDeckModalPanel.center();
+            createDeckModalPanel.show();
+
+            hidePopup.initialize(createDeckModalPanel);
+        });
+        createDeckButton.setStyleName("createDeckButton");
+        return localPanel;
+    }
+
     public void setHomeMagicHandler(ClickHandler handler) {
         Button homeButton = (Button) mainPanel.getWidget(4);
         homeButton.addClickHandler(handler);
@@ -204,6 +320,8 @@ public class HomeGameView extends Composite {
 
         if (elementList.get(0) instanceof Card) {
             showCards((List<Card>) elementList);
+        } else if (elementList.get(0) instanceof Deck) {
+            showDecks((List<Deck>) elementList);
         }
 
     }
