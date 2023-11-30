@@ -69,14 +69,7 @@ public class HomeGameActivity extends AbstractActivity {
         });
     }
 
-    public void addCardToUserOwnedOrWished(Card card, Boolean isOwnedOrWished) {
-
-        // aggiunti la carta alle possedute o desiderate dell'utente
-        backendService.addCardToUserOwnedOrWished(this.loggedUser, card, isOwnedOrWished);
-
-        // ora rendo persistente la carta nel database
-        saveChangesInDB(this.loggedUser);
-    }
+   
 
     public void getOwnedOrWishedCards(String gameName, Boolean isOwnedOrWished) {
         // se true stampi le owned, se false stampi le wished
@@ -90,6 +83,25 @@ public class HomeGameActivity extends AbstractActivity {
             this.cardListType = CardListType.SHOW_WISHED_CARDS;
             view.showGrid(cardsWished);
         }
+    }
+
+    public void addCardToUserOwnedOrWished(Card card, Boolean isOwnedOrWished) {
+
+        // aggiunti la carta alle possedute o desiderate dell'utente
+        backendService.addCardToUserOwnedOrWished(this.loggedUser, card, isOwnedOrWished);
+
+        // ora rendo persistente la carta nel database
+        saveChangesInDB(this.loggedUser);
+    }
+
+    
+    public void removeCardFromUserOwnedOrWished(Card card, Boolean isOwnedOrWished) {
+
+        // rimuovi la carta dalle possedute o desiderate dell'utente
+        backendService.removeCardFromUserOwnedOrWished(this.loggedUser, card, isOwnedOrWished);
+
+        saveChangesInDB(this.loggedUser);
+
     }
 
     /* ++ METODI DI SUPPORTO ++ */

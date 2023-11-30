@@ -89,6 +89,14 @@ public class CardDetailsModalPanel extends PopupPanel {
             homeGameActivity.addCardToUserOwnedOrWished(card, false);
         });
 
+        removeOwnedButton.addClickHandler(event -> {
+            homeGameActivity.removeCardFromUserOwnedOrWished(card, true);
+        });
+
+        removeWishedButton.addClickHandler(event -> {
+            homeGameActivity.removeCardFromUserOwnedOrWished(card, false);
+        });
+
         // campo enum in card e controllo quel campo
         content.add(cardDetailsContainer);
 
