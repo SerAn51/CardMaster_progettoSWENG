@@ -142,6 +142,7 @@ body::-webkit-scrollbar {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(11.7px);
   -webkit-backdrop-filter: blur(11.7px);
+
 }
 
 .loginTitle {
@@ -298,12 +299,6 @@ body::-webkit-scrollbar {
   filter: brightness(85%);
 }
 
-.headerLogoutLabel {
-  font-size: 20px;
-  margin-top: 3px;
-  font-family: 'Nunito', sans-serif;
-}
-
 .headerLogoutButton {
   --primary-color: #ff6666;
   --secondary-color: #fff;
@@ -338,6 +333,11 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
+.headerLogoutLabel {
+  font-size: 20px;
+  margin-top: 3px;
+  font-family: 'Nunito', sans-serif;
+}
 
 .headerLogoutImage {
   background-image: url('/img/logout_logo.png');
@@ -396,6 +396,14 @@ body::-webkit-scrollbar {
   font-family: var(--font-family);
 }
 
+.headerProfileInfo {
+  margin-top: 3px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--font-family);
+}
+
+
 .headerProfileButtonImage {
   background-image: url('/img/profile_logo.png');
   width: 25px;
@@ -448,6 +456,13 @@ body::-webkit-scrollbar {
   transition-duration: 100ms;
 }
 
+.red-dot-indicator {
+  width: 23px;
+  height: 23px;
+  background-color: rgb(255, 0, 0);
+  border-radius: 50%;
+}
+
 
 .headerCustom-modal {
   background-color: transparent;
@@ -475,6 +490,12 @@ body::-webkit-scrollbar {
   border-left: 30px solid transparent;
   border-right: 30px solid transparent;
   z-index: 1000;
+}
+
+.gwt-PopupPanel {
+  border: 0px !important;
+  padding: 0px !important;
+  background: transparent !important;
 }
 
 .headerCustom-modal-title {
@@ -1360,6 +1381,17 @@ body::-webkit-scrollbar {
 
 
 /* Custom pokemon cards */
+.miniBody {
+  font-family: var(--font-family);
+  background: linear-gradient(to right, #8e9eab, #eef2f3);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
 .card-wrap {
   width: 30.5vh;
   background: #fff;
@@ -1395,9 +1427,80 @@ body::-webkit-scrollbar {
   margin-bottom: 20px;
 }
 
+.card-text {
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
 /*++HOME GAME VIEW++*/
+.searchCardButton {
+  width: 50px;
+  height: 50px;
+}
 
 /* ++ INIZIO POP UP PANEL DEL SITO ++ */
+
+.filterContentPanel {
+  background-color: #ff9966;
+  border-radius: var(--border-radius);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 50px 0px 50px 0px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden;
+  display: flex;
+  /* Abilita il layout flex per il contenitore */
+  flex-direction: column;
+  /* Imposta la direzione di layout su colonna */
+  align-items: center;
+  /* Centra verticalmente all'interno del contenitore */
+}
+
+.addCardConditionModalPanel {
+  background-color: #ff9966;
+  border-radius: var(--border-radius);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 50px 0px 50px 0px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden;
+  display: flex;
+  /* Abilita il layout flex per il contenitore */
+  flex-direction: column;
+  /* Imposta la direzione di layout su colonna */
+  align-items: center;
+  /* Centra verticalmente all'interno del contenitore */
+}
+
+.initDeckContainer {
+  background-color: #ff9966;
+  border-radius: var(--border-radius);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 50px 0px 50px 0px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden;
+  display: flex;
+  /* Abilita il layout flex per il contenitore */
+  flex-direction: column;
+  /* Imposta la direzione di layout su colonna */
+  align-items: center;
+  /* Centra verticalmente all'interno del contenitore */
+}
+
 .cardDetailsContainer {
   background-color: #ff9966;
   border-radius: var(--border-radius);
@@ -1417,13 +1520,7 @@ body::-webkit-scrollbar {
   align-items: center;
 }
 
-.gwt-PopupPanel {
-  border: 0px !important;
-  padding: 0px !important;
-  background: transparent !important;
-}
-
-.addCardConditionModalPanel {
+.chooseCardForProposalContainer {
   background-color: #ff9966;
   border-radius: var(--border-radius);
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
@@ -1436,35 +1533,145 @@ body::-webkit-scrollbar {
   margin: 20px 0;
   overflow: hidden;
   display: flex;
+  /* Abilita il layout flex per il contenitore */
+  flex-direction: column;
+  /* Imposta la direzione di layout su colonna */
+  align-items: center;
 }
 
-/* -- FINE POPUP PANEL DEL SITO -- */
+/* -- FINE POP UP PANEL DEL SITO -- */
+
+/* ++ INIZIO BOTTONE PER ANDARE ALLA PAGINA DEGLI SCAMBI ++ */
+
+.exchangeButtonImage {
+  background-image: url('/img/exchange_logo.png');
+  width: 23px;
+  height: 23px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 8px;
+}
+
+.exchangeButtonLabel {
+  font-size: 17px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.exchangeButton {
+  --primary-color: #669eff;
+  --secondary-color: #fff;
+  --hover-color: #1d66c5;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+}
+
+.exchangeButton:hover {
+  background-color: var(--hover-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+}
+
+.exchangeButton:hover .exchangeButtonImage {
+  filter: brightness(85%);
+  transition-duration: 100ms;
+}
+
+.exchangeButton:active {
+  transform: scale(0.9);
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  transform: scale(0.90);
+  position: relative;
+}
+
+/* -- FINE BOTTONE PER ANDARE ALLA PAGINA DEGLI SCAMBI -- */
+
+/* ++ INIZIO EXCHANGEVIEW ++ */
+
+.exchangeWelcomeLabelWithExchanges {
+  font-family: 'Passion One', sans-serif;
+  font-size: 65px;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: none;
+  color: rgb(231, 231, 231);
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 0px;
+}
+
+.exchangeWelcomeLabelWithoutExchanges {
+  font-family: 'Passion One', sans-serif;
+  font-size: 90px;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: none;
+  color: rgb(231, 231, 231);
+  text-align: center;
+  margin-top: 150px;
+  margin-bottom: 0px;
+}
+
+.emojiExchangesLabel {
+  font-size: 90px;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.exchangePanel {
+  background-color: rgb(0, 51, 102);
+  border-radius: var(--border-radius);
+
+}
+
+.exchangeProposalPanel {
+  background-color: #1d66c5;
+  /*background-color: #1d66c5;*/
+  border-radius: var(--border-radius);
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
+
+/* -- FINE EXCHANGEVIEW -- */
 
 /* DECK */
-.decksGrid {
-  display: grid;
-  justify-content: center;
-  width: 109rem;
-  height: 45rem;
-  overflow-y: scroll;
-}
-
-.deckPanel {
+.deckList {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  align-content: center;
-  min-height: 14rem;
-  min-width: 21rem;
-  /*! overflow-inline: visible; */
-  padding: 1rem;
+  width: 15rem;
 
   /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.32);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(11.6px);
-  -webkit-backdrop-filter: blur(11.6px);
+  backdrop-filter: blur(13.9px);
+  -webkit-backdrop-filter: blur(13.9px);
 }
 
 .deckName {
@@ -1487,6 +1694,7 @@ body::-webkit-scrollbar {
   color: rgb(231, 231, 231);
   text-align: center;
   max-width: 23rem;
+
 }
 
 .deckButtonPanel {
@@ -1496,33 +1704,32 @@ body::-webkit-scrollbar {
   margin-top: 1rem;
 }
 
-.openDeckButton {
-  background-image: url('/img/modDeck.svg');
-  width: 40px;
-  height: 40px;
-  background-size: cover;
-  background-color: transparent;
-  border: none;
-  transition: all 0.3s;
+.deckPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  min-height: 14rem;
+  min-width: 21rem;
+  /*! overflow-inline: visible; */
+  padding: 1rem;
+
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.38);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.6px);
+  -webkit-backdrop-filter: blur(11.6px);
 }
 
-.openDeckButton:hover {
-  transform: scale(1.2);
-}
-
-
-.deleteDeckButton {
-  background-image: url('/img/trash.svg');
-  width: 40px;
-  height: 40px;
-  background-size: cover;
-  background-color: transparent;
-  border: none;
-  transition: all 0.3s;
-}
-
-.deleteDeckButton:hover {
-  transform: scale(1.2);
+.decksGrid {
+  display: grid;
+  /*! flex-direction: row; */
+  /*! align-items: center; */
+  justify-content: center;
+  width: 109rem;
+  height: 45rem;
+  overflow-y: scroll;
 }
 
 /* Stile per il pulsante di creazione del mazzo */
@@ -1563,7 +1770,36 @@ body::-webkit-scrollbar {
   width: 100%;
 }
 
-/*POPUP DECK */
+.openDeckButton {
+  background-image: url('/img/wrench.svg');
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  transition: all 0.3s;
+}
+
+.openDeckButton:hover {
+  transform: scale(1.2);
+}
+
+.deleteDeckButton {
+  background-image: url('/img/trash.svg');
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  transition: all 0.3s;
+}
+
+.deleteDeckButton:hover {
+  transform: scale(1.2);
+}
+
+
+/* POPUP GESTIONE DECK */
 .popupContainer {
   border-radius: var(--border-radius);
   background-color: var(--popup-background-color);
@@ -1576,12 +1812,6 @@ body::-webkit-scrollbar {
   overflow-y: scroll;
   max-width: 16rem;
   max-height: 40rem;
-  color: white;
-  font-family: var(--font-family);
-  font-weight: bold;
-  justify-items: center;
-  margin-right: 0.8rem;
-  overflow-x: hidden;
 }
 
 .popupContainer .createDeckButton {
@@ -1610,108 +1840,44 @@ body::-webkit-scrollbar {
   margin-bottom: 1rem;
 }
 
-.createDeckButton {
-  background-color: #29ca29;
-  color: white;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: all 0.3s;
+.addCardToDeck {
+  background-image: url('/img/add.svg');
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-color: transparent;
   border: none;
-  width: 10rem;
-  height: 3rem;
+  transition: all 0.3;
+}
+
+.textInPopup {
+  font-family: var(--font-family);
   font-size: 1.4rem;
-  font-weight: bolder;
-  margin-right: 7rem;
-}
-
-/* Stile quando il cursore è sopra il pulsante */
-.createDeckButton:hover {
-  background-color: darkgreen;
-  transform: scale(1.2);
-}
-
-/* Stile quando il pulsante è attivo/cliccato */
-.createDeckButton:active {
-  transform: scale(0.9);
-}
-
-.createDeckButton::after {
-  transform: scale(1.2);
-}
-
-.createDeckContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-
-/* MANAGE DECK MODAL PANEL */
-.sticky-label {
-  position: sticky;
-  top: 0;
-  color: red;
-  padding: 8px;
-  z-index: 1;
-  font-family: var(--font-family);
-  font-size: 1.5rem;
-  font-weight: bolder;
-}
-
-.scrollable-cards {
-  max-height: 30rem;
-  overflow-y: auto;
-  padding-top: 1rem;
-  /*! display: grid; */
-  /*! justify-items: center; */
-  min-height: 30rem;
-  /*! min-width: 4rem; */
-  justify-content: center;
-  margin-left: 7rem;
-  /*! overflow-x: hidden; */
-}
-
-
-.card-details {
-  color: white;
-  font-family: var(--font-family);
-  font-size: 1.5rem;
-  font-weight: bolder;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: #ffffff;
   text-align: center;
+  max-width: 23rem;
   margin-bottom: 1rem;
+}
+
+.availableCardsLabel {
+  font-family: var(--font-family);
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: rgb(230, 0, 0);
+  text-align: center;
+  max-width: 23rem;
+  margin-bottom: 1rem;
+}
+
+.chooseCardContainer {
   display: grid;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   justify-items: center;
-}
-
-
-
-.cardToDeck .addCardToDeck {
-  background-color: #29ca29;
-  color: white;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: all 0.3s;
-  border: none;
-  width: 10rem;
-  height: 3rem;
-  font-size: 1.4rem;
-  font-weight: bolder;
-  margin-right: 7rem;
-}
-
-.removeCardFromDeck {
-  background-color: #ca2929;
-  color: white;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: all 0.3s;
-  border: none;
-  width: 10rem;
-  height: 3rem;
-  font-size: 1.4rem;
-  font-weight: bolder;
-  margin-right: 7rem;
+  max-width: 10rem;
+  max-height: 40rem;
+  overflow-y: scroll;
 }
