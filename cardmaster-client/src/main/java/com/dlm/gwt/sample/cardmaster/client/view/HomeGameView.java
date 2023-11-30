@@ -180,6 +180,11 @@ public class HomeGameView extends Composite {
         });
 
         Button showWishedCardsButton = new Button("Mostra wished");
+        showWishedCardsButton.addClickHandler(event -> {
+            currentPage = 0;
+            homeGameActivity.getOwnedOrWishedCards(this.gameName, false);
+        }); 
+        
         Button showDeck = new Button("Mostra deck");
         showDeck.addClickHandler(event -> {
             homeGameActivity.getDecks(this.loggedUser, this.gameName);

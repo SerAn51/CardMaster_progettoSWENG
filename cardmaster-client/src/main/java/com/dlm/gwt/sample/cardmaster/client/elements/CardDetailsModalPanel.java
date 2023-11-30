@@ -84,7 +84,11 @@ public class CardDetailsModalPanel extends PopupPanel {
             addOrUpdateCardConditionModalPanel(card, false);
         });
 
-        // TODO: gestire mostra tutte/ mostra owned/ mostra wished
+        // al click del bottone, aggiungere la carta alle wished
+        addWishedButton.addClickHandler(event -> {
+            homeGameActivity.addCardToUserOwnedOrWished(card, false);
+        });
+
         // campo enum in card e controllo quel campo
         content.add(cardDetailsContainer);
 
