@@ -125,6 +125,7 @@ public class HomeGameActivity extends AbstractActivity {
     public void showCardDetailsModalPanel(Card card) {
         CardDetailsModalPanel modalPanel = new CardDetailsModalPanel(this.loggedUser, card, this.gameName,
                 this.cardListType);
+        modalPanel.center();
         modalPanel.show();
         HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
         hidePopup.initialize(modalPanel);
