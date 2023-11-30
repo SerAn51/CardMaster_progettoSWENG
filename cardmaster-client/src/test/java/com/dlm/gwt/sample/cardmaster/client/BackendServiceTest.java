@@ -40,6 +40,53 @@ public class BackendServiceTest {
         assertTrue(user.getOwnedCards().contains(mockCard));
     }
 
+    @DisplayName("Testing addCardToUserOwnedOrWished with wished card")
+    @Test
+    public void testAddCardToUserWished() {
+        User user = new User("mockUser", "mockPassword", "mockEmail@mail.it", 14, "Altro");
+        Card card = new MockCard("mockCard", "mockType", "mockDescription");
+        boolean isOwnedOrWished = false;
+
+        backendService.addCardToUserOwnedOrWished(user, card, isOwnedOrWished);
+
+        // Ora aggiungi un'asserzione per verificare che la carta sia stata aggiunta
+        // correttamente all'utente.
+        // Hint: user.getWishedCards() dovrebbe contenere la carta aggiunta.
+
+        assertTrue(user.getWishedCards().contains(card));
+    }
+
+    @DisplayName("Testing removeCardFromUserOwnedOrWished with owned card")
+    @Test
+    public void testRemoveCardFromUserOwned() {
+        User user = new User("mockUser", "mockPassword", "", 14, "Altro");
+        Card card = new MockCard("mockCard", "mockType", "mockDescription");
+        boolean isOwnedOrWished = true;
+
+        // aggiungo la carta alla lista di owned dell'utente cosi' da testare la sua rimozione
+        user.addOwnedCard(card);
+
+        backendService.removeCardFromUserOwnedOrWished(user, card, isOwnedOrWished);
+
+        assertFalse(user.getOwnedCards().contains(card));
+    }
+
+    @DisplayName("Testing removeCardFromUserOwnedOrWished with wished card")
+    @Test
+    public void testRemoveCardFromUserWished() {
+        User user = new User("mockUser", "mockPassword", "", 14, "Altro");
+        Card card = new MockCard("mockCard", "mockType", "mockDescription");
+        boolean isOwnedOrWished = false;
+
+        // aggiungo la carta alla lista di wished dell'utente cosi' da testare la sua rimozione
+        user.addWishedCard(card);
+
+        backendService.removeCardFromUserOwnedOrWished(user, card, isOwnedOrWished);
+
+        assertFalse(user.getWishedCards().contains(card));
+    }
+
+
     @DisplayName("Testing createDeck")
     @Test
     public void testCreateDeck() {
