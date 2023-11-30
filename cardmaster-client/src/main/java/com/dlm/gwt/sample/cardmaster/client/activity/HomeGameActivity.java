@@ -85,9 +85,11 @@ public class HomeGameActivity extends AbstractActivity {
             this.cardListType = CardListType.SHOW_OWNED_CARDS;
             view.showGrid(cardsOwned);
         }
-
-        // TODO: gestire caso wished
-
+        else {
+            List<Card> cardsWished = this.loggedUser.getWishedCards();
+            this.cardListType = CardListType.SHOW_WISHED_CARDS;
+            view.showGrid(cardsWished);
+        }
     }
 
     /* ++ METODI DI SUPPORTO ++ */
