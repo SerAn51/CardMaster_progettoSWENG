@@ -23,6 +23,17 @@ public class BackendService {
         }
     }
 
+    public void removeCardFromUserOwnedOrWished(User user, Card card, Boolean isOwnedOrWished) {
+        // Rimuovi la carta dalle "owned" se presente
+        if (isOwnedOrWished == true && user.getOwnedCards().contains(card)) {
+            removeOwnedCard(user, card);
+        }
+        // Rimuovi la carta dalle "wished" se presente
+        if (isOwnedOrWished == false && user.getWishedCards().contains(card)) {
+            user.removeWishedCard(card);
+        }
+    }
+
     public void createDeck(User user, String gameName, String deckName) {
         // creo il deck e lo aggiungo alla "lista" di deck dell'utente
         Deck deck = new Deck(deckName, gameName);
@@ -43,4 +54,17 @@ public class BackendService {
         // rimuovo la carta dal deck
         user.removeCardFromDeck(card, deckName);
     }
+
+    private void removeOwnedCard(User user, Card card) {
+        // 1. rimuovo la carta dalla lista di carte owned dell'utente
+        user.getOwnedCards().remove(card);
+
+        // 2. una volta rimossa la carta, controlla se è presente in qualche deck e rimuovila
+        for (Deck deck : user.getDecks().values()) {
+            if (deck.getCards().contains(card)) {
+                deck.getCards().remove(card);
+            }
+        }
+        }
 }
+    
