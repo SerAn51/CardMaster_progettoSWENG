@@ -104,6 +104,10 @@ public class HomeGameActivity extends AbstractActivity {
 
     }
 
+    public void updateCardCondition() {
+        saveChangesInDB(this.loggedUser);
+    }
+
     /* ++ METODI DI SUPPORTO ++ */
 
     public void saveChangesInDB(User user) {
