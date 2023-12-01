@@ -9,7 +9,7 @@
   --pokemonHeaderSymbolHeight: 16rem;
   --magicSymbolWidth: 16rem;
   --magicSymbolHeight: 16rem;
-  --popup-background-color: #003366;
+  --popup-background-color: #241c59;
 }
 
 body {
@@ -142,6 +142,7 @@ body::-webkit-scrollbar {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(11.7px);
   -webkit-backdrop-filter: blur(11.7px);
+
 }
 
 .loginTitle {
@@ -265,8 +266,8 @@ body::-webkit-scrollbar {
 .headerPanel {
   padding: 10px;
   margin: 0;
-  width: 100%;
-  height: 110px;
+  width: 100vw;
+  height: 7rem;
   background-color: transparent;
   border: 2px solid transparent;
   font-size: 1rem;
@@ -277,16 +278,22 @@ body::-webkit-scrollbar {
   -webkit-backdrop-filter: blur(20px);
 }
 
+.headerButtonPanel {
+  display: grid;
+  justify-content: flex-end;
+  align-content: space-between;
+}
+
 .headerLogo {
   background-image: url('/img/logo-no-background_left.png');
   background-size: contain;
   background-repeat: no-repeat;
-  width: 800px;
-  height: 60px;
+  width: 30rem;
+  height: 5rem;
   border: none;
   cursor: pointer;
   background-color: transparent;
-  margin-left: 3%;
+  margin: 0.5rem 1rem 0rem 0rem;
 }
 
 .headerLogo:hover {
@@ -296,12 +303,6 @@ body::-webkit-scrollbar {
 
 .headerLogo:active {
   filter: brightness(85%);
-}
-
-.headerLogoutLabel {
-  font-size: 20px;
-  margin-top: 3px;
-  font-family: 'Nunito', sans-serif;
 }
 
 .headerLogoutButton {
@@ -338,6 +339,11 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
+.headerLogoutLabel {
+  font-size: 20px;
+  margin-top: 3px;
+  font-family: 'Nunito', sans-serif;
+}
 
 .headerLogoutImage {
   background-image: url('/img/logout_logo.png');
@@ -361,16 +367,14 @@ body::-webkit-scrollbar {
   border: 0;
   border-radius: var(--border-radius);
   color: var(--secondary-color);
-
   padding: 1em 1.8em;
   background: var(--primary-color);
   display: flex;
   transition: 0.2s background;
-  align-items: center;
-  gap: 0.6em;
   font-weight: bold;
   transition-duration: .3s;
   transition-duration: 150ms;
+  margin-right: 1rem;
 }
 
 .headerProfileButton:hover {
@@ -395,6 +399,14 @@ body::-webkit-scrollbar {
   font-weight: bold;
   font-family: var(--font-family);
 }
+
+.headerProfileInfo {
+  margin-top: 3px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--font-family);
+}
+
 
 .headerProfileButtonImage {
   background-image: url('/img/profile_logo.png');
@@ -475,6 +487,19 @@ body::-webkit-scrollbar {
   border-left: 30px solid transparent;
   border-right: 30px solid transparent;
   z-index: 1000;
+}
+
+.gwt-PopupPanel {
+  border: 0px !important;
+  padding: 0px !important;
+  background: transparent !important;
+  /* left: 35rem; */
+  /* top: 8rem; */
+  /* visibility: visible;
+  position: absolute;
+  overflow: visible;
+  z-index: 10000;
+  position: absolute; */
 }
 
 .headerCustom-modal-title {
@@ -1307,7 +1332,7 @@ body::-webkit-scrollbar {
   cursor: pointer;
   margin-top: 40px;
   margin-bottom: 10px;
-  width: 90%
+  width: 90%;
 }
 
 .sidebarButton:hover {
@@ -1360,6 +1385,17 @@ body::-webkit-scrollbar {
 
 
 /* Custom pokemon cards */
+.miniBody {
+  font-family: var(--font-family);
+  background: linear-gradient(to right, #8e9eab, #eef2f3);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
 .card-wrap {
   width: 30.5vh;
   background: #fff;
@@ -1396,101 +1432,148 @@ body::-webkit-scrollbar {
   margin-bottom: 20px;
 }
 
-/*++HOME GAME VIEW++*/
+/* ++ HOME GAME VIEW ++ */
+.searchBox {
+  font-family: var(--font-family);
+  display: flex;
+  max-width: 230px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: #2f3640;
+  border-radius: var(--border-radius);
+  position: relative;
+}
+
+.searchButton {
+  color: white;
+  position: absolute;
+  right: 8px;
+  top: 7px;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--border-radius);
+  background: var(--gradient-2, linear-gradient(90deg, #2accf5 0%, #5000fd 100%));
+  border: 0;
+  display: inline-block;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+}
+
+/*hover effect*/
+.searchButton:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+  transform: translateY(-3px);
+}
+
+/*button pressing effect*/
+.searchButton:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.searchInput {
+  border: none;
+  background: none;
+  outline: none;
+  color: white;
+  font-size: 15px;
+  padding: 24px 46px 24px 26px;
+}
+
+.filterCardsButton {
+  --primary-color: var(--gradient-2, linear-gradient(90deg, #2accf5 30%, #5000fd 70%));
+  --secondary-color: #fff;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+
+  margin-top: 1rem;
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: all 0.3s ease-in-out;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+  transition-duration: .3s;
+  transition-duration: 150ms;
+}
+
+.filterButtonImage {
+  background-image: url('/img/filter-image.png');
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+  margin-right: 8px;
+}
+
+.filterCardsButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+  cursor: pointer;
+  transform: scale(1.03);
+  transition-duration: .1s;
+}
+
+.filterCardsButton:active {
+  transform: scale(0.9);
+  transition: all 0.25s;
+  box-shadow: none;
+  -webkit-transition: all 0.25s;
+  transform: scale(0.90);
+  position: relative;
+}
+
+.filterLabel {
+  margin-top: 3px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: var(--font-family);
+}
+
+
+/* -- HOME GAME VIEW -- */
 
 /* ++ INIZIO POP UP PANEL DEL SITO ++ */
-.noCardsInDeck {
+
+.filterContentPanel {
+  background-color: #ff9966;
   border-radius: var(--border-radius);
-  background-color: var(--popup-background-color);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 50px 0px 50px 0px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden;
+  display: flex;
+  /* Abilita il layout flex per il contenitore */
+  flex-direction: column;
+  /* Imposta la direzione di layout su colonna */
+  align-items: center;
+  /* Centra verticalmente all'interno del contenitore */
+}
+
+/* -- FINE POP UP PANEL DEL SITO -- */
+
+/* DECK */
+.deckList {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem;
-  width: 14rem;
-  padding-bottom: 33rem;
-  font-family: var(--font-family);
-  margin-right: 0.8rem;
-  overflow-y: auto;
-  color: white;
-  font-weight: bolder;
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
-}
-
-.gwt-PopupPanel {
-  border: 0px !important;
-  padding: 0px !important;
-  background: transparent !important;
-}
-
-/* POPUP CONDIZIONE */
-.addCardConditionModalPanel {
-  background-color: var(--popup-background-color);
-  border-radius: var(--border-radius);
-  box-shadow: 1rem 1rem 1.5rem rgba(0, 0, 0, 0.35);
-  color: #ffffff;
-  padding: 3rem 2rem 3rem 2rem;
-  position: relative;
-  min-width: 15rem;
-  max-width: 25rem;
-  text-align: center;
-  margin: 0rem 0;
-  overflow: hidden;
-  display: grid;
   justify-content: center;
-  justify-items: center;
-  align-items: center;
-  font-family: var(--font-family);
-}
-
-
-.addCardConditionModalPanel .label {
-  font-size: 0.9rem;
-  font-weight: bolder;
-  margin-left: 0.3rem;
-}
-
-.addCardConditionModalPanel .title {
-  font-size: 1.8rem;
-  font-weight: bolder;
-  margin-bottom: 1rem;
-}
-
-.addCardConditionModalPanel .labelContainer {
-  display: grid;
-  justify-items: center;
-  margin: 0.5rem 0rem 0.5rem 0rem;
-  justify-content: center;
-  text-align: left;
   width: 15rem;
-}
-
-/* -- FINE POPUP PANEL DEL SITO -- */
-
-/* DECK */
-.decksGrid {
-  display: grid;
-  justify-content: center;
-  width: 109rem;
-  height: 45rem;
-  overflow-y: scroll;
-}
-
-.deckPanel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  min-height: 14rem;
-  min-width: 21rem;
-  /*! overflow-inline: visible; */
-  padding: 1rem;
 
   /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.32);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(11.6px);
-  -webkit-backdrop-filter: blur(11.6px);
+  backdrop-filter: blur(13.9px);
+  -webkit-backdrop-filter: blur(13.9px);
 }
 
 .deckName {
@@ -1515,40 +1598,37 @@ body::-webkit-scrollbar {
   max-width: 23rem;
 }
 
-.deckButtonPanel {
+.deckPanel {
   display: flex;
   align-items: center;
   justify-content: center;
+  align-content: center;
+  min-height: 14rem;
+  min-width: 21rem;
+  /*! overflow-inline: visible; */
+  padding: 1rem;
+
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.38);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.6px);
+  -webkit-backdrop-filter: blur(11.6px);
+}
+
+.decksGrid {
+  display: grid;
+  justify-content: center;
+  width: 109rem;
+  height: 42.9rem;
+  overflow-y: scroll;
+  margin-bottom: 2rem;
+}
+
+.deckButtonPanel {
+  display: flex;
+  justify-content: center;
   margin-top: 1rem;
-}
-
-.openDeckButton {
-  background-image: url('/img/modDeck.svg');
-  width: 40px;
-  height: 40px;
-  background-size: cover;
-  background-color: transparent;
-  border: none;
-  transition: all 0.3s;
-}
-
-.openDeckButton:hover {
-  transform: scale(1.2);
-}
-
-
-.deleteDeckButton {
-  background-image: url('/img/trash.svg');
-  width: 40px;
-  height: 40px;
-  background-size: cover;
-  background-color: transparent;
-  border: none;
-  transition: all 0.3s;
-}
-
-.deleteDeckButton:hover {
-  transform: scale(1.2);
 }
 
 /* Stile per il pulsante di creazione del mazzo */
@@ -1589,7 +1669,36 @@ body::-webkit-scrollbar {
   width: 100%;
 }
 
-/*POPUP DECK */
+.openDeckButton {
+  background-image: url('/img/modDeck.svg');
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  transition: all 0.3s;
+}
+
+.openDeckButton:hover {
+  transform: scale(1.2);
+}
+
+.deleteDeckButton {
+  background-image: url('/img/trash.svg');
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  transition: all 0.3s;
+}
+
+.deleteDeckButton:hover {
+  transform: scale(1.2);
+}
+
+
+/* POPUP GESTIONE DECK */
 .popupContainer {
   border-radius: var(--border-radius);
   background-color: var(--popup-background-color);
@@ -1636,57 +1745,6 @@ body::-webkit-scrollbar {
   margin-bottom: 1rem;
 }
 
-.createDeckButton {
-  background-color: #29ca29;
-  color: white;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: all 0.3s;
-  border: none;
-  width: 10rem;
-  height: 3rem;
-  font-size: 1.4rem;
-  font-weight: bolder;
-  margin-right: 7rem;
-}
-
-/* Stile quando il cursore è sopra il pulsante */
-.createDeckButton:hover {
-  background-color: darkgreen;
-  transform: scale(1.2);
-}
-
-/* Stile quando il pulsante è attivo/cliccato */
-.createDeckButton:active {
-  transform: scale(0.9);
-}
-
-.createDeckButton::after {
-  transform: scale(1.2);
-}
-
-.createDeckContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-
-/* MANAGE DECK MODAL PANEL */
-.sticky-label {
-  position: sticky;
-  top: 0;
-  text-transform: uppercase;
-  padding-bottom: 8px;
-  z-index: 1;
-  font-family: var(--font-family);
-  font-size: 1.8rem;
-  font-weight: 900;
-  font-family: 'Passion One';
-  color: #ee3e42;
-}
 
 .scrollable-cards {
   max-height: 30rem;
@@ -1701,21 +1759,6 @@ body::-webkit-scrollbar {
   /*! overflow-x: hidden; */
 }
 
-.noCardsInDeck {
-  border-radius: var(--border-radius);
-  background-color: var(--popup-background-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 3rem;
-  padding-bottom: 33rem;
-  font-family: var(--font-family);
-  margin-right: 0.8rem;
-  overflow-y: auto;
-  color: white;
-  font-weight: bolder;
-}
-
 
 .card-details {
   color: white;
@@ -1728,8 +1771,6 @@ body::-webkit-scrollbar {
   justify-content: center;
   justify-items: center;
 }
-
-
 
 .cardToDeck .addCardToDeck {
   background-color: #29ca29;
@@ -1759,37 +1800,3 @@ body::-webkit-scrollbar {
   margin-right: 7rem;
 }
 
-.confirmButton {
-  background-color: #29ca29;
-  color: white;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: all 0.3s;
-  border: none;
-  width: 11rem;
-  height: 3rem;
-  font-size: 1.3rem;
-  font-weight: bolder;
-  margin-top: 1rem;
-}
-
-.confirmButton:hover {
-  background-color: darkgreen;
-  transform: scale(1.2);
-}
-
-.confirmButton:active {
-  transform: scale(0.9);
-}
-
-.confirmButton::after {
-  transform: scale(1.2);
-}
-
-.confirmButtonContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}

@@ -7,12 +7,11 @@ import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.dlm.gwt.sample.cardmaster.client.ViewRouter;
 import com.dlm.gwt.sample.cardmaster.client.backendService.BackendService;
+import com.dlm.gwt.sample.cardmaster.client.backendService.filterer.CardFilterStrategy;
 import com.dlm.gwt.sample.cardmaster.client.elements.CardDetailsModalPanel;
 import com.dlm.gwt.sample.cardmaster.client.elements.HidePopupPanelClickingOutside;
 import com.dlm.gwt.sample.cardmaster.client.utils.CardListType;
@@ -26,17 +25,16 @@ public class HomeGameActivity extends AbstractActivity {
 
     private final HomeGameView view;
     private final DatabaseServiceAsync databaseService;
-    private User loggedUser = SessionUser.getInstance().getSessionUser();
     private final BackendService backendService;
-
     String gameName;
-    private CardListType cardListType;
+    CardListType cardListType;
+    User loggedUser = SessionUser.getInstance().getSessionUser();
 
     public HomeGameActivity(HomeGameView view, DatabaseServiceAsync databaseService, String gameName) {
         this.view = view;
         this.databaseService = databaseService;
-        this.gameName = gameName;
         this.backendService = new BackendService(databaseService);
+        this.gameName = gameName;
     }
 
     @Override
@@ -45,20 +43,29 @@ public class HomeGameActivity extends AbstractActivity {
         containerWidget.setWidget(view);
     }
 
-    public void toHome() {
-        // apri la pagina di gestione delle carte di magic/pokemon/yugioh
-        String token = "home";
-        History.newItem(token);
-        new ViewRouter().handleRouteChange(token);// vai a vedere la url perche' ho cambiato il token
+    /* ++INIZIO MOSTRA TUTTE LE CARTE CON RELATIVI PULSANTI ADD/REMOVE++ */
+
+    public void showCardDetailsModalPanel(Card card) {
+        CardDetailsModalPanel modalPanel = new CardDetailsModalPanel(this.loggedUser, card, this.gameName,
+                this.cardListType);
+        modalPanel.center();
+        modalPanel.show();
+        HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
+        hidePopup.initialize(modalPanel);
     }
 
-    public void getCards(String gameName) {
+    public CardListType getCardListType() {
+        return this.cardListType;
+    }
+
+    // input: magic, pokemon, yugioh
+    public void getAllCards(String gameName) {
         databaseService.getCards(gameName, new AsyncCallback<List<Card>>() {
             @Override
             public void onSuccess(List<Card> cards) {
-                cardListType = CardListType.SHOW_ALL_CARDS;
                 // richiama il metodo della view che mostra le carte
-                view.showGrid(cards);
+                cardListType = CardListType.SHOW_ALL_CARDS;
+                view.showSearchAndFilter(cards, null, null);
             }
 
             @Override
@@ -67,22 +74,6 @@ public class HomeGameActivity extends AbstractActivity {
                 Window.alert("Errore HomeGameActivity.getCards: " + caught.getMessage());
             }
         });
-    }
-
-   
-
-    public void getOwnedOrWishedCards(String gameName, Boolean isOwnedOrWished) {
-        // se true stampi le owned, se false stampi le wished
-        if (isOwnedOrWished == true) {
-            List<Card> cardsOwned = this.loggedUser.getOwnedCards();
-            this.cardListType = CardListType.SHOW_OWNED_CARDS;
-            view.showGrid(cardsOwned);
-        }
-        else {
-            List<Card> cardsWished = this.loggedUser.getWishedCards();
-            this.cardListType = CardListType.SHOW_WISHED_CARDS;
-            view.showGrid(cardsWished);
-        }
     }
 
     public void addCardToUserOwnedOrWished(Card card, Boolean isOwnedOrWished) {
@@ -94,19 +85,109 @@ public class HomeGameActivity extends AbstractActivity {
         saveChangesInDB(this.loggedUser);
     }
 
-    
+    public void updateCardCondition() {
+        saveChangesInDB(this.loggedUser);
+    }
+
     public void removeCardFromUserOwnedOrWished(Card card, Boolean isOwnedOrWished) {
 
         // rimuovi la carta dalle possedute o desiderate dell'utente
         backendService.removeCardFromUserOwnedOrWished(this.loggedUser, card, isOwnedOrWished);
 
-        saveChangesInDB(this.loggedUser);
+        // il check della rimozione si occupa di rendere persistente la modifica nel
+        // database
+        
 
     }
 
-    public void updateCardCondition() {
+    /*--FINE MOSTRA TUTTE LE CARTE CON RELATIVI PULSANTI ADD/REMOVE--*/
+
+    /* INIZIO RICERCA CARTA PER NOME */
+
+    public void getCardByName(List<Card> cards, String searchText) {
+        CardFilterStrategy cardFilterStrategy = view.getCardFilterStrategy();
+        List<Card> filteredCards = cardFilterStrategy.filter(cards, searchText, null, this.cardListType);
+        view.showGrid(filteredCards);
+    }
+
+    /* FINE RICERCA CARTA PER NOME */
+
+    /* ++INIZIO MOSTRA LE CARTE OWNED/WISHED CON RELATIVI PULSANTI ADD/REMOVE++ */
+    // non e' un'operazione di backend ma gestisce la visualizzazione delle carte
+    // owned/wished
+    public void getOwnedOrWishedCards(String gameName, Boolean isOwnedOrWished) {
+        // se true stampi le owned, se false stampi le wished
+        if (isOwnedOrWished == true) {
+            List<Card> cardsOwned = this.loggedUser.getOwnedCards();
+            this.cardListType = CardListType.SHOW_OWNED_CARDS;
+            view.showSearchAndFilter(cardsOwned, null, null);
+        } else {
+            List<Card> magicCardsWished = this.loggedUser.getWishedCards();
+            this.cardListType = CardListType.SHOW_WISHED_CARDS;
+            view.showSearchAndFilter(magicCardsWished, null, null);
+        }
+    }
+    /*--FINE MOSTRA LE CARTE OWNED CON RELATIVI PULSANTI ADD/REMOVE--*/
+
+    /* ++INIZIO GESTISCI DECKS++ */
+
+    public void getDecks(User loggedUser, String gameName) {
+
+        List<Deck> decks = new ArrayList<>();
+        Map<String, Deck> userDecks = loggedUser.getDecks();
+
+        if (userDecks != null && !userDecks.isEmpty()) {
+            for (Deck deck : userDecks.values()) {
+                if (deck.getGame().equalsIgnoreCase(gameName)) {
+                    decks.add(deck);
+                }
+            }
+        }
+        // richiama il metodo della view che mostra i decks cosi' aggiornare visivamente
+        // la pagina
+        view.showDecks(decks);
+    }
+
+    public void createDeck(String deckName) {
+
+        // creo il deck e lo aggiungo alla "lista" di deck dell'utente
+        backendService.createDeck(this.loggedUser, this.gameName, deckName);
+
+        // ora rendo persistente il deck nel database
         saveChangesInDB(this.loggedUser);
     }
+
+    public void deleteDeck(String deckName) {
+
+        // rimuovo il deck dalla "lista" di deck dell'utente
+        backendService.deleteDeck(this.loggedUser, deckName);
+
+        // toglo dall'intefaccia il deck eliminato
+        getDecks(loggedUser, deckName);
+
+        // ora rendo persistente il deck nel database
+        saveChangesInDB(this.loggedUser);
+    }
+
+    public void addCardToDeck(Card card, String deckName) {
+
+        // aggiorna il deck dell'utente
+        backendService.addCardToDeck(this.loggedUser, deckName, card);
+
+        // salva le modifiche all'utente nel db
+        saveChangesInDB(this.loggedUser);
+    }
+
+    public void removeCardFromDeck(Card card, String deckName) {
+
+        // aggiorna il deck dell'utente
+        backendService.removeCardFromDeck(this.loggedUser, deckName, card);
+
+        // salva le modifiche all'utente nel db
+        saveChangesInDB(this.loggedUser);
+    }
+
+    /* --FINE GESTISCI DECKS-- */
 
     /* ++ METODI DI SUPPORTO ++ */
 
@@ -126,70 +207,6 @@ public class HomeGameActivity extends AbstractActivity {
         });
     }
 
-    public void showCardDetailsModalPanel(Card card) {
-        CardDetailsModalPanel modalPanel = new CardDetailsModalPanel(this.loggedUser, card, this.gameName,
-                this.cardListType);
-        modalPanel.center();
-        modalPanel.show();
-        HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
-        hidePopup.initialize(modalPanel);
-    }
-
-    public void getDecks(User loggedUser, String gameName) {
-
-        List<Deck> decks = new ArrayList<>();
-        Map<String, Deck> userDecks = loggedUser.getDecks();
-
-        if (userDecks != null && !userDecks.isEmpty()) {
-            for (Deck deck : userDecks.values()) {
-                if (deck.getGame().equalsIgnoreCase(gameName)) {
-                    decks.add(deck);
-                }
-            }
-        }
-        // richiama il metodo della view che mostra i decks cosi' aggiornare visivamente
-        // la pagina
-        view.showDecks(decks);
-    }
-
-    public void deleteDeck(String deckName) {
-
-        // rimuovo il deck dalla "lista" di deck dell'utente
-        backendService.deleteDeck(this.loggedUser, deckName);
-
-        // toglo dall'intefaccia il deck eliminato
-        getDecks(loggedUser, deckName);
-
-        // ora rendo persistente il deck nel database
-        saveChangesInDB(this.loggedUser);
-    }
-
-    public void removeCardFromDeck(Card card, String deckName) {
-
-        // aggiorna il deck dell'utente
-        backendService.removeCardFromDeck(this.loggedUser, deckName, card);
-
-        // salva le modifiche all'utente nel db
-        saveChangesInDB(this.loggedUser);
-    }
-
-    public void addCardToDeck(Card card, String deckName) {
-
-        // aggiorna il deck dell'utente
-        backendService.addCardToDeck(this.loggedUser, deckName, card);
-
-        // salva le modifiche all'utente nel db
-        saveChangesInDB(this.loggedUser);
-    }
-
-    public void createDeck(String deckName) {
-
-        // creo il deck e lo aggiungo alla "lista" di deck dell'utente
-        backendService.createDeck(this.loggedUser, this.gameName, deckName);
-
-        // ora rendo persistente il deck nel database
-        saveChangesInDB(this.loggedUser);
-    }
-
     /* -- METODI DI SUPPORTO -- */
+
 }
