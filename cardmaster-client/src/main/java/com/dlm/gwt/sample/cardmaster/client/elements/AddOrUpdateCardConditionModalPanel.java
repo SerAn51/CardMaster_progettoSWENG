@@ -157,7 +157,7 @@ public class AddOrUpdateCardConditionModalPanel extends PopupPanel {
                 }
             }
         }
-        Button confirmConditionButton = new Button("Conferma");
+        
 
         addDetailContainer.add(chooseConditionLabel);
         addDetailContainer.add(conditionListBox);
@@ -165,7 +165,7 @@ public class AddOrUpdateCardConditionModalPanel extends PopupPanel {
         Label addDescriptionLabel = new Label("Aggiungi descrizione");
         addDescriptionLabel.setStyleName("label");
         if (card.getConditionDescription().isEmpty()) {
-            descriptionTextBox.getElement().setPropertyString("placeholder", "Descrizione (max 200 caratteri)");
+            descriptionTextBox.getElement().setPropertyString("placeholder", "Descrizione (max 100 caratteri)");
         } else {
             descriptionTextBox.getElement().setPropertyString("placeholder", card.getConditionDescription());
         }
@@ -179,10 +179,9 @@ public class AddOrUpdateCardConditionModalPanel extends PopupPanel {
         charCountLabel.setStyleName("label");
         updateCharCount();
 
-        addDetailContainer.add(addDescriptionLabel);
-        addDetailContainer.add(descriptionTextBox);
-        addDetailContainer.add(charCountLabel);
-        addDetailContainer.add(confirmConditionButton);
+        
+
+        Button confirmConditionButton = new Button("Conferma");
 
         confirmConditionButton.addClickHandler(event -> {
             card.setCondition(conditionListBox.getSelectedValue());
@@ -192,9 +191,14 @@ public class AddOrUpdateCardConditionModalPanel extends PopupPanel {
             }
             hide();
             hidePopup.destroy();
-            // TO DO: implementare logica update
-            // homeGameActivity.updateCardCondition(card);
+            
+            homeGameActivity.updateCardCondition();
         });
+
+        addDetailContainer.add(addDescriptionLabel);
+        addDetailContainer.add(descriptionTextBox);
+        addDetailContainer.add(charCountLabel);
+        addDetailContainer.add(confirmConditionButton);
 
         content.add(addDetailContainer);
 

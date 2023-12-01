@@ -78,7 +78,7 @@ public class CardDetailsModalPanel extends PopupPanel {
             cardDetailsContainer.add(removeWishedButton);
         }
 
-        // TODO: aggiungi eventi per i bottoni
+        
         // al click del bottone, aggiungere la carta alle owned
         addOwnedButton.addClickHandler(event -> {
             addOrUpdateCardConditionModalPanel(card, false);
@@ -95,6 +95,10 @@ public class CardDetailsModalPanel extends PopupPanel {
 
         removeWishedButton.addClickHandler(event -> {
             homeGameActivity.removeCardFromUserOwnedOrWished(card, false);
+        });
+
+        updatePropertiesButton.addClickHandler(event -> {
+            addOrUpdateCardConditionModalPanel(card, true);
         });
 
         // campo enum in card e controllo quel campo
