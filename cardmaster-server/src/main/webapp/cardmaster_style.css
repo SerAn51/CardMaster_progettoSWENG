@@ -9,7 +9,7 @@
   --pokemonHeaderSymbolHeight: 16rem;
   --magicSymbolWidth: 16rem;
   --magicSymbolHeight: 16rem;
-  --popup-background-color: #241c59;
+  --popup-background-color: #003366;
 }
 
 body {
@@ -1368,6 +1368,7 @@ body::-webkit-scrollbar {
   cursor: pointer;
   transition: all .2s ease-in-out;
   height: 25rem;
+  max-width: 18.7rem;
 }
 
 .card-content {
@@ -1398,23 +1399,21 @@ body::-webkit-scrollbar {
 /*++HOME GAME VIEW++*/
 
 /* ++ INIZIO POP UP PANEL DEL SITO ++ */
-.cardDetailsContainer {
-  background-color: #ff9966;
+.noCardsInDeck {
   border-radius: var(--border-radius);
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
-  color: #ffffff;
-  padding: 50px 0px 50px 0px;
-  position: relative;
-  width: 350px;
-  max-width: 100%;
-  text-align: center;
-  margin: 20px 0;
-  overflow: hidden;
+  background-color: var(--popup-background-color);
   display: flex;
-  /* Abilita il layout flex per il contenitore */
   flex-direction: column;
-  /* Imposta la direzione di layout su colonna */
   align-items: center;
+  padding: 3rem;
+  width: 14rem;
+  padding-bottom: 33rem;
+  font-family: var(--font-family);
+  margin-right: 0.8rem;
+  overflow-y: auto;
+  color: white;
+  font-weight: bolder;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
 }
 
 .gwt-PopupPanel {
@@ -1423,19 +1422,46 @@ body::-webkit-scrollbar {
   background: transparent !important;
 }
 
+/* POPUP CONDIZIONE */
 .addCardConditionModalPanel {
-  background-color: #ff9966;
+  background-color: var(--popup-background-color);
   border-radius: var(--border-radius);
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  box-shadow: 1rem 1rem 1.5rem rgba(0, 0, 0, 0.35);
   color: #ffffff;
-  padding: 50px 0px 50px 0px;
+  padding: 3rem 2rem 3rem 2rem;
   position: relative;
-  width: 350px;
-  max-width: 100%;
+  min-width: 15rem;
+  max-width: 25rem;
   text-align: center;
-  margin: 20px 0;
+  margin: 0rem 0;
   overflow: hidden;
-  display: flex;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  font-family: var(--font-family);
+}
+
+
+.addCardConditionModalPanel .label {
+  font-size: 0.9rem;
+  font-weight: bolder;
+  margin-left: 0.3rem;
+}
+
+.addCardConditionModalPanel .title {
+  font-size: 1.8rem;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+}
+
+.addCardConditionModalPanel .labelContainer {
+  display: grid;
+  justify-items: center;
+  margin: 0.5rem 0rem 0.5rem 0rem;
+  justify-content: center;
+  text-align: left;
+  width: 15rem;
 }
 
 /* -- FINE POPUP PANEL DEL SITO -- */
@@ -1652,12 +1678,14 @@ body::-webkit-scrollbar {
 .sticky-label {
   position: sticky;
   top: 0;
-  color: red;
-  padding: 8px;
+  text-transform: uppercase;
+  padding-bottom: 8px;
   z-index: 1;
   font-family: var(--font-family);
-  font-size: 1.5rem;
-  font-weight: bolder;
+  font-size: 1.8rem;
+  font-weight: 900;
+  font-family: 'Passion One';
+  color: #ee3e42;
 }
 
 .scrollable-cards {
@@ -1671,6 +1699,21 @@ body::-webkit-scrollbar {
   justify-content: center;
   margin-left: 7rem;
   /*! overflow-x: hidden; */
+}
+
+.noCardsInDeck {
+  border-radius: var(--border-radius);
+  background-color: var(--popup-background-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  padding-bottom: 33rem;
+  font-family: var(--font-family);
+  margin-right: 0.8rem;
+  overflow-y: auto;
+  color: white;
+  font-weight: bolder;
 }
 
 
@@ -1714,4 +1757,39 @@ body::-webkit-scrollbar {
   font-size: 1.4rem;
   font-weight: bolder;
   margin-right: 7rem;
+}
+
+.confirmButton {
+  background-color: #29ca29;
+  color: white;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  width: 11rem;
+  height: 3rem;
+  font-size: 1.3rem;
+  font-weight: bolder;
+  margin-top: 1rem;
+}
+
+.confirmButton:hover {
+  background-color: darkgreen;
+  transform: scale(1.2);
+}
+
+.confirmButton:active {
+  transform: scale(0.9);
+}
+
+.confirmButton::after {
+  transform: scale(1.2);
+}
+
+.confirmButtonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
