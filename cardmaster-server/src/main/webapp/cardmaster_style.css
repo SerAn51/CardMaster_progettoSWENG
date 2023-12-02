@@ -1800,3 +1800,54 @@ body::-webkit-scrollbar {
   margin-right: 7rem;
 }
 
+.filterContentPanel {
+  background-color: var(--popup-background-color);
+  border-radius: var(--border-radius);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 1rem 0px 1rem 0px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden;
+  display: grid;
+  /* Abilita il layout flex per il contenitore /
+  flex-direction: column;
+  / Imposta la direzione di layout su colonna /
+  justify-content: center;
+  align-items: center;
+  / Centra verticalmente all'interno del contenitore */
+  justify-items: center;
+}
+
+.applyFilterButton {
+  --primary-color: #669eff;
+  --secondary-color: #fff;
+  --hover-color: #1d66c5;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  /* display: grid; */
+  transition: 0.2s background;
+  align-items: center;
+  font-weight: bold;
+  margin: 1.5rem 0 1rem -2rem;
+  transition: all 0.3s;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  padding-right: -2rem;
+}
+
+.filterContentPanel .title {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: var(--title-font-family);
+  margin-top: 1.5rem;
+}
+

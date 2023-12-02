@@ -40,6 +40,7 @@ public class FilterCardModalPanel extends PopupPanel {
         addFilterComponents();
 
         Button applyFilterButton = new Button("Applica filtro");
+        applyFilterButton.setStyleName("applyFilterButton");
         applyFilterButton.addClickHandler(event -> {
             readRadioButtons();
             hide();
@@ -47,7 +48,8 @@ public class FilterCardModalPanel extends PopupPanel {
 
             if (cardFilterStrategy != null) {
                 CardListType cardListType = homeGameActivity.getCardListType();
-                List<Card> filteredCards = cardFilterStrategy.filter(cards, null, selectedRadioButtonsMap, cardListType);
+                List<Card> filteredCards = cardFilterStrategy.filter(cards, null, selectedRadioButtonsMap,
+                        cardListType);
                 homeGameView.showGrid(filteredCards);
             }
         });
@@ -76,6 +78,7 @@ public class FilterCardModalPanel extends PopupPanel {
         addTypeFilters(MagicCard.Type.values());
         addRarityFilters(MagicCard.Rarity.values());
         Label otherLabel = new Label("Altro:");
+        otherLabel.setStyleName("title");
         filterContentPanel.add(otherLabel);
         addRadioButtonFilter("Foil", "foilGroup", "hasFoil");
         addRadioButtonFilter("Alternative", "alternativeGroup", "isAlternative");
@@ -88,6 +91,7 @@ public class FilterCardModalPanel extends PopupPanel {
         addTypeFilters(PokemonCard.Type.values());
         addRarityFilters(PokemonCard.Rarity.values());
         Label otherLabel = new Label("Altro:");
+        otherLabel.setStyleName("title");
         filterContentPanel.add(otherLabel);
         addRadioButtonFilter("First Edition", "firstEditionGroup", "firstEdition");
         addRadioButtonFilter("Holo", "holoGroup", "holo");
@@ -104,6 +108,7 @@ public class FilterCardModalPanel extends PopupPanel {
     // Metodi di utilità per aggiungere filtri generici
     private void addTypeFilters(Enum<?>[] values) {
         Label typeLabel = new Label("Tipo:");
+        typeLabel.setStyleName("title");
         filterContentPanel.add(typeLabel);
         for (Enum<?> value : values) {
             addRadioButtonFilter(value.name(), "typeGroup", value.name());
@@ -112,6 +117,7 @@ public class FilterCardModalPanel extends PopupPanel {
 
     private void addRarityFilters(Enum<?>[] values) {
         Label rarityLabel = new Label("Rarità:");
+        rarityLabel.setStyleName("title");
         filterContentPanel.add(rarityLabel);
         for (Enum<?> value : values) {
             addRadioButtonFilter(value.name(), "rarityGroup", value.name());
@@ -120,6 +126,7 @@ public class FilterCardModalPanel extends PopupPanel {
 
     private void addRaceFilters(Enum<?>[] values) {
         Label raceLabel = new Label("Razza:");
+        raceLabel.setStyleName("title");
         for (Enum<?> value : values) {
             addRadioButtonFilter(value.name(), "raceGroup", value.name());
         }
