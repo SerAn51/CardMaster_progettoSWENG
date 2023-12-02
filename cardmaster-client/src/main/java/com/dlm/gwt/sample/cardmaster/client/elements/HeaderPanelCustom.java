@@ -4,6 +4,7 @@ import com.dlm.gwt.sample.cardmaster.client.ViewRouter;
 import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.Style.VerticalAlign;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -14,6 +15,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -49,6 +51,7 @@ public class HeaderPanelCustom {
         // BOTTONE PROFILO - Crea un HorizontalPanel per contenere l'immagine e
         // l'etichetta
         HorizontalPanel panelWrapperProfileButtonElements = new HorizontalPanel();
+        panelWrapperProfileButtonElements.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         // BOTTONE PROFILO - Crea un'immagine e imposta il suo URL
         HTML imageContainerProfileButton = new HTML("<div class='headerLogoutImage-container'></div>");
         // se la home e' di pokemon mostra un allenatore pokemon, ecc
@@ -59,16 +62,50 @@ public class HeaderPanelCustom {
         // BOTTONE PROFILO - Aggiungi l'immagine e l'etichetta al pannello orizzontale
         panelWrapperProfileButtonElements.add(imageContainerProfileButton);
         panelWrapperProfileButtonElements.add(profileLabel);
-        // BOTTONE PROFILO - Crea un pulsante e aggiungi il pannello orizzontale al
+
+        // BOTTONE PROFILO - Crea un pulsante e aggiungi il pannello completo al
         // pulsante
         Button profileButton = new Button();
         profileButton.setStyleName("headerProfileButton");
         profileButton.getElement().getStyle().setDisplay(Display.INLINE_BLOCK); // Per visualizzare il pulsante
-                                                                                // orrettamente
+                                                                                // correttamente
         profileButton.getElement().getStyle().setVerticalAlign(VerticalAlign.MIDDLE); // Per allineare l'immagine e
-                                                                                      // l'etichetta verticalmente
-        profileButton.getElement().getStyle().setLineHeight(1.5, Unit.EM); // Imposta il line-height per centrare
-                                                                           // l'immagine e l'etichetta
+        // l'etichetta verticalmente
+        profileButton.getElement().getStyle().setLineHeight(1.0, Unit.EM); // Imposta il line-height per centrare
+        // l'immagine e l'etichetta
+
+        // BOTTONE PROFILO - Aggiungi l'indicatore rosso se ci sono notifiche
+        if (loggedUser.getExchangeProposals().size() > 0) {
+            // BOTTONE PROFILO - Crea un elemento HTML per l'indicatore rosso
+            HTML redDotIndicator = new HTML("<div class='red-dot-indicator'></div>");
+            redDotIndicator.setStyleName("headerRedDotIndicator");
+
+            // Aggiungi lo stile per posizionare l'indicatore nell'angolo in alto a destra
+            // di panelWrapperProfileButtonElements
+            panelWrapperProfileButtonElements.getElement().getStyle().setPosition(Position.RELATIVE);
+            redDotIndicator.getElement().getStyle().setPosition(Position.ABSOLUTE);
+            redDotIndicator.getElement().getStyle().setTop(-18, Unit.PX);
+            redDotIndicator.getElement().getStyle().setRight(-28, Unit.PX);
+
+            // Calcola il numero di proposte di scambio
+            int numberOfProposals = loggedUser.getExchangeProposals().size();
+
+            // Crea il testo da visualizzare nel red dot
+            String labelText = (numberOfProposals > 9) ? "9+" : String.valueOf(numberOfProposals);
+            HTML numberLabel = new HTML("<div class='number-label'>" + labelText + "</div>");
+            numberLabel.getElement().getStyle().setPosition(Position.ABSOLUTE);
+            if (numberOfProposals > 9) {
+                numberLabel.getElement().getStyle().setTop(20, Unit.PCT);
+                numberLabel.getElement().getStyle().setLeft(21, Unit.PCT);
+            } else {
+                numberLabel.getElement().getStyle().setTop(18, Unit.PCT);
+                numberLabel.getElement().getStyle().setLeft(33, Unit.PCT);
+            }
+            redDotIndicator.getElement().appendChild(numberLabel.getElement());
+
+            panelWrapperProfileButtonElements.add(redDotIndicator);
+        }
+
         profileButton.getElement().appendChild(panelWrapperProfileButtonElements.getElement());
 
         // Mostra finestra pop up con il profilo utente
@@ -95,12 +132,8 @@ public class HeaderPanelCustom {
                             // Posiziona la finestra vicino al bottone
                             int left = profileButton.getAbsoluteLeft() + (profileButton.getOffsetWidth() / 2)
                                     - (modal.getOffsetWidth() / 2);
-                            int top = profileButton.getAbsoluteTop() + profileButton.getOffsetHeight() + 10; // Aggiungi
-                                                                                                             // 10 pixel
-                                                                                                             // di
-                                                                                                             // spazio
-                                                                                                             // sotto il
-                                                                                                             // bottone
+                            int top = profileButton.getAbsoluteTop() + profileButton.getOffsetHeight() + 10;
+                            // Aggiungi 10 pixel di spazio sotto il bottone
 
                             modal.setPopupPosition(left, top);
                         }
@@ -133,8 +166,6 @@ public class HeaderPanelCustom {
             }
         });
 
-        headerPanel.setWidget(0, 1, profileButton);
-
         // BOTTONE LOGOUT - Crea un HorizontalPanel per contenere l'immagine e
         // l'etichetta
         HorizontalPanel panelWrapperLogoutButtonElements = new HorizontalPanel();
@@ -159,11 +190,16 @@ public class HeaderPanelCustom {
                                                                           // l'immagine e l'etichetta
         logoutButton.getElement().appendChild(panelWrapperLogoutButtonElements.getElement());
 
-        headerPanel.setWidget(0, 2, logoutButton);
+
+        Panel buttonPanel = new HorizontalPanel();
+        buttonPanel.setStyleName("headerButtonPanel");
+        buttonPanel.add(profileButton);
+        buttonPanel.add(logoutButton);
+
+        headerPanel.setWidget(0, 1, buttonPanel);
 
         headerPanel.getFlexCellFormatter().setWidth(0, 0, "80%"); // LogoButton
-        headerPanel.getFlexCellFormatter().setWidth(0, 1, "10%"); // ProfileButton
-        headerPanel.getFlexCellFormatter().setWidth(0, 2, "10%"); // LogoutButton
+        headerPanel.getFlexCellFormatter().setWidth(0, 1, "20%"); // ProfileButton
 
         logoButton.addClickHandler(event -> logoHome(viewRouter));
         logoutButton.addClickHandler(event -> logout(viewRouter));

@@ -18,6 +18,7 @@ import com.dlm.gwt.sample.cardmaster.client.utils.CardListType;
 import com.dlm.gwt.sample.cardmaster.client.view.HomeGameView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -96,7 +97,6 @@ public class HomeGameActivity extends AbstractActivity {
 
         // il check della rimozione si occupa di rendere persistente la modifica nel
         // database
-        
 
     }
 
@@ -188,6 +188,66 @@ public class HomeGameActivity extends AbstractActivity {
     }
 
     /* --FINE GESTISCI DECKS-- */
+
+    /* ++ INIZIO SCAMBIO ++ */
+
+    public void getOwnersWishersList(CardDetailsModalPanel modalPanel, Card card, Boolean isOwned,
+            AsyncCallback<Map<String, List<Card>>> callback) {
+        final Map<String, List<Card>> ownersWishersMap = new HashMap<>();
+
+        databaseService.getOwnersWishersOfCard(card, isOwned, new AsyncCallback<Map<String, List<Card>>>() {
+            @Override
+            public void onSuccess(Map<String, List<Card>> dbownersWishersMap) {
+                ownersWishersMap.putAll(dbownersWishersMap);
+
+                // Richiama il metodo della vista che mostra le carte
+                // modalPanel.showOwnersWishers(ownersWishersMap, isOwned);
+                callback.onSuccess(ownersWishersMap);
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                // Gestisci l'errore durante la chiamata al servizio database
+                Window.alert("Errore HomeGameActivity.getOwnersWishersList: " + caught.getMessage());
+                callback.onFailure(caught);
+            }
+        });
+    }
+
+    public void getUserByUsername(String username, AsyncCallback<User> callback) {
+        databaseService.getUserByUsername(username, new AsyncCallback<User>() {
+            @Override
+            public void onSuccess(User user) {
+                callback.onSuccess(user);
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                // Gestisci l'errore durante la chiamata al servizio database
+                Window.alert("Errore HomeGameActivity.getUserByUsername: " + caught.getMessage());
+                callback.onFailure(caught);
+            }
+        });
+    }
+
+    public void sendExchangeProposal(String counterparty, List<Card> proposedCards, List<Card> requestedCards) {
+        databaseService.sendExchangeProposal(this.loggedUser, counterparty, proposedCards, requestedCards,
+                new AsyncCallback<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean success) {
+                        Window.alert("Proposta di scambio inviata con successo");
+                    }
+
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        // Gestisci l'errore durante la chiamata al servizio database
+                        Window.alert("Errore HomeGameActivity.sendExchangeProposal: " + caught.getMessage());
+                    }
+                });
+
+    }
+
+    /* -- FINE SCAMBIO -- */
 
     /* ++ METODI DI SUPPORTO ++ */
 

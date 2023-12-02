@@ -1,5 +1,6 @@
 package com.dlm.gwt.sample.cardmaster.client;
 
+import com.dlm.gwt.sample.cardmaster.client.view.ExchangeView;
 import com.dlm.gwt.sample.cardmaster.client.view.HomeGameView;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -37,7 +38,7 @@ public class ViewRouter implements ValueChangeHandler<String> {
         }
     }
 
-    //TODO: accorpare metodi nello switch case
+    // TODO: accorpare metodi nello switch case
     public void handleRouteChange(String token) {
         switch (token) {
             case "login":
@@ -57,6 +58,9 @@ public class ViewRouter implements ValueChangeHandler<String> {
                 break;
             case "yugiohHome":
                 toYugiohHome();
+                break;
+            case "exchange":
+                toExchangePage();
                 break;
         }
     }
@@ -78,6 +82,7 @@ public class ViewRouter implements ValueChangeHandler<String> {
         HomeView homePage = new HomeView();
         RootPanel.get().add(homePage);
     }
+
     private void toMagicHome() {
         RootPanel.get().clear();
         HomeGameView magicHomePage = new HomeGameView("Magic");
@@ -94,6 +99,12 @@ public class ViewRouter implements ValueChangeHandler<String> {
         RootPanel.get().clear();
         HomeGameView yugiohHomePage = new HomeGameView("Yugioh");
         RootPanel.get().add(yugiohHomePage);
+    }
+
+    private void toExchangePage() {
+        RootPanel.get().clear();
+        ExchangeView exchangePage = new ExchangeView();
+        RootPanel.get().add(exchangePage);
     }
 
 }
