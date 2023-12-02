@@ -460,6 +460,13 @@ body::-webkit-scrollbar {
   transition-duration: 100ms;
 }
 
+.red-dot-indicator {
+  width: 23px;
+  height: 23px;
+  background-color: rgb(255, 0, 0);
+  border-radius: 50%;
+}
+
 
 .headerCustom-modal {
   background-color: transparent;
@@ -1558,7 +1565,134 @@ body::-webkit-scrollbar {
   /* Centra verticalmente all'interno del contenitore */
 }
 
+.chooseCardForProposalContainer {
+  background-color: #ff9966;
+  border-radius: var(--border-radius);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 50px 0px 50px 0px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden;
+  display: flex;
+  /* Abilita il layout flex per il contenitore */
+  flex-direction: column;
+  /* Imposta la direzione di layout su colonna */
+  align-items: center;
+}
+
 /* -- FINE POP UP PANEL DEL SITO -- */
+
+/* ++ INIZIO BOTTONE PER ANDARE ALLA PAGINA DEGLI SCAMBI ++ */
+
+.exchangeButtonImage {
+  background-image: url('/img/exchange_logo.png');
+  width: 23px;
+  height: 23px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 8px;
+}
+
+.exchangeButtonLabel {
+  font-size: 17px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.exchangeButton {
+  --primary-color: #669eff;
+  --secondary-color: #fff;
+  --hover-color: #1d66c5;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+}
+
+.exchangeButton:hover {
+  background-color: var(--hover-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+}
+
+.exchangeButton:hover .exchangeButtonImage {
+  filter: brightness(85%);
+  transition-duration: 100ms;
+}
+
+.exchangeButton:active {
+  transform: scale(0.9);
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  transform: scale(0.90);
+  position: relative;
+}
+
+/* -- FINE BOTTONE PER ANDARE ALLA PAGINA DEGLI SCAMBI -- */
+
+/* ++ INIZIO EXCHANGEVIEW ++ */
+
+.exchangeWelcomeLabelWithExchanges {
+  font-family: 'Passion One', sans-serif;
+  font-size: 65px;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: none;
+  color: rgb(231, 231, 231);
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 0px;
+}
+
+.exchangeWelcomeLabelWithoutExchanges {
+  font-family: 'Passion One', sans-serif;
+  font-size: 7rem;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  font-style: normal;
+  font-variant: small-caps;
+  color: rgb(231, 231, 231);
+  text-align: center;
+  margin-top: 10vw;
+}
+
+.emojiExchangesLabel {
+  font-size: 90px;
+  text-align: center;
+}
+
+.exchangePanel {
+  background-color: rgb(0, 51, 102);
+  border-radius: var(--border-radius);
+}
+
+.exchangeProposalPanel {
+  background-color: #1d66c5;
+  /*background-color: #1d66c5;*/
+  border-radius: var(--border-radius);
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
+
+/* -- FINE EXCHANGEVIEW -- */
 
 /* DECK */
 .deckList {
@@ -1717,6 +1851,44 @@ body::-webkit-scrollbar {
   justify-items: center;
   margin-right: 0.8rem;
   overflow-x: hidden;
+}
+
+.exchangeButton:hover {
+  background-color: var(--hover-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+}
+
+.exchangeButton:hover .exchangeButtonImage {
+  filter: brightness(85%);
+  transition-duration: 100ms;
+}
+
+.exchangeButton:active {
+  transform: scale(0.9);
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  transform: scale(0.90);
+  position: relative;
+}
+
+.exchangeButton:hover {
+  background-color: var(--hover-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+}
+
+.exchangeButton:hover .exchangeButtonImage {
+  filter: brightness(85%);
+  transition-duration: 100ms;
+}
+
+.exchangeButton:active {
+  transform: scale(0.9);
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  transform: scale(0.90);
+  position: relative;
 }
 
 .popupContainer .createDeckButton {
