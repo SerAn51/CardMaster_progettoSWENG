@@ -2,10 +2,14 @@ package database;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 
 import com.dlm.gwt.sample.cardmaster.server.CardFactoryCreator;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
+import com.dlm.gwt.sample.cardmaster.shared.card.ExchangeProposal;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -102,6 +106,7 @@ public class Database {
             }
             // salva nel db
             // open();
+            // ricorsione che si interrompe subito
             Map<Integer, Card> map = (Map<Integer, Card>) db.hashMap(lowercaseGameName + "_cards").createOrOpen();
             int card_id = 0;
             if (gameName.equalsIgnoreCase("Magic")) {
@@ -200,6 +205,69 @@ public class Database {
         }
     }
 
+    /* ++ INIIZO SCAMBIO ++ */
+
+    public Map<String, List<Card>> getOwnersWishersOfCard(Card card, Boolean isOwned) {
+        Map<String, List<Card>> ownersWishersMap = new HashMap<>();
+        Map<String, User> userMap = openUserMap();
+        try {
+
+            for (User user : userMap.values()) {
+                List<Card> ownedWishedCards;
+                if (isOwned) {
+                    ownedWishedCards = user.getOwnedCards();
+                } else {
+                    ownedWishedCards = user.getWishedCards();
+                }
+                List<Card> istancesOfCard = new LinkedList<>();
+                for (Card ownedWishedCard : ownedWishedCards) {
+                    if (ownedWishedCard.getName().equals(card.getName())) {
+                        istancesOfCard.add(ownedWishedCard);
+                    }
+                }
+                ownersWishersMap.put(user.getUsername(), istancesOfCard);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return ownersWishersMap;
+    }
+
+    public Boolean sendExchangeProposal(User proponent, String counterpartyUsername, List<Card> proposedCards,
+            List<Card> requestedCards) {
+
+        Boolean success = false;
+        // creo l'oggetto ExchangeProposal
+        ExchangeProposal exchangeProposal = new ExchangeProposal(proponent, counterpartyUsername, proposedCards,
+                requestedCards);
+
+        // accedo alla lista di utenti nel database e per l'utente che riceve la
+        // proposta aggiungo la proposta alla sua lista di proposte
+        User counterpartyUser = null;
+        try {
+            Map<String, User> userMap = openUserMap();
+            counterpartyUser = userMap.get(counterpartyUsername);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        if (counterpartyUser != null) {
+            counterpartyUser.addExchangeProposal(exchangeProposal);
+
+            saveChangesInDB(counterpartyUser);
+            success = true;
+        }
+        return success;
+
+    }
+
+    /* -- FINE SCAMBIO -- */
+
     /* ++ INIZIO METODI DI SUPPORTO ++ */
 
     // metodo generico per ritornare la mappa di utenti
@@ -234,6 +302,62 @@ public class Database {
             close();
         }
         return success;
+    }
+
+    public Boolean checkExchangesAfterRemoveCard(User loggedUser, Card card) {
+        boolean success = false;
+        Map<String, User> userMap = openUserMap();
+
+        try {
+            for (User user : userMap.values()) {
+                List<ExchangeProposal> exchangeProposals = user.getExchangeProposals();
+                // List<ExchangeProposal> updatedProposals = new ArrayList<>();
+
+                System.out.println(
+                        "USER: " + user.getUsername() + " | exchangeProposals all'inizio: " + exchangeProposals.size());
+
+                if (!exchangeProposals.isEmpty()) {
+                    // Creare un iteratore per la lista
+                    Iterator<ExchangeProposal> iterator = exchangeProposals.iterator();
+
+                    // Iterare sulla lista con l'iteratore
+                    while (iterator.hasNext()) {
+                        ExchangeProposal exchangeProposal = iterator.next();
+
+                        // Condizioni per rimuovere l'elemento
+                        if (exchangeProposal.getProponent().getUsername().equals(loggedUser.getUsername()) &&
+                                containsWithCompareAttributes(exchangeProposal.getProposedCards(), card)) {
+                            iterator.remove();
+                        } else if (exchangeProposal.getCounterparty().equals(loggedUser.getUsername()) &&
+                                containsWithCompareAttributes(exchangeProposal.getrequestedCards(), card)) {
+                            iterator.remove();
+                        }
+                    }
+
+                    System.out.println("actual proposals: " + exchangeProposals.size());
+
+                    // Aggiorna la mappa dell'utente
+                    userMap.put(user.getUsername(), user);
+
+                    db.commit(); // Salva le modifiche nel database
+                }
+            }
+            success = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return success;
+    }
+
+    private boolean containsWithCompareAttributes(List<Card> list, Card card) {
+        for (Card item : list) {
+            if (item.compareAttributes(card)) {
+                return true; // Trovato l'elemento
+            }
+        }
+        return false; // Elemento non trovato
     }
 
     public User getUserByUsername(String username) {

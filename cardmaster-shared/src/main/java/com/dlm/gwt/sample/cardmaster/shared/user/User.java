@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
 import com.dlm.gwt.sample.cardmaster.shared.card.Deck;
+import com.dlm.gwt.sample.cardmaster.shared.card.ExchangeProposal;
 
 public class User implements Serializable {
 
@@ -19,6 +20,7 @@ public class User implements Serializable {
     private List<Card> ownedCards;
     private List<Card> wishedCards;
     private Map<String, Deck> decks;
+    private List<ExchangeProposal> exchangeProposals;
 
     public User(String username, String email, String password, int age, String gender) {
         this.username = username;
@@ -29,6 +31,7 @@ public class User implements Serializable {
         this.ownedCards = new ArrayList<>();
         this.wishedCards = new ArrayList<>();
         this.decks = new HashMap<>();
+        this.exchangeProposals = new ArrayList<>();
     }
 
     public User() {
@@ -66,6 +69,10 @@ public class User implements Serializable {
         return this.decks;
     }
 
+    public List<ExchangeProposal> getExchangeProposals() {
+        return this.exchangeProposals;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -84,6 +91,10 @@ public class User implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public void setExchangeProposals(List<ExchangeProposal> exchangeProposals) {
+        this.exchangeProposals = exchangeProposals;
     }
 
     public void addOwnedCard(Card card) {
@@ -121,4 +132,11 @@ public class User implements Serializable {
         deck.removeCard(card);
     }
 
+    public void addExchangeProposal(ExchangeProposal exchangeProposal) {
+        this.exchangeProposals.add(exchangeProposal);
+    }
+
+    public void removeExchangeProposal(ExchangeProposal exchangeProposal) {
+        this.exchangeProposals.remove(exchangeProposal);
+    }
 }
