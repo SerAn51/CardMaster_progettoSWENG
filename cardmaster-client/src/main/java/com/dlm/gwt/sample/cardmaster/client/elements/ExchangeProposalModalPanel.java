@@ -9,13 +9,7 @@ import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PopupPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.*;
 
 public class ExchangeProposalModalPanel extends PopupPanel {
 
@@ -27,10 +21,10 @@ public class ExchangeProposalModalPanel extends PopupPanel {
     Map<CheckBox, Card> proposedCardsMap;
     Map<CheckBox, Card> requestedCardsMap;
 
-    public ExchangeProposalModalPanel(User loggedUser, Card cardLoggedUserWant, String counterpartyUsername,
+    public ExchangeProposalModalPanel(Card cardLoggedUserWant, String counterpartyUsername,
             HomeGameActivity homeGameActivity, HidePopupPanelClickingOutside hidePopup) {
 
-        this.loggedUser = loggedUser;
+        this.loggedUser = homeGameActivity.getLoggedUser();
         this.cardLoggedUserWant = cardLoggedUserWant;
         this.counterpartyUsername = counterpartyUsername;
         this.homeGameActivity = homeGameActivity;
@@ -38,28 +32,34 @@ public class ExchangeProposalModalPanel extends PopupPanel {
         requestedCardsMap = new HashMap<>();
 
         // Contenuto della finestra modale
-        VerticalPanel content = new VerticalPanel();
-        HorizontalPanel chooseCardPanels = new HorizontalPanel();
+        Grid popup = new Grid(2, 1);
+        popup.setStyleName("exchangeProposalModalPanel");
+
+        Grid chooseCardPanels = new Grid(1, 3);
+        chooseCardPanels.setStyleName("chooseCardPanels");
 
         // Pannello per la scelta delle carte da proporre
-        FlowPanel chooseCardForProposalContainer = chooseCardForProposalContainerCreator();
+        Panel chooseCardForProposalContainer = chooseCardForProposalContainerCreator();
 
         // Pannello per la visualizzazione delle carte che l'utente counterparty vuole
-        FlowPanel cardsCounterpartyWantContainer = cardsCounterpartyWantContainerCreator();
+        Panel cardsCounterpartyWantContainer = cardsCounterpartyWantContainerCreator();
 
         // Pannello per visualizzare le altre carte che l'utente counterparty possiede
-        FlowPanel otherCardsCounterpartyContainer = otherCardsCounterpartyContainerCreator();
+        Panel otherCardsCounterpartyContainer = otherCardsCounterpartyContainerCreator();
 
-        chooseCardPanels.add(chooseCardForProposalContainer);
-        chooseCardPanels.add(cardsCounterpartyWantContainer);
-        chooseCardPanels.add(otherCardsCounterpartyContainer);
-        content.add(chooseCardPanels);
+        chooseCardPanels.setWidget(0, 0, chooseCardForProposalContainer);
+        chooseCardPanels.setWidget(0, 1, cardsCounterpartyWantContainer);
+        chooseCardPanels.setWidget(0, 2, otherCardsCounterpartyContainer);
 
         // Aggiungi il bottone per inviare la proposta
         // bottone per inviare la proposta
+        Panel sendProposalButtonContainer = new HorizontalPanel();
         Button sendProposalButton = new Button("Invia proposta!");
-        sendProposalButton.addStyleName("sendProposalButton");
-        chooseCardForProposalContainer.add(sendProposalButton);
+        sendProposalButtonContainer.add(sendProposalButton);
+        sendProposalButtonContainer.setStyleName("sendProposalButtonContainer");
+        sendProposalButton.setStyleName("sendProposalButton");
+
+        chooseCardForProposalContainer.add(sendProposalButtonContainer);
 
         sendProposalButton.addClickHandler(event -> {
             List<Card> proposedCardsList = new LinkedList<>();
@@ -95,67 +95,89 @@ public class ExchangeProposalModalPanel extends PopupPanel {
             hidePopup.destroy();
         });
 
-        content.add(sendProposalButton);
+        popup.setWidget(0, 0, chooseCardPanels);
+        popup.setWidget(1, 0, sendProposalButtonContainer);
 
-        setWidget(content);
+        setWidget(popup);
     }
 
-    private FlowPanel chooseCardForProposalContainerCreator() {
-        FlowPanel chooseCardForProposalContainer = new FlowPanel();
-        chooseCardForProposalContainer.addStyleName("chooseCardForProposalContainer");
+    /**
+     * Carte da offrire
+     * 
+     * @return Panel
+     */
+    private Panel chooseCardForProposalContainerCreator() {
+        Panel chooseCardForProposalContainer = new VerticalPanel();
+        chooseCardForProposalContainer.setStyleName("chooseCardForProposalContainer");
+        Label carteDaOffrire = new Label("Carte da offrire");
+        carteDaOffrire.setStyleName("exchangeTitleLabel");
+        chooseCardForProposalContainer.add(carteDaOffrire);
 
         Label chooseCardForProposalLabel = new Label(
                 "Scegli una o piu' carte da proporre in cambio di " + cardLoggedUserWant.getName());
-        chooseCardForProposalLabel.addStyleName("chooseCardForProposalLabel");
+        chooseCardForProposalLabel.setStyleName("chooseCardForProposalLabel");
         chooseCardForProposalContainer.add(chooseCardForProposalLabel);
 
         Label chooseCardForProposalLabel1 = new Label(
                 "Puoi scegliere tra tutte le carte che possiedi, anche se di giochi diversi!");
-        chooseCardForProposalLabel1.addStyleName("chooseCardForProposalLabel1");
+        chooseCardForProposalLabel1.setStyleName("chooseCardForProposalLabel1");
         chooseCardForProposalContainer.add(chooseCardForProposalLabel1);
 
         Label chooseCardForProposalLabel2 = new Label(
                 "Puoi anche non proporre alcuna carta, ma siamo sicuri che " + counterpartyUsername
                         + " accettera'?👀");
-        chooseCardForProposalLabel2.addStyleName("chooseCardForProposalLabel2");
+        chooseCardForProposalLabel2.setStyleName("chooseCardForProposalLabel2");
         chooseCardForProposalContainer.add(chooseCardForProposalLabel2);
+
+        Panel scrollableExchangePanel = new VerticalPanel();
+        scrollableExchangePanel.setStyleName("scrollableExchangePanel");
 
         // Itera sulle carte di loggedUser
         for (Card c : loggedUser.getOwnedCards()) {
             CheckBox cardCheckBox = new CheckBox(c.getName() + " - " + c.getCondition());
-            cardCheckBox.addStyleName("cardCheckBox");
+            cardCheckBox.setStyleName("cardCheckBox");
 
             // Associa l'oggetto Card alla CheckBox nella mappa (la chiave e' il riferimento
             // alla memoria)
             proposedCardsMap.put(cardCheckBox, c);
 
-            chooseCardForProposalContainer.add(cardCheckBox);
+            scrollableExchangePanel.add(cardCheckBox);
         }
 
+        chooseCardForProposalContainer.add(scrollableExchangePanel);
         return chooseCardForProposalContainer;
     }
 
-    private FlowPanel cardsCounterpartyWantContainerCreator() {
-        FlowPanel cardsCounterpartyWantContainer = new FlowPanel();
-        cardsCounterpartyWantContainer.addStyleName("chooseCardForProposalContainer");
+    /**
+     * Carte desiderate dall'altro utente
+     * 
+     * @return
+     */
+    private Panel cardsCounterpartyWantContainerCreator() {
+        Panel cardsCounterpartyWantContainer = new VerticalPanel();
+        cardsCounterpartyWantContainer.setStyleName("chooseCardForProposalContainer");
+
+        Label carteDesiderateDallAltroUtente = new Label("Carte desiderate dall'altro utente");
+        carteDesiderateDallAltroUtente.setStyleName("exchangeTitleLabel");
+        cardsCounterpartyWantContainer.add(carteDesiderateDallAltroUtente);
 
         Label cardsCounterpartyWantLabel = new Label(
                 counterpartyUsername + " vuole queste carte: ");
-        cardsCounterpartyWantLabel.addStyleName("cardsCounterpartyWantLabel");
+        cardsCounterpartyWantLabel.setStyleName("cardsCounterpartyWantLabel");
         cardsCounterpartyWantContainer.add(cardsCounterpartyWantLabel);
 
-        // mostra tutte le carte possedute dall'utente loggato con una checkbox
-        FlowPanel cardsContainer = new FlowPanel();
-        cardsContainer.addStyleName("cardsContainer");
+        Panel scrollableExchangePanel = new VerticalPanel();
+        scrollableExchangePanel.setStyleName("scrollableExchangePanel");
 
         homeGameActivity.getUserByUsername(counterpartyUsername, new AsyncCallback<User>() {
             @Override
             public void onSuccess(User user) {
+
                 // stampa le carte che la controparte desidera
                 for (Card counterpartyWishedCard : user.getWishedCards()) {
                     Label cardLabel = new Label("- " + counterpartyWishedCard.getName());
-                    cardLabel.addStyleName("cardLabel");
-                    cardsCounterpartyWantContainer.add(cardLabel);
+                    cardLabel.setStyleName("cardLabel");
+                    scrollableExchangePanel.add(cardLabel);
                 }
             }
 
@@ -164,45 +186,57 @@ public class ExchangeProposalModalPanel extends PopupPanel {
             }
         });
 
+        cardsCounterpartyWantContainer.add(scrollableExchangePanel);
         return cardsCounterpartyWantContainer;
     }
 
-    private FlowPanel otherCardsCounterpartyContainerCreator() {
-        FlowPanel otherCardsCounterpartyContainer = new FlowPanel();
-        otherCardsCounterpartyContainer.addStyleName("chooseCardForProposalContainer");
+    /**
+     * Altre carte possedute dall'altro utente
+     * 
+     * @return
+     */
+    private Panel otherCardsCounterpartyContainerCreator() {
+        Panel otherCardsCounterpartyContainer = new VerticalPanel();
+        otherCardsCounterpartyContainer.setStyleName("chooseCardForProposalContainer");
+
+        Label altreCartePosseduteDallAltroUtente = new Label("Altre carte possedute dall'altro utente");
+        altreCartePosseduteDallAltroUtente.setStyleName("exchangeTitleLabel");
+        otherCardsCounterpartyContainer.add(altreCartePosseduteDallAltroUtente);
 
         Label otherCardsCounterpartyLabel = new Label(
-                counterpartyUsername + " possiede anche queste carte");
-        otherCardsCounterpartyLabel.addStyleName("otherCardsCounterpartyLabel");
+                (counterpartyUsername + " possiede anche queste carte"));
+        otherCardsCounterpartyLabel.setStyleName("otherCardsCounterpartyLabel");
         otherCardsCounterpartyContainer.add(otherCardsCounterpartyLabel);
 
-        // mostra tutte le carte possedute dall'utente loggato con una checkbox
-        FlowPanel cardsContainer = new FlowPanel();
-        cardsContainer.addStyleName("cardsContainer");
+        Panel scrollableExchangePanel = new VerticalPanel();
+        scrollableExchangePanel.setStyleName("scrollableExchangePanel");
 
         homeGameActivity.getUserByUsername(counterpartyUsername, new AsyncCallback<User>() {
             @Override
             public void onSuccess(User user) {
                 int cardRecurrence = 0;
-                for (Card otherOwnedCard : user.getOwnedCards()) {
-                    // non mostrare la carta che l'utente loggato vuole solo una volta, se la stessa
-                    // carta è presente due volte, mostrala una volta, se e' presente tre volte,
-                    // mostrala due volte, ecc.
 
-                    // in questo modo evito di mostrare la carta che l'utente loggato vuole (l'ha
-                    // già selezionata avviando su di essa la proposta) ma se c'e' una carta uguale,
-                    // la mostro
+                for (Card otherOwnedCard : user.getOwnedCards()) {
+                    /**
+                     * carta è presente due volte, mostrala una volta, se e' presente tre
+                     * volte,mostrala due volte, ecc.
+                     *
+                     * in questo modo evito di mostrare la carta che l'utente loggato vuole (l'ha
+                     * già selezionata avviando su di essa la proposta) ma se c'e' una carta uguale,
+                     * la mostro non mostrare la carta che l'utente loggato vuole solo una volta, se
+                     * la stessa
+                     */
                     if ((otherOwnedCard.compareAttributes(cardLoggedUserWant)) && cardRecurrence == 0) {
                         cardRecurrence++;
                         continue;
                     }
                     CheckBox cardCheckBox = new CheckBox(
                             otherOwnedCard.getName() + " - " + otherOwnedCard.getCondition());
-                    cardCheckBox.addStyleName("cardCheckBox");
+                    cardCheckBox.setStyleName("cardCheckBox");
 
                     requestedCardsMap.put(cardCheckBox, otherOwnedCard);
 
-                    otherCardsCounterpartyContainer.add(cardCheckBox);
+                    scrollableExchangePanel.add(cardCheckBox);
 
                 }
             }
@@ -212,6 +246,7 @@ public class ExchangeProposalModalPanel extends PopupPanel {
             }
         });
 
+        otherCardsCounterpartyContainer.add(scrollableExchangePanel);
         return otherCardsCounterpartyContainer;
     }
 }

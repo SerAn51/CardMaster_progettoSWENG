@@ -267,6 +267,10 @@ public class HomeGameActivity extends AbstractActivity {
         });
     }
 
+    public User getLoggedUser() {
+        return this.loggedUser;
+    }
+
     /* -- METODI DI SUPPORTO -- */
 
 }

@@ -232,7 +232,7 @@ public class CardDetailsModalPanel extends PopupPanel {
                                     HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
 
                                     ExchangeProposalModalPanel exchangeProposalModalPanel = new ExchangeProposalModalPanel(
-                                            loggedUser, specificCard, counterparty, homeGameActivity, hidePopup);
+                                            specificCard, counterparty, homeGameActivity, hidePopup);
 
                                     // Mostra il modal panel
                                     exchangeProposalModalPanel.center();
