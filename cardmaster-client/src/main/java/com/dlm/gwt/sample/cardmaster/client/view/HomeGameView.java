@@ -1,5 +1,6 @@
 package com.dlm.gwt.sample.cardmaster.client.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class HomeGameView extends Composite {
     private Button filterCardsButton;
     private boolean searchVisible = false;
     private boolean filterVisible = false;
-    FlexTable cardsGrid;
+    // FlexTable cardsGrid;
     VerticalPanel sidebar = new VerticalPanel();
     VerticalPanel searchFilterPanel = new VerticalPanel();
 
@@ -156,7 +157,8 @@ public class HomeGameView extends Composite {
 
         // Simulo il click sul bottone "Mostra tutte" per mostrare tutte le carte
         // all'apertura della home
-        ClickEvent.fireNativeEvent(Document.get().createClickEvent(0, 0, 0, 0, 0, false, false, false, false), showAllCardsButton);
+        ClickEvent.fireNativeEvent(Document.get().createClickEvent(0, 0, 0, 0, 0, false, false, false, false),
+                showAllCardsButton);
 
         buttonsPanel.add(showAllCardsButton);
         buttonsPanel.add(showOwnedCardsButton);
@@ -216,41 +218,43 @@ public class HomeGameView extends Composite {
 
     public void showGrid(List<?> elementList) {
 
-        Boolean elementsAreNotThisGame = false;
-        for (Object element : elementList) {
-            if (element instanceof Card) {
-                Card card = (Card) element;
-                if (!card.getGame().equalsIgnoreCase(this.gameName)) {
-                    elementsAreNotThisGame = true;
-                    break;
-                }
-            } else if (element instanceof Deck) {
-                Deck deck = (Deck) element;
-                if (!deck.getGame().equalsIgnoreCase(this.gameName)) {
-                    elementsAreNotThisGame = true;
-                    break;
-                }
-            }
-        }
+        /*
+         * Boolean elementsAreNotThisGame = false;
+         * for (Object element : elementList) {
+         * if (element instanceof Card) {
+         * Card card = (Card) element;
+         * if (!card.getGame().equalsIgnoreCase(this.gameName)) {
+         * elementsAreNotThisGame = true;
+         * break;
+         * }
+         * } else if (element instanceof Deck) {
+         * Deck deck = (Deck) element;
+         * if (!deck.getGame().equalsIgnoreCase(this.gameName)) {
+         * elementsAreNotThisGame = true;
+         * break;
+         * }
+         * }
+         * }
+         */
 
         // se non ci sono carte/deck oppure le carte/deck non sono di questo gioco
-        if (elementList.size() == 0 || elementsAreNotThisGame) {
-            Label noCardsLabel = new Label("Non ci sono carte da mostrare");
-            noCardsLabel.setStyleName("noCardsLabel");
-            setInGrid(noCardsLabel);
-        } else {
-            if (elementList.get(0) instanceof Card) {
-                showCards((List<Card>) elementList);
-            } else if (elementList.get(0) instanceof Deck) {
-                showDecks((List<Deck>) elementList);
-            }
+        // if (elementList.size() == 0 || elementsAreNotThisGame) {
+        // Label noCardsLabel = new Label("Non ci sono carte da mostrare");
+        // noCardsLabel.setStyleName("noCardsLabel");
+        // setInGrid(noCardsLabel);
+        // } else {
+        if (elementList.get(0) instanceof Card) {
+            showCards((List<Card>) elementList);
+        } else if (elementList.get(0) instanceof Deck) {
+            showDecks((List<Deck>) elementList);
         }
+        // }
 
     }
 
     public void showCards(List<Card> cards) {
 
-        cardsGrid = new FlexTable();
+        FlexTable cardsGrid = new FlexTable();
         FlexTable localCardsGrid = new FlexTable();
         cardsGrid.setStyleName("cardsFlexTable");
 
@@ -260,25 +264,27 @@ public class HomeGameView extends Composite {
         int lastPage = Math.min(cards.size(), firstPage + CARDS_PER_PAGE);
         CardView cardView = null;
 
+
+        // Aggiungi le carte alla griglia locale
         for (int i = firstPage; i < lastPage; i++) {
-            if (cards.get(i) instanceof Card) {
-                Card card = (Card) cards.get(i);
-                if (card.getGame().equalsIgnoreCase(this.gameName)) {
-                    cardViewFactory = new CardViewFactory(card, this.homeGameActivity);
-                    cardView = cardViewFactory.createCardView();
-                    localCardsGrid.setWidget(row, col, cardView);
-                    localCardsGrid.setStyleName("cardsGrid");
-                }
-            }
+            Card card = cards.get(i);
+            cardViewFactory = new CardViewFactory(card, this.homeGameActivity);
+            cardView = cardViewFactory.createCardView();
+
+            // Aggiungi la vista della carta alla griglia locale
+            localCardsGrid.setWidget(row, col, cardView);
+            localCardsGrid.setStyleName("cardsGrid");
+
+            // Passa alla colonna successiva o alla riga successiva se la colonna è piena
             col++;
-            if (col == COLUMN_COUNT) {
+            if (col >= COLUMN_COUNT) {
                 col = 0;
                 row++;
             }
         }
 
         // bodyTable.setWidget(0, 2, cardsGrid);
-        gestionePaginazione(cards, lastPage);
+        gestionePaginazione(cards, lastPage, cardsGrid);
         cardsGrid.setWidget(0, 1, localCardsGrid);
         setInGrid(cardsGrid);
         bodyTable.setStyleName("bodyTable");
@@ -410,7 +416,7 @@ public class HomeGameView extends Composite {
         bodyTable.setStyleName("bodyTable");
     }
 
-    private void gestionePaginazione(List<?> cards, int lastPage) {
+    private void gestionePaginazione(List<?> cards, int lastPage, FlexTable cardsGrid) {
 
         Button prevPageButton = new Button();
         Button nextPageButton = new Button();
@@ -432,7 +438,8 @@ public class HomeGameView extends Composite {
             });
         }
         Label pageCounterLabel = new Label(
-                (currentPage + 1) + " di " + (((cards.size() + CARDS_PER_PAGE - 1) / CARDS_PER_PAGE)));
+                (currentPage + 1) + " di " + (((cards.size() + CARDS_PER_PAGE - 1) /
+                        CARDS_PER_PAGE)));
         pageCounterLabel.setStyleName("pageCounterLabel");
 
         prevPageButton.setStyleName("paginationButtonPrev");
