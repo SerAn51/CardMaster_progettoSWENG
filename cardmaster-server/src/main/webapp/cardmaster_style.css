@@ -1265,14 +1265,38 @@ body::-webkit-scrollbar {
   height: 100%;
 }
 
+.noCardsLabel {
+  font-family: 'Passion One', sans-serif;
+  font-size: 65px;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+.noDeckLabel {
+  font-family: 'Passion One', sans-serif;
+  font-size: 65px;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 10rem;
+}
+
 /* PAGINAZIONE DELLA SCHERMATA DELLE CARTE */
-.paginationButton {
+.paginationButtonPrev {
   font-family: var(--font-family);
+  width: 3rem;
+  height: 10rem;
   display: flex;
   padding: 12.5px 30px;
   border: 0;
   border-radius: var(--border-radius);
-  background-color: var(--colorButton);
+  background: url('img/prev.png') center/contain no-repeat;
+  background-color: #2aa7f5;
   color: #ffffff;
   font-weight: bold;
   font-size: 16px;
@@ -1280,22 +1304,65 @@ body::-webkit-scrollbar {
   letter-spacing: 1px;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin-left: 1rem;
 }
 
-.paginationButton:hover {
+.paginationButtonPrev:hover {
   background-color: #1e87d6;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   scale: 1.05;
   transform: translateY(-2px);
 }
 
-.paginationButton:active {
+.paginationButtonPrev:active {
   background-color: #2ba8fb;
   box-shadow: none;
   transform: translateY(0);
 }
 
-.paginationButton:disabled {
+.paginationButtonPrev:disabled {
+  background-color: #ddd;
+  color: #aaa;
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+
+.paginationButtonNext {
+  font-family: var(--font-family);
+  width: 3rem;
+  height: 10rem;
+  display: flex;
+  padding: 12.5px 30px;
+  border: 0;
+  border-radius: var(--border-radius);
+  background: url('img/next.png') center/contain no-repeat;
+  background-color: #2aa7f5;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  margin-left: -1.4rem;
+  margin-top: 20.5rem;
+}
+
+.paginationButtonNext:hover {
+  background-color: #1e87d6;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  scale: 1.05;
+  transform: translateY(-2px);
+}
+
+.paginationButtonNext:active {
+  background-color: #2ba8fb;
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.paginationButtonNext:disabled {
   background-color: #ddd;
   color: #aaa;
   box-shadow: none;
@@ -1321,6 +1388,13 @@ body::-webkit-scrollbar {
   letter-spacing: 1px;
   transition: all 0.3s ease-in-out;
   position: relative;
+  margin-left: -1.4rem;
+  margin-top: 14.5rem;
+}
+
+
+.buttonsPanel {
+  margin-bottom: 10rem;
 }
 
 .sidebarButton {
@@ -1339,7 +1413,7 @@ body::-webkit-scrollbar {
   cursor: pointer;
   margin-top: 40px;
   margin-bottom: 10px;
-  width: 90%;
+  width: 83%;
 }
 
 .sidebarButton:hover {
@@ -1360,12 +1434,17 @@ body::-webkit-scrollbar {
 }
 
 .sidebar {
-  width: 100%;
-  justify-content: center;
+  justify-items: center;
   justify-content: center;
   align-items: center;
-  display: flex;
-  min-height: 51.9rem;
+  display: grid;
+  min-height: 52rem;
+  width: 17rem;
+  border-radius: var(--border-radius);
+  background: rgba(112, 112, 112, 0.32);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(13.9px);
+  -webkit-backdrop-filter: blur(13.9px);
 }
 
 .paginationPanel {
@@ -1404,14 +1483,13 @@ body::-webkit-scrollbar {
 }
 
 .card-wrap {
-  width: 30.5vh;
+  max-width: 33rem;
   background: #fff;
   overflow: hidden;
   color: var(--color-text);
   cursor: pointer;
   transition: all .2s ease-in-out;
   height: 25rem;
-  max-width: 18.7rem;
 }
 
 .card-content {
@@ -1436,6 +1514,12 @@ body::-webkit-scrollbar {
   text-align: center;
   text-transform: uppercase;
   margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.card-text {
+  text-align: center;
+  font-size: 12px;
   margin-bottom: 20px;
 }
 
@@ -1991,194 +2075,5 @@ body::-webkit-scrollbar {
   font-size: 1.4rem;
   font-weight: bolder;
   margin-right: 7rem;
-}
 
-/* ++ STILE BOTTONI DETTAGLI CARTA E POPUP DETTAGLI++ */
-.cardDetailsContent {
-  background-color: #003366;
-  border-radius: var(--border-radius);
-  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
-  color: #ffffff;
-  padding: 50px 0px 50px 0px;
-  position: relative;
-  min-width: 1000px;
-  min-height: 400px;
-  max-width: 100%;
-  text-align: center;
-  margin: 20px 0;
-  overflow: hidden;
-  display: flex;
-  /* Abilita il layout flex per il contenitore */
-  flex-direction: column;
-  /* Imposta la direzione di layout su colonna */
-  align-items: center;
-}
-
-.cardDetailsContainer {
-  margin-right: 10rem;
-  padding: 0.5rem;
-}
-
-.addButton {
-  --primary-color: #2e9d4c;
-  --secondary-color: #fff;
-  --hover-color: #137d51;
-  --hover-text-color: #d8d8d8;
-  box-sizing: border-box;
-  border: 0;
-  border-radius: var(--border-radius);
-  color: var(--secondary-color);
-
-  padding: 1em 1.8em;
-  background: var(--primary-color);
-  display: flex;
-  transition: 0.2s background;
-  align-items: center;
-  gap: 0.6em;
-  font-weight: bold;
-  transition-duration: .3s;
-  transition-duration: 150ms;
-  margin-top: 1rem;
-}
-
-.removeButton {
-  --primary-color: #ff6666;
-  --secondary-color: #fff;
-  /*--hover-color: #be4848;*/
-  --hover-color: #c51d1d;
-  --hover-text-color: #d8d8d8;
-  box-sizing: border-box;
-  border: 0;
-  border-radius: var(--border-radius);
-  color: var(--secondary-color);
-  padding: 1em 1.8em;
-  background: var(--primary-color);
-  display: flex;
-  transition: 0.2s background;
-  align-items: center;
-  gap: 0.6em;
-  font-weight: bold;
-  margin-top: 1rem;
-}
-
-.updateButton {
-  --primary-color: #efbe00;
-  --secondary-color: #fff;
-  --hover-color: #aa8700;
-  --hover-text-color: #d8d8d8;
-  box-sizing: border-box;
-  border: 0;
-  border-radius: var(--border-radius);
-  color: var(--secondary-color);
-  padding: 1em 1.8em;
-  background: var(--primary-color);
-  display: flex;
-  transition: 0.2s background;
-  align-items: center;
-  gap: 0.6em;
-  font-weight: bold;
-  margin-top: 1rem;
-}
-
-.addButton:hover,
-.removeButton:hover,
-.updateButton:hover {
-  background-color: var(--hover-color);
-  color: var(--hover-text-color);
-  cursor: pointer;
-}
-
-.addButton:active,
-.removeButton:active,
-.updateButton:active {
-  transform: scale(0.9);
-  transition: all 0.25s;
-  -webkit-transition: all 0.25s;
-  transform: scale(0.90);
-  position: relative;
-}
-
-.proposalButton {
-  --primary-color: #669eff;
-  --secondary-color: #fff;
-  --hover-color: #1d66c5;
-  --hover-text-color: #d8d8d8;
-  box-sizing: border-box;
-  border: 0;
-  border-radius: var(--border-radius);
-  color: var(--secondary-color);
-  padding: 1em 1.8em;
-  background: var(--primary-color);
-  display: flex;
-  transition: 0.2s background;
-  align-items: center;
-  gap: 0.6em;
-  font-weight: bold;
-}
-
-.proposalButton:hover {
-  background-color: var(--hover-color);
-  color: var(--hover-text-color);
-  cursor: pointer;
-}
-
-.proposalButton:hover .exchangeButtonImage {
-  filter: brightness(85%);
-  transition-duration: 100ms;
-}
-
-.proposalButton:active {
-  transform: scale(0.9);
-  transition: all 0.25s;
-  -webkit-transition: all 0.25s;
-  transform: scale(0.90);
-  position: relative;
-}
-
-.titleCardDetailsLabel {
-  font-family: var(--font-family);
-  font-size: 1.4rem;
-  font-weight: bold;
-  font-variant: small-caps;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  max-width: 23rem;
-  margin-bottom: 1rem;
-}
-
-.otherTitleCardDetailsLabel {
-  font-family: var(--font-family);
-  font-size: 1.4rem;
-  font-weight: bold;
-  font-variant: small-caps;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  max-width: 23rem;
-  margin-top: -1rem;
-  margin-bottom: 1rem;
-}
-
-.cardDetailLabel {
-  font-family: var(--font-family);
-  font-size: 15px;
-  color: rgb(255, 255, 255);
-  max-width: 23rem;
-  margin-bottom: 0.1rem;
-}
-
-.ownerWisherLabel {
-  font-family: var(--font-family);
-  font-size: 15px;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  max-width: 23rem;
-  margin-bottom: 0.1rem;
-}
-
-.ownersContainer {
-  margin-right: 2rem;
-}
-
-.wishersContainer {
-  padding: 20px !important;
 }
