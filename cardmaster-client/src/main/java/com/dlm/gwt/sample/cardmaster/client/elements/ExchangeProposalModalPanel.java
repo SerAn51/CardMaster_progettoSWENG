@@ -23,7 +23,6 @@ public class ExchangeProposalModalPanel extends PopupPanel {
     private Card cardLoggedUserWant;
     private String counterpartyUsername;
     private HomeGameActivity homeGameActivity;
-    private HidePopupPanelClickingOutside hidePopup;
     // Dichiarazione di una mappa per associare CheckBox agli oggetti Card
     Map<CheckBox, Card> proposedCardsMap;
     Map<CheckBox, Card> requestedCardsMap;
@@ -35,7 +34,6 @@ public class ExchangeProposalModalPanel extends PopupPanel {
         this.cardLoggedUserWant = cardLoggedUserWant;
         this.counterpartyUsername = counterpartyUsername;
         this.homeGameActivity = homeGameActivity;
-        this.hidePopup = hidePopup;
         proposedCardsMap = new HashMap<>();
         requestedCardsMap = new HashMap<>();
 

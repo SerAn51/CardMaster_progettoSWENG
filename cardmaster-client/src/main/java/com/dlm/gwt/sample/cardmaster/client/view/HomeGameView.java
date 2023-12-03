@@ -21,6 +21,7 @@ import com.dlm.gwt.sample.cardmaster.shared.services.DatabaseServiceAsync;
 import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.Style.VerticalAlign;
@@ -152,6 +153,10 @@ public class HomeGameView extends Composite {
         showOwnedCardsButton.setStyleName("sidebarButton");
         showWishedCardsButton.setStyleName("sidebarButton");
         showDecksButton.setStyleName("sidebarButton");
+
+        // Simulo il click sul bottone "Mostra tutte" per mostrare tutte le carte
+        // all'apertura della home
+        ClickEvent.fireNativeEvent(Document.get().createClickEvent(0, 0, 0, 0, 0, false, false, false, false), showAllCardsButton);
 
         buttonsPanel.add(showAllCardsButton);
         buttonsPanel.add(showOwnedCardsButton);

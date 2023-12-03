@@ -99,6 +99,15 @@ public class User implements Serializable {
 
     public void addOwnedCard(Card card) {
         this.ownedCards.add(card);
+        for (Card wishedCard : this.wishedCards) {
+            if (wishedCard.getName().equals(card.getName())) {
+                this.wishedCards.remove(wishedCard);
+                break;
+            }
+        }
+        if (this.wishedCards.contains(card)) {
+            this.wishedCards.remove(card);
+        }
     }
 
     public void addWishedCard(Card card) {
