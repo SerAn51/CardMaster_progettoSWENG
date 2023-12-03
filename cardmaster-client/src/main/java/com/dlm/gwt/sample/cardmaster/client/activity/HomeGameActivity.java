@@ -119,12 +119,24 @@ public class HomeGameActivity extends AbstractActivity {
         // se true stampi le owned, se false stampi le wished
         if (isOwnedOrWished == true) {
             List<Card> cardsOwned = this.loggedUser.getOwnedCards();
+            List<Card> localCards = new ArrayList<Card>();
+            for (Card card : cardsOwned) {
+                if (card.getGame().equalsIgnoreCase(this.gameName)) {
+                    localCards.add(card);
+                }
+            }
             this.cardListType = CardListType.SHOW_OWNED_CARDS;
-            view.showSearchAndFilter(cardsOwned, null, null);
+            view.showSearchAndFilter(localCards, null, null);
         } else {
-            List<Card> magicCardsWished = this.loggedUser.getWishedCards();
+            List<Card> cardsWished = this.loggedUser.getWishedCards();
+            List<Card> localCards = new ArrayList<Card>();
+            for (Card card : cardsWished) {
+                if (card.getGame().equalsIgnoreCase(this.gameName)) {
+                    localCards.add(card);
+                }
+            }
             this.cardListType = CardListType.SHOW_WISHED_CARDS;
-            view.showSearchAndFilter(magicCardsWished, null, null);
+            view.showSearchAndFilter(localCards, null, null);
         }
     }
     /*--FINE MOSTRA LE CARTE OWNED CON RELATIVI PULSANTI ADD/REMOVE--*/
