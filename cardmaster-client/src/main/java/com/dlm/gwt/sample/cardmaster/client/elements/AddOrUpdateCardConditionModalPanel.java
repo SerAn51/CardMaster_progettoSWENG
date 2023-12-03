@@ -108,6 +108,7 @@ public class AddOrUpdateCardConditionModalPanel extends PopupPanel {
         conditionListBox.addItem("5 (in perfette condizioni)");
 
         Button confirmConditionButton = new Button("Conferma");
+        confirmConditionButton.setStyleName("confirmButton");
         labelContainer.add(chooseConditionLabel);
         labelContainer.add(conditionListBox);
         labelContainer.setStyleName("labelContainer");
@@ -182,6 +183,7 @@ public class AddOrUpdateCardConditionModalPanel extends PopupPanel {
         
 
         Button confirmConditionButton = new Button("Conferma");
+        confirmConditionButton.setStyleName("confirmButton");
 
         confirmConditionButton.addClickHandler(event -> {
             card.setCondition(conditionListBox.getSelectedValue());
