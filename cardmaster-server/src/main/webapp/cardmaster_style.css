@@ -1540,6 +1540,27 @@ body::-webkit-scrollbar {
   font-family: var(--font-family);
 }
 
+.noCardsLabel {
+  font-family: 'Passion One', sans-serif;
+  font-size: 65px;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+.noDeckLabel {
+  font-family: 'Passion One', sans-serif;
+  font-size: 65px;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 10rem;
+}
+
 
 /* -- HOME GAME VIEW -- */
 
@@ -1972,29 +1993,112 @@ body::-webkit-scrollbar {
   margin-right: 7rem;
 }
 
-.filterContentPanel {
-  background-color: var(--popup-background-color);
+/* ++ STILE BOTTONI DETTAGLI CARTA E POPUP DETTAGLI++ */
+.cardDetailsContent {
+  background-color: #003366;
   border-radius: var(--border-radius);
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
   color: #ffffff;
-  padding: 1rem 0px 1rem 0px;
+  padding: 50px 0px 50px 0px;
   position: relative;
-  width: 350px;
+  min-width: 1000px;
+  min-height: 400px;
   max-width: 100%;
   text-align: center;
   margin: 20px 0;
   overflow: hidden;
-  display: grid;
-  /* Abilita il layout flex per il contenitore /
+  display: flex;
+  /* Abilita il layout flex per il contenitore */
   flex-direction: column;
-  / Imposta la direzione di layout su colonna /
-  justify-content: center;
+  /* Imposta la direzione di layout su colonna */
   align-items: center;
-  / Centra verticalmente all'interno del contenitore */
-  justify-items: center;
 }
 
-.applyFilterButton {
+.cardDetailsContainer {
+  margin-right: 10rem;
+  padding: 0.5rem;
+}
+
+.addButton {
+  --primary-color: #2e9d4c;
+  --secondary-color: #fff;
+  --hover-color: #137d51;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+  transition-duration: .3s;
+  transition-duration: 150ms;
+  margin-top: 1rem;
+}
+
+.removeButton {
+  --primary-color: #ff6666;
+  --secondary-color: #fff;
+  /*--hover-color: #be4848;*/
+  --hover-color: #c51d1d;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.updateButton {
+  --primary-color: #efbe00;
+  --secondary-color: #fff;
+  --hover-color: #aa8700;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.addButton:hover,
+.removeButton:hover,
+.updateButton:hover {
+  background-color: var(--hover-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+}
+
+.addButton:active,
+.removeButton:active,
+.updateButton:active {
+  transform: scale(0.9);
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  transform: scale(0.90);
+  position: relative;
+}
+
+.proposalButton {
   --primary-color: #669eff;
   --secondary-color: #fff;
   --hover-color: #1d66c5;
@@ -2005,21 +2109,76 @@ body::-webkit-scrollbar {
   color: var(--secondary-color);
   padding: 1em 1.8em;
   background: var(--primary-color);
-  /* display: grid; */
+  display: flex;
   transition: 0.2s background;
   align-items: center;
+  gap: 0.6em;
   font-weight: bold;
-  margin: 1.5rem 0 1rem -2rem;
-  transition: all 0.3s;
+}
+
+.proposalButton:hover {
+  background-color: var(--hover-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+}
+
+.proposalButton:hover .exchangeButtonImage {
+  filter: brightness(85%);
+  transition-duration: 100ms;
+}
+
+.proposalButton:active {
+  transform: scale(0.9);
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  transform: scale(0.90);
+  position: relative;
+}
+
+.titleCardDetailsLabel {
   font-family: var(--font-family);
-  font-size: 1rem;
-  padding-right: -2rem;
-}
-
-.filterContentPanel .title {
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: bold;
-  font-family: var(--title-font-family);
-  margin-top: 1.5rem;
+  font-variant: small-caps;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  max-width: 23rem;
+  margin-bottom: 1rem;
 }
 
+.otherTitleCardDetailsLabel {
+  font-family: var(--font-family);
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  max-width: 23rem;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
+.cardDetailLabel {
+  font-family: var(--font-family);
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  max-width: 23rem;
+  margin-bottom: 0.1rem;
+}
+
+.ownerWisherLabel {
+  font-family: var(--font-family);
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  max-width: 23rem;
+  margin-bottom: 0.1rem;
+}
+
+.ownersContainer {
+  margin-right: 2rem;
+}
+
+.wishersContainer {
+  padding: 20px !important;
+}
