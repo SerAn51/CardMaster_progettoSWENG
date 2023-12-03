@@ -1441,10 +1441,10 @@ body::-webkit-scrollbar {
   min-height: 52rem;
   width: 17rem;
   border-radius: var(--border-radius);
-  background: rgba(112, 112, 112, 0.32);
+  background: rgba(255, 255, 255, 0.11);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(13.9px);
-  -webkit-backdrop-filter: blur(13.9px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .paginationPanel {
@@ -1624,33 +1624,52 @@ body::-webkit-scrollbar {
   font-family: var(--font-family);
 }
 
-.noCardsLabel {
-  font-family: 'Passion One', sans-serif;
-  font-size: 65px;
-  letter-spacing: 4px;
-  word-spacing: 7.5px;
-  font-weight: bold;
-  color: #ffffff;
-  text-align: center;
-}
-
-.noDeckLabel {
-  font-family: 'Passion One', sans-serif;
-  font-size: 65px;
-  letter-spacing: 4px;
-  word-spacing: 7.5px;
-  font-weight: bold;
-  color: #ffffff;
-  text-align: center;
-  margin-top: 10rem;
-}
-
 
 /* -- HOME GAME VIEW -- */
 
 /* ++ INIZIO POP UP PANEL DEL SITO ++ */
 
 .filterContentPanel {
+  background-color: #ff9966;
+  border-radius: var(--border-radius);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 50px 0px 50px 0px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden;
+  display: flex;
+  /* Abilita il layout flex per il contenitore */
+  flex-direction: column;
+  /* Imposta la direzione di layout su colonna */
+  align-items: center;
+  /* Centra verticalmente all'interno del contenitore */
+}
+
+.addCardConditionModalPanel {
+  background-color: #ff9966;
+  border-radius: var(--border-radius);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 50px 0px 50px 0px;
+  position: relative;
+  width: 350px;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden;
+  display: flex;
+  /* Abilita il layout flex per il contenitore */
+  flex-direction: column;
+  /* Imposta la direzione di layout su colonna */
+  align-items: center;
+  /* Centra verticalmente all'interno del contenitore */
+}
+
+.initDeckContainer {
   background-color: #ff9966;
   border-radius: var(--border-radius);
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
@@ -1835,6 +1854,7 @@ body::-webkit-scrollbar {
   color: rgb(231, 231, 231);
   text-align: center;
   max-width: 23rem;
+
 }
 
 .deckPanel {
@@ -2075,5 +2095,194 @@ body::-webkit-scrollbar {
   font-size: 1.4rem;
   font-weight: bolder;
   margin-right: 7rem;
+}
 
+/* ++ STILE BOTTONI DETTAGLI CARTA E POPUP DETTAGLI++ */
+.cardDetailsContent {
+  background-color: #003366;
+  border-radius: var(--border-radius);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 50px 0px 50px 0px;
+  position: relative;
+  min-width: 1000px;
+  min-height: 400px;
+  max-width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden;
+  display: flex;
+  /* Abilita il layout flex per il contenitore */
+  flex-direction: column;
+  /* Imposta la direzione di layout su colonna */
+  align-items: center;
+}
+
+.cardDetailsContainer {
+  margin-right: 10rem;
+  padding: 0.5rem;
+}
+
+.addButton {
+  --primary-color: #2e9d4c;
+  --secondary-color: #fff;
+  --hover-color: #137d51;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+  transition-duration: .3s;
+  transition-duration: 150ms;
+  margin-top: 1rem;
+}
+
+.removeButton {
+  --primary-color: #ff6666;
+  --secondary-color: #fff;
+  /*--hover-color: #be4848;*/
+  --hover-color: #c51d1d;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.updateButton {
+  --primary-color: #efbe00;
+  --secondary-color: #fff;
+  --hover-color: #aa8700;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.addButton:hover,
+.removeButton:hover,
+.updateButton:hover {
+  background-color: var(--hover-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+}
+
+.addButton:active,
+.removeButton:active,
+.updateButton:active {
+  transform: scale(0.9);
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  transform: scale(0.90);
+  position: relative;
+}
+
+.proposalButton {
+  --primary-color: #669eff;
+  --secondary-color: #fff;
+  --hover-color: #1d66c5;
+  --hover-text-color: #d8d8d8;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius);
+  color: var(--secondary-color);
+  padding: 1em 1.8em;
+  background: var(--primary-color);
+  display: flex;
+  transition: 0.2s background;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: bold;
+}
+
+.proposalButton:hover {
+  background-color: var(--hover-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+}
+
+.proposalButton:hover .exchangeButtonImage {
+  filter: brightness(85%);
+  transition-duration: 100ms;
+}
+
+.proposalButton:active {
+  transform: scale(0.9);
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  transform: scale(0.90);
+  position: relative;
+}
+
+.titleCardDetailsLabel {
+  font-family: var(--font-family);
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  max-width: 23rem;
+  margin-bottom: 1rem;
+}
+
+.otherTitleCardDetailsLabel {
+  font-family: var(--font-family);
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  max-width: 23rem;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
+.cardDetailLabel {
+  font-family: var(--font-family);
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  max-width: 23rem;
+  margin-bottom: 0.1rem;
+}
+
+.ownerWisherLabel {
+  font-family: var(--font-family);
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  max-width: 23rem;
+  margin-bottom: 0.1rem;
+}
+
+.ownersContainer {
+  margin-right: 2rem;
+}
+
+.wishersContainer {
+  padding: 20px !important;
 }
