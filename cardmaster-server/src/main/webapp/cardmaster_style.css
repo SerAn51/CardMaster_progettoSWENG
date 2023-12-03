@@ -1624,6 +1624,27 @@ body::-webkit-scrollbar {
   font-family: var(--font-family);
 }
 
+.noCardsLabel {
+  font-family: 'Passion One', sans-serif;
+  font-size: 65px;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+.noDeckLabel {
+  font-family: 'Passion One', sans-serif;
+  font-size: 65px;
+  letter-spacing: 4px;
+  word-spacing: 7.5px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 10rem;
+}
+
 
 /* -- HOME GAME VIEW -- */
 
@@ -2054,4 +2075,5 @@ body::-webkit-scrollbar {
   font-size: 1.4rem;
   font-weight: bolder;
   margin-right: 7rem;
+
 }
