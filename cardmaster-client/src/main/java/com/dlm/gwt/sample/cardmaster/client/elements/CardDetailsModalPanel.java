@@ -204,6 +204,12 @@ public class CardDetailsModalPanel extends PopupPanel {
     public void showOwnersWishers(Map<String, List<Card>> ownersWishersList, Boolean isOwned) {
         if (ownersWishersList != null) {
 
+            Panel scrollablePanelWisher = new VerticalPanel();
+            scrollablePanelWisher.setStyleName("scrollablePanel");
+
+            Panel scrollablePanelOwner = new VerticalPanel();
+            scrollablePanelOwner.setStyleName("scrollablePanel");
+
             // mostra gli utenti che la possiedono e la condizione della carta
             for (Map.Entry<String, List<Card>> entry : ownersWishersList.entrySet()) {
                 String counterparty = entry.getKey();
@@ -221,7 +227,7 @@ public class CardDetailsModalPanel extends PopupPanel {
 
                                 Label ownerLabel = new Label(counterparty + " - " + specificCard.getCondition());
                                 ownerLabel.setStyleName("ownerWisherLabel");
-                                ownersContainer.add(ownerLabel);
+                                scrollablePanelOwner.add(ownerLabel);
 
                                 Button exchangeProposalButton = new Button("Proposta di scambio");
                                 exchangeProposalButton.setStyleName("proposalButton");
@@ -232,7 +238,7 @@ public class CardDetailsModalPanel extends PopupPanel {
                                     HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
 
                                     ExchangeProposalModalPanel exchangeProposalModalPanel = new ExchangeProposalModalPanel(
-                                            loggedUser, specificCard, counterparty, homeGameActivity, hidePopup);
+                                            specificCard, counterparty, homeGameActivity, hidePopup);
 
                                     // Mostra il modal panel
                                     exchangeProposalModalPanel.center();
@@ -242,7 +248,7 @@ public class CardDetailsModalPanel extends PopupPanel {
 
                                     hidePopup.initialize(exchangeProposalModalPanel);
                                 });
-                                ownersContainer.add(exchangeProposalButton);
+                                scrollablePanelOwner.add(exchangeProposalButton);
                             }
                         }
                     } else {
@@ -251,7 +257,7 @@ public class CardDetailsModalPanel extends PopupPanel {
                         if (numberOfWishedCards > 0) {
                             Label wisherLabel = new Label(counterparty + " - x" + numberOfWishedCards);
                             wisherLabel.setStyleName("ownerWisherLabel");
-                            wishersContainer.add(wisherLabel);
+                            scrollablePanelWisher.add(wisherLabel);
                         } else {
                             Label noWishedCardsLabel = new Label("Nessuno desidera questa carta");
                             noWishedCardsLabel.setStyleName("ownerWisherLabel");
@@ -261,6 +267,9 @@ public class CardDetailsModalPanel extends PopupPanel {
                 }
 
             }
+            
+            ownersContainer.add(scrollablePanelOwner);
+            wishersContainer.add(scrollablePanelWisher);
         }
     }
 

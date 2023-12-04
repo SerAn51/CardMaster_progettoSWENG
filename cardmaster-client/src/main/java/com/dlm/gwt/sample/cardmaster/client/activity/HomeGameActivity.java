@@ -280,6 +280,7 @@ public class HomeGameActivity extends AbstractActivity {
         });
     }
 
+
     public String getGameName() {
         return this.gameName;
     }
@@ -291,6 +292,7 @@ public class HomeGameActivity extends AbstractActivity {
     public HomeGameView getView() {
         return this.view;
     }
+
 
     /* -- METODI DI SUPPORTO -- */
 
