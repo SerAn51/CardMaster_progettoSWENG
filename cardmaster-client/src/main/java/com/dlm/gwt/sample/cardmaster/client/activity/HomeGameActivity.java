@@ -15,6 +15,7 @@ import com.dlm.gwt.sample.cardmaster.client.backendService.filterer.CardFilterSt
 import com.dlm.gwt.sample.cardmaster.client.elements.CardDetailsModalPanel;
 import com.dlm.gwt.sample.cardmaster.client.elements.HidePopupPanelClickingOutside;
 import com.dlm.gwt.sample.cardmaster.client.utils.CardListType;
+import com.dlm.gwt.sample.cardmaster.client.utils.ElementType;
 import com.dlm.gwt.sample.cardmaster.client.view.HomeGameView;
 
 import java.util.ArrayList;
@@ -107,7 +108,7 @@ public class HomeGameActivity extends AbstractActivity {
     public void getCardByName(List<Card> cards, String searchText) {
         CardFilterStrategy cardFilterStrategy = view.getCardFilterStrategy();
         List<Card> filteredCards = cardFilterStrategy.filter(cards, searchText, null, this.cardListType);
-        view.showGrid(filteredCards);
+        view.showGrid(filteredCards, ElementType.CARDS);
     }
 
     /* FINE RICERCA CARTA PER NOME */
@@ -157,7 +158,7 @@ public class HomeGameActivity extends AbstractActivity {
         }
         // richiama il metodo della view che mostra i decks cosi' aggiornare visivamente
         // la pagina
-        view.showDecks(decks);
+        view.showGrid(decks, ElementType.DECKS);
     }
 
     public void createDeck(String deckName) {
@@ -277,6 +278,18 @@ public class HomeGameActivity extends AbstractActivity {
                 Window.alert("Errore: " + caught.getMessage());
             }
         });
+    }
+
+    public String getGameName() {
+        return this.gameName;
+    }
+
+    public User getLoggedUser() {
+        return this.loggedUser;
+    }
+
+    public HomeGameView getView() {
+        return this.view;
     }
 
     /* -- METODI DI SUPPORTO -- */

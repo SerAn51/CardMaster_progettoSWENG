@@ -3,6 +3,7 @@ package com.dlm.gwt.sample.cardmaster.client.elements;
 import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
 import com.dlm.gwt.sample.cardmaster.client.backendService.filterer.CardFilterStrategy;
 import com.dlm.gwt.sample.cardmaster.client.utils.CardListType;
+import com.dlm.gwt.sample.cardmaster.client.utils.ElementType;
 import com.dlm.gwt.sample.cardmaster.client.view.HomeGameView;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
 import com.dlm.gwt.sample.cardmaster.shared.card.MagicCard;
@@ -50,7 +51,7 @@ public class FilterCardModalPanel extends PopupPanel {
                 CardListType cardListType = homeGameActivity.getCardListType();
                 List<Card> filteredCards = cardFilterStrategy.filter(cards, null, selectedRadioButtonsMap,
                         cardListType);
-                homeGameView.showGrid(filteredCards);
+                homeGameView.showGrid(filteredCards, ElementType.CARDS);
             }
         });
 
