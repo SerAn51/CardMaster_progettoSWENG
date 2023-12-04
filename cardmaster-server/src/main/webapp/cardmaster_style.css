@@ -2,6 +2,7 @@
   --border-radius: 20px;
   --white-color: #fff;
   --font-family: 'Nunito', sans-serif;
+  --title-font-family: 'Passion One', sans-serif;
   --colorButton: #3c31bb;
   --luceParabola: 100%;
   --pokemonTypeSymbol: 11rem;
@@ -720,7 +721,7 @@ body::-webkit-scrollbar {
 }
 
 .homeChooseGameLabel {
-  font-family: 'Passion One', sans-serif;
+  font-family: var(--title-font-family);
   font-size: 90px;
   letter-spacing: 4px;
   word-spacing: 7.5px;
@@ -737,7 +738,7 @@ body::-webkit-scrollbar {
 }
 
 .homeWelcomeLabel {
-  font-family: 'Passion One', sans-serif;
+  font-family: var(--title-font-family);
   font-size: 90px;
   letter-spacing: 4px;
   word-spacing: 7.5px;
@@ -1266,7 +1267,7 @@ body::-webkit-scrollbar {
 }
 
 .noCardsLabel {
-  font-family: 'Passion One', sans-serif;
+  font-family: var(--title-font-family);
   font-size: 65px;
   letter-spacing: 4px;
   word-spacing: 7.5px;
@@ -1276,7 +1277,7 @@ body::-webkit-scrollbar {
 }
 
 .noDeckLabel {
-  font-family: 'Passion One', sans-serif;
+  font-family: var(--title-font-family);
   font-size: 65px;
   letter-spacing: 4px;
   word-spacing: 7.5px;
@@ -1768,7 +1769,7 @@ body::-webkit-scrollbar {
 /* ++ INIZIO EXCHANGEVIEW ++ */
 
 .exchangeWelcomeLabelWithExchanges {
-  font-family: 'Passion One', sans-serif;
+  font-family: var(--title-font-family);
   font-size: 65px;
   letter-spacing: 4px;
   word-spacing: 7.5px;
@@ -1785,7 +1786,7 @@ body::-webkit-scrollbar {
 }
 
 .exchangeWelcomeLabelWithoutExchanges {
-  font-family: 'Passion One', sans-serif;
+  font-family: var(--title-font-family);
   font-size: 7rem;
   letter-spacing: 4px;
   word-spacing: 7.5px;
@@ -2285,4 +2286,33 @@ body::-webkit-scrollbar {
 
 .wishersContainer {
   padding: 20px !important;
+}
+
+/* PLACEHOLDER */
+.gamePlaceholderPanel {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  width: 92%;
+  height: 20%;
+}
+
+.gamePlaceholderLabel {
+  font-size: 6rem;
+  font-weight: bolder;
+  font-family: var(--title-font-family);
+}
+
+.deckPlaceholderPanel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deckPlaceholderLabel {
+  font-size: 4.4rem;
+  font-weight: bolder;
+  font-family: var(--title-font-family);
+  margin-bottom: 4rem;
+  position: relative;
 }

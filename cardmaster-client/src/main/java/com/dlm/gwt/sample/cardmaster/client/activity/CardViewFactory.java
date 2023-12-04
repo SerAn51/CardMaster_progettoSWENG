@@ -1,6 +1,5 @@
 package com.dlm.gwt.sample.cardmaster.client.activity;
 
-import com.dlm.gwt.sample.cardmaster.client.utils.CardListType;
 import com.dlm.gwt.sample.cardmaster.client.view.CardView;
 import com.dlm.gwt.sample.cardmaster.client.view.cardsView.CardMagicView;
 import com.dlm.gwt.sample.cardmaster.client.view.cardsView.CardPokemonView;
