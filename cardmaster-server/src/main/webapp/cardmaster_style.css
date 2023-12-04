@@ -1439,7 +1439,7 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   display: grid;
-  min-height: 52rem;
+  min-height: 51.5rem;
   width: 17rem;
   border-radius: var(--border-radius);
   background: rgba(255, 255, 255, 0.11);
@@ -2301,12 +2301,14 @@ body::-webkit-scrollbar {
   font-size: 6rem;
   font-weight: bolder;
   font-family: var(--title-font-family);
+  color: #ffffff;
 }
 
 .deckPlaceholderPanel {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #ffffff;
 }
 
 .deckPlaceholderLabel {
