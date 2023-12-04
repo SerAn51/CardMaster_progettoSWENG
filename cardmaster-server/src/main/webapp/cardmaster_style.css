@@ -468,7 +468,6 @@ body::-webkit-scrollbar {
   border-radius: 50%;
 }
 
-
 .headerCustom-modal {
   background-color: transparent;
   border-radius: var(--border-radius);
@@ -571,6 +570,15 @@ body::-webkit-scrollbar {
 }
 
 /*-- FINE CSS HEADER --*/
+
+/*++ INIZIO CSS POPUP PROFILO ++*/
+.profileLabel {
+  font-family: var(--font-family);
+  color: #ffffff;
+  font-size: 16px;
+}
+
+/*-- FINE CSS POPUP PROFILO --*/
 
 /*++ CSS HOME ++*/
 .homePanel {
@@ -1439,7 +1447,7 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   display: grid;
-  min-height: 52rem;
+  min-height: 51.5rem;
   width: 17rem;
   border-radius: var(--border-radius);
   background: rgba(255, 255, 255, 0.11);
@@ -1743,6 +1751,7 @@ body::-webkit-scrollbar {
   align-items: center;
   gap: 0.6em;
   font-weight: bold;
+  margin-top: 1rem;
 }
 
 .exchangeButton:hover {
@@ -2301,12 +2310,14 @@ body::-webkit-scrollbar {
   font-size: 6rem;
   font-weight: bolder;
   font-family: var(--title-font-family);
+  color: #ffffff;
 }
 
 .deckPlaceholderPanel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
 }
 
 .deckPlaceholderLabel {
