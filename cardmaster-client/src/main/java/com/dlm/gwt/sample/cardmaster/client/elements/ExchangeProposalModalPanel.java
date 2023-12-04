@@ -118,11 +118,6 @@ public class ExchangeProposalModalPanel extends PopupPanel {
         chooseCardForProposalLabel.setStyleName("chooseCardForProposalLabel");
         chooseCardForProposalContainer.add(chooseCardForProposalLabel);
 
-        Label chooseCardForProposalLabel1 = new Label(
-                "Puoi scegliere tra tutte le carte che possiedi, anche se di giochi diversi!");
-        chooseCardForProposalLabel1.setStyleName("chooseCardForProposalLabel1");
-        chooseCardForProposalContainer.add(chooseCardForProposalLabel1);
-
         Label chooseCardForProposalLabel2 = new Label(
                 "Puoi anche non proporre alcuna carta, ma siamo sicuri che " + counterpartyUsername
                         + " accettera'?👀");
@@ -133,15 +128,45 @@ public class ExchangeProposalModalPanel extends PopupPanel {
         scrollableExchangePanel.setStyleName("scrollableExchangePanel");
 
         // Itera sulle carte di loggedUser
-        for (Card c : loggedUser.getOwnedCards()) {
-            CheckBox cardCheckBox = new CheckBox(c.getName() + " - " + c.getCondition());
+        for (Card card : loggedUser.getOwnedCards()) {
+            HorizontalPanel cardContainer = new HorizontalPanel();
+            cardContainer.setStyleName("cardContainer");
+            cardContainer.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+
+            HTML imageContainerBackCardButton = new HTML("<div class='backCardImage'></div>");
+            if (card.getGame().equalsIgnoreCase("Magic")) {
+                imageContainerBackCardButton.setStyleName("backCardImageMagic");
+            } else if (card.getGame().equalsIgnoreCase("Pokemon")) {
+                imageContainerBackCardButton.setStyleName("backCardImagePokemon");
+            } else if (card.getGame().equals("Yugioh")) {
+                imageContainerBackCardButton.setStyleName("backCardImageYugioh");
+            }
+            VerticalPanel cardInfoContainer = new VerticalPanel();
+            Label nameLabel = new Label(card.getName());
+            nameLabel.setStyleName("nameLabel");
+            Label conditionLabel = new Label("Condizione: " + card.getCondition());
+            conditionLabel.setStyleName("conditionLabel");
+            Label conditionDescriptionLabel = new Label(
+                    "Descrizione: " + ((card.getConditionDescription().equals("")) ? "Nessuna"
+                            : card.getConditionDescription()));
+            conditionDescriptionLabel.setStyleName("conditionLabel");
+
+            CheckBox cardCheckBox = new CheckBox();
             cardCheckBox.setStyleName("cardCheckBox");
+
+            cardInfoContainer.add(nameLabel);
+            cardInfoContainer.add(conditionLabel);
+            cardInfoContainer.add(conditionDescriptionLabel);
+
+            cardContainer.add(imageContainerBackCardButton);
+            cardContainer.add(cardInfoContainer);
+            cardContainer.add(cardCheckBox);
 
             // Associa l'oggetto Card alla CheckBox nella mappa (la chiave e' il riferimento
             // alla memoria)
-            proposedCardsMap.put(cardCheckBox, c);
+            proposedCardsMap.put(cardCheckBox, card);
 
-            scrollableExchangePanel.add(cardCheckBox);
+            scrollableExchangePanel.add(cardContainer);
         }
 
         chooseCardForProposalContainer.add(scrollableExchangePanel);
@@ -157,13 +182,8 @@ public class ExchangeProposalModalPanel extends PopupPanel {
         Panel cardsCounterpartyWantContainer = new VerticalPanel();
         cardsCounterpartyWantContainer.setStyleName("chooseCardForProposalContainer");
 
-        Label carteDesiderateDallAltroUtente = new Label("Carte desiderate dall'altro utente");
-        carteDesiderateDallAltroUtente.setStyleName("exchangeTitleLabel");
-        cardsCounterpartyWantContainer.add(carteDesiderateDallAltroUtente);
-
-        Label cardsCounterpartyWantLabel = new Label(
-                counterpartyUsername + " vuole queste carte: ");
-        cardsCounterpartyWantLabel.setStyleName("cardsCounterpartyWantLabel");
+        Label cardsCounterpartyWantLabel = new Label("Carte desiderate da " + counterpartyUsername);
+        cardsCounterpartyWantLabel.setStyleName("exchangeTitleLabel");
         cardsCounterpartyWantContainer.add(cardsCounterpartyWantLabel);
 
         Panel scrollableExchangePanel = new VerticalPanel();
@@ -175,9 +195,29 @@ public class ExchangeProposalModalPanel extends PopupPanel {
 
                 // stampa le carte che la controparte desidera
                 for (Card counterpartyWishedCard : user.getWishedCards()) {
-                    Label cardLabel = new Label("- " + counterpartyWishedCard.getName());
-                    cardLabel.setStyleName("cardLabel");
-                    scrollableExchangePanel.add(cardLabel);
+
+                    HorizontalPanel cardContainer = new HorizontalPanel();
+                    cardContainer.setStyleName("cardContainer");
+                    cardContainer.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+
+                    HTML imageContainerBackCardButton = new HTML("<div class='backCardImage'></div>");
+                    if (counterpartyWishedCard.getGame().equalsIgnoreCase("Magic")) {
+                        imageContainerBackCardButton.setStyleName("backCardImageMagic");
+                    } else if (counterpartyWishedCard.getGame().equalsIgnoreCase("Pokemon")) {
+                        imageContainerBackCardButton.setStyleName("backCardImagePokemon");
+                    } else if (counterpartyWishedCard.getGame().equals("Yugioh")) {
+                        imageContainerBackCardButton.setStyleName("backCardImageYugioh");
+                    }
+                    VerticalPanel cardInfoContainer = new VerticalPanel();
+                    Label nameLabel = new Label(counterpartyWishedCard.getName());
+                    nameLabel.setStyleName("nameLabel");
+
+                    cardInfoContainer.add(nameLabel);
+
+                    cardContainer.add(imageContainerBackCardButton);
+                    cardContainer.add(cardInfoContainer);
+
+                    scrollableExchangePanel.add(cardContainer);
                 }
             }
 
@@ -199,13 +239,9 @@ public class ExchangeProposalModalPanel extends PopupPanel {
         Panel otherCardsCounterpartyContainer = new VerticalPanel();
         otherCardsCounterpartyContainer.setStyleName("chooseCardForProposalContainer");
 
-        Label altreCartePosseduteDallAltroUtente = new Label("Altre carte possedute dall'altro utente");
-        altreCartePosseduteDallAltroUtente.setStyleName("exchangeTitleLabel");
-        otherCardsCounterpartyContainer.add(altreCartePosseduteDallAltroUtente);
-
         Label otherCardsCounterpartyLabel = new Label(
                 (counterpartyUsername + " possiede anche queste carte"));
-        otherCardsCounterpartyLabel.setStyleName("otherCardsCounterpartyLabel");
+        otherCardsCounterpartyLabel.setStyleName("exchangeTitleLabel");
         otherCardsCounterpartyContainer.add(otherCardsCounterpartyLabel);
 
         Panel scrollableExchangePanel = new VerticalPanel();
@@ -232,7 +268,7 @@ public class ExchangeProposalModalPanel extends PopupPanel {
                     }
                     HorizontalPanel cardContainer = new HorizontalPanel();
                     cardContainer.setStyleName("cardContainer");
-                  
+                    cardContainer.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 
                     HTML imageContainerBackCardButton = new HTML("<div class='backCardImage'></div>");
                     if (otherOwnedCard.getGame().equalsIgnoreCase("Magic")) {
@@ -263,9 +299,6 @@ public class ExchangeProposalModalPanel extends PopupPanel {
 
                     requestedCardsMap.put(cardCheckBox, otherOwnedCard);
                     scrollableExchangePanel.add(cardContainer);
-
-                    otherCardsCounterpartyContainer.add(cardContainer);
-
 
                 }
             }

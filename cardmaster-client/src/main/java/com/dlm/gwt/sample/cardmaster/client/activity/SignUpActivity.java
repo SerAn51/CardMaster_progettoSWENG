@@ -52,23 +52,23 @@ public class SignUpActivity extends AbstractActivity {
         String gender = view.getGender();
 
         if (username.isEmpty()) {
-            Window.alert("Insert a username");
+            Window.alert("Inserisci un username");
             return;
         }
         if (!password.equals(secondPsw)) {
-            Window.alert("The two password are not the same");
+            Window.alert("Le password non sono le stesse");
             return;
         }
         if (!email.contains("@") || !(email.contains(".it") || email.contains(".com"))) {
-            Window.alert("Please insert a valid email");
+            Window.alert("Inserisci una mail valida");
             return;
         }
         if (age.isEmpty()) {
-            Window.alert("Please insert a valid age");
+            Window.alert("Inserisci un'eta'");
             return;
         }
         if (gender.isEmpty()) {
-            Window.alert("Please insert a valid gender");
+            Window.alert("Inserisci un genere");
             return;
         }
 
@@ -80,14 +80,13 @@ public class SignUpActivity extends AbstractActivity {
             public void onSuccess(Boolean result) {
                 if (result) {
                     // Login avvenuto con successo
-                    Window.alert("Signed up successfully!");
+                    Window.alert("Registrazione avvenuta con successo!");
                     SessionUser.getInstance().setSessionUser(newUser);
                     String token = "home";
                     History.newItem(token);
                     new ViewRouter().handleRouteChange(token);
                 } else {
                     // Registration failed
-                    // TODO: essere piu' specifici su cosa l'utente ha sbagliato
                     Window.alert("Informazioni non valide");
                 }
             }

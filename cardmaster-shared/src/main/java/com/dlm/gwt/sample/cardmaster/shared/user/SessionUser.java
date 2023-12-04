@@ -2,7 +2,7 @@ package com.dlm.gwt.sample.cardmaster.shared.user;
 
 public class SessionUser {
 
-    // trying to be a singleton
+    // Singleton
     private User savedUser;
     private static SessionUser instance;
 
