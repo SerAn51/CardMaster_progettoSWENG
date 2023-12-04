@@ -12,6 +12,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -196,13 +197,40 @@ public class ExchangeProposalModalPanel extends PopupPanel {
                         cardRecurrence++;
                         continue;
                     }
-                    CheckBox cardCheckBox = new CheckBox(
-                            otherOwnedCard.getName() + " - " + otherOwnedCard.getCondition());
+                    HorizontalPanel cardContainer = new HorizontalPanel();
+                    cardContainer.setStyleName("cardContainer");
+
+
+                    HTML imageContainerBackCardButton = new HTML("<div class='backCardImage'></div>");
+                    if (otherOwnedCard.getGame().equalsIgnoreCase("Magic")) {
+                        imageContainerBackCardButton.setStyleName("backCardImageMagic");
+                    } else if (otherOwnedCard.getGame().equalsIgnoreCase("Pokemon")) {
+                        imageContainerBackCardButton.setStyleName("backCardImagePokemon");
+                    } else if (otherOwnedCard.getGame().equals("Yugioh")) {
+                        imageContainerBackCardButton.setStyleName("backCardImageYugioh");
+                    }
+                    VerticalPanel cardInfoContainer = new VerticalPanel();
+                    Label nameLabel = new Label(otherOwnedCard.getName());
+                    nameLabel.setStyleName("nameLabel");
+                    Label conditionLabel = new Label("Condizione: " + otherOwnedCard.getCondition());
+                    conditionLabel.setStyleName("conditionLabel");
+                    Label conditionDescriptionLabel = new Label(
+                            "Descrizione: " + ((otherOwnedCard.getConditionDescription().equals("")) ? "Nessuna"
+                                    : otherOwnedCard.getConditionDescription()));
+                    conditionDescriptionLabel.setStyleName("conditionLabel");
+                    cardInfoContainer.add(nameLabel);
+                    cardInfoContainer.add(conditionLabel);
+                    cardInfoContainer.add(conditionDescriptionLabel);
+
+                    CheckBox cardCheckBox = new CheckBox();
                     cardCheckBox.addStyleName("cardCheckBox");
+                    cardContainer.add(imageContainerBackCardButton);
+                    cardContainer.add(cardInfoContainer);
+                    cardContainer.add(cardCheckBox);
 
                     requestedCardsMap.put(cardCheckBox, otherOwnedCard);
 
-                    otherCardsCounterpartyContainer.add(cardCheckBox);
+                    otherCardsCounterpartyContainer.add(cardContainer);
 
                 }
             }
