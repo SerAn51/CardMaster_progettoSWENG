@@ -83,6 +83,7 @@ public class ManageDeckModalPanel extends PopupPanel {
         } else {
             // FIXME: richiama il placeholder del homeGameActivity
             Label noCards = new Label("Non ci sono carte nel deck");
+            noCards.setStyleName("noCardsDeck");
             scrollableCards.add(noCards);
         }
         cardsAlreadyInDeckContainer.add(scrollableCards);
@@ -100,37 +101,43 @@ public class ManageDeckModalPanel extends PopupPanel {
 
         FlowPanel scrollableCards = new FlowPanel();
         scrollableCards.setStyleName("scrollable-cards"); // Applica la classe CSS scrollable-cards
+        if (loggedUser.getOwnedCards().size() == 0) {
+            Label noCards = new Label("Non hai carte disponibili");
+            noCards.setStyleName("noCardsOwned");
+            chooseCardContainer.add(noCards);
+        } else {
 
-        for (Card card : loggedUser.getOwnedCards()) {
-            if (card.getGame().equals(gameName) && !loggedUser.getDecks().get(deckName).getCards().contains(card)) {
+            for (Card card : loggedUser.getOwnedCards()) {
+                if (card.getGame().equals(gameName) && !loggedUser.getDecks().get(deckName).getCards().contains(card)) {
 
-                Panel cardInfo = new VerticalPanel();
-                Label cardName = new Label(card.getName());
-                Label cardCondition = new Label(card.getCondition());
-                Panel cardDetails = new VerticalPanel();
-                Panel buttonContainerPanel = new HorizontalPanel();
-                Button addCardButton = new Button("Add");
-                addCardButton.addClickHandler(event -> {
-                    homeGameActivity.addCardToDeck(card, this.deckName);
-                    hide();
-                    hidePopup.destroy();
-                    homeGameActivity.getDecks(loggedUser, gameName);
-                });
+                    Panel cardInfo = new VerticalPanel();
+                    Label cardName = new Label(card.getName());
+                    Label cardCondition = new Label(card.getCondition());
+                    Panel cardDetails = new VerticalPanel();
+                    Panel buttonContainerPanel = new HorizontalPanel();
+                    Button addCardButton = new Button("Add");
+                    addCardButton.addClickHandler(event -> {
+                        homeGameActivity.addCardToDeck(card, this.deckName);
+                        hide();
+                        hidePopup.destroy();
+                        homeGameActivity.getDecks(loggedUser, gameName);
+                    });
 
-                addCardButton.setStyleName("addCardToDeck");
-                cardInfo.setStyleName("card-details");
-                buttonContainerPanel.setStyleName("cardToDeck");
+                    addCardButton.setStyleName("addCardToDeck");
+                    cardInfo.setStyleName("card-details");
+                    buttonContainerPanel.setStyleName("cardToDeck");
 
-                buttonContainerPanel.add(addCardButton);
-                cardDetails.add(cardName);
-                cardDetails.add(cardCondition);
-                cardInfo.add(cardDetails);
-                cardInfo.add(buttonContainerPanel);
+                    buttonContainerPanel.add(addCardButton);
+                    cardDetails.add(cardName);
+                    cardDetails.add(cardCondition);
+                    cardInfo.add(cardDetails);
+                    cardInfo.add(buttonContainerPanel);
 
-                scrollableCards.add(cardInfo);
+                    scrollableCards.add(cardInfo);
+                }
             }
+            // FIXME: richiama il placeholder del homeGameActivity
         }
-
         chooseCardContainer.add(scrollableCards);
         content.add(chooseCardContainer);
     }
