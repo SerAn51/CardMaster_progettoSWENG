@@ -2297,6 +2297,60 @@ body::-webkit-scrollbar {
   padding: 20px !important;
 }
 
+.cardContainer {
+  padding: 10px;
+}
+
+.backCardImageMagic {
+  background-image: url('/img/backCardImageMagic.png');
+  width: 50px;
+  height: 70px;
+  background-size: contain;
+  margin-right: 8px;
+  background-repeat: no-repeat;
+  border-radius: 1px;
+}
+
+.backCardImagePokemon {
+  background-image: url('/img/backCardImagePokemon.png');
+  width: 50px;
+  height: 70px;
+  background-size: contain;
+  margin-right: 8px;
+  background-repeat: no-repeat;
+  border-radius: 1px;
+}
+
+.backCardImageYugioh {
+  background-image: url('/img/backCardImageYugioh.png');
+  width: 50px;
+  height: 70px;
+  background-size: contain;
+  margin-right: 8px;
+  background-repeat: no-repeat;
+  border-radius: 1px;
+}
+
+.nameLabel {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: rgb(255, 255, 255);
+  max-width: 23rem;
+
+}
+
+.conditionLabel {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: bold;
+  font-variant: small-caps;
+  color: rgb(255, 255, 255);
+  max-width: 23rem;
+}
+
+
 /* PLACEHOLDER */
 .gamePlaceholderPanel {
   display: grid;
