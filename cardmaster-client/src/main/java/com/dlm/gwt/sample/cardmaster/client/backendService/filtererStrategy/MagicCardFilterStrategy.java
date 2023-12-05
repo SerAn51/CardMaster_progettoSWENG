@@ -1,4 +1,4 @@
-package com.dlm.gwt.sample.cardmaster.client.backendService.filterer;
+package com.dlm.gwt.sample.cardmaster.client.backendService.filtererStrategy;
 
 import java.util.ArrayList;
 import java.util.HashSet;

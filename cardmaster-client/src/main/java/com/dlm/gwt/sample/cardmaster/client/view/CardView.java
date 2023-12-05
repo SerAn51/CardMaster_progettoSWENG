@@ -29,9 +29,7 @@ public abstract class CardView extends Composite {
 
         Button showDetails = new Button("Dettagli");
         showDetails.addClickHandler(event -> {
-
-            homeGameActivity.showCardDetailsModalPanel(card);
-
+           homeGameActivity.showCardDetailsModalPanel(card);
         });
 
         showDetails.setStyleName("card-btn");

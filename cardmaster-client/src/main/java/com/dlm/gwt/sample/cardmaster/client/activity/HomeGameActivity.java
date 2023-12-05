@@ -11,15 +11,14 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.dlm.gwt.sample.cardmaster.client.backendService.BackendService;
-import com.dlm.gwt.sample.cardmaster.client.backendService.filterer.CardFilterStrategy;
+import com.dlm.gwt.sample.cardmaster.client.backendService.GetUserByUsername;
+import com.dlm.gwt.sample.cardmaster.client.backendService.filtererStrategy.CardFilterStrategy;
 import com.dlm.gwt.sample.cardmaster.client.elements.CardDetailsModalPanel;
-import com.dlm.gwt.sample.cardmaster.client.elements.HidePopupPanelClickingOutside;
+import com.dlm.gwt.sample.cardmaster.client.handlers.*;
 import com.dlm.gwt.sample.cardmaster.client.utils.CardListType;
 import com.dlm.gwt.sample.cardmaster.client.utils.ElementType;
 import com.dlm.gwt.sample.cardmaster.client.view.HomeGameView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,15 +27,21 @@ public class HomeGameActivity extends AbstractActivity {
     private final HomeGameView view;
     private final DatabaseServiceAsync databaseService;
     private final BackendService backendService;
-    String gameName;
-    CardListType cardListType;
-    User loggedUser = SessionUser.getInstance().getSessionUser();
+    private String gameName;
+    private CardListType cardListType;
+    private User loggedUser = SessionUser.getInstance().getSessionUser();
+    private CardHandler cardHandler;
+    private DeckHandler deckHandler;
+    private ExchangeHandler exchageHandler;
 
-    public HomeGameActivity(HomeGameView view, DatabaseServiceAsync databaseService, String gameName) {
+    public HomeGameActivity(HomeGameView view, String gameName, DatabaseServiceAsync databaseService) {
         this.view = view;
-        this.databaseService = databaseService;
-        this.backendService = new BackendService(databaseService);
         this.gameName = gameName;
+        this.databaseService = databaseService;
+        this.backendService = new BackendService(this.databaseService);
+        this.cardHandler = new CardHandler(this.databaseService, this.backendService, this.gameName);
+        this.deckHandler = new DeckHandler(this.databaseService, this.backendService);
+        this.exchageHandler = new ExchangeHandler(this.databaseService);
     }
 
     @Override
@@ -48,12 +53,7 @@ public class HomeGameActivity extends AbstractActivity {
     /* ++INIZIO MOSTRA TUTTE LE CARTE CON RELATIVI PULSANTI ADD/REMOVE++ */
 
     public void showCardDetailsModalPanel(Card card) {
-        CardDetailsModalPanel modalPanel = new CardDetailsModalPanel(card, this.gameName,
-                this.cardListType);
-        modalPanel.center();
-        modalPanel.show();
-        HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
-        hidePopup.initialize(modalPanel);
+        this.cardHandler.showCardDetailsModalPanel(card, this.cardListType);
     }
 
     public CardListType getCardListType() {
@@ -61,8 +61,8 @@ public class HomeGameActivity extends AbstractActivity {
     }
 
     // input: magic, pokemon, yugioh
-    public void getAllCards(String gameName) {
-        databaseService.getCards(gameName, new AsyncCallback<List<Card>>() {
+    public void getAllCards() {
+        databaseService.getCards(this.gameName, new AsyncCallback<List<Card>>() {
             @Override
             public void onSuccess(List<Card> cards) {
                 // richiama il metodo della view che mostra le carte
@@ -79,26 +79,17 @@ public class HomeGameActivity extends AbstractActivity {
     }
 
     public void addCardToUserOwnedOrWished(Card card, Boolean isOwnedOrWished) {
-
-        // aggiunti la carta alle possedute o desiderate dell'utente
-        backendService.addCardToUserOwnedOrWished(this.loggedUser, card, isOwnedOrWished);
-
-        // ora rendo persistente la carta nel database
-        saveChangesInDB(this.loggedUser);
+        this.cardHandler.addCardToUserOwnedOrWished(this.loggedUser, card, isOwnedOrWished);
     }
 
     public void updateCardCondition() {
-        saveChangesInDB(this.loggedUser);
+        this.cardHandler.updateCardCondition(this.loggedUser);
     }
 
     public void removeCardFromUserOwnedOrWished(Card card, Boolean isOwnedOrWished) {
 
         // rimuovi la carta dalle possedute o desiderate dell'utente
-        backendService.removeCardFromUserOwnedOrWished(this.loggedUser, card, isOwnedOrWished);
-
-        // il check della rimozione si occupa di rendere persistente la modifica nel
-        // database
-
+        this.cardHandler.removeCardFromUserOwnedOrWished(this.loggedUser, card, isOwnedOrWished);
     }
 
     /*--FINE MOSTRA TUTTE LE CARTE CON RELATIVI PULSANTI ADD/REMOVE--*/
@@ -114,121 +105,90 @@ public class HomeGameActivity extends AbstractActivity {
     /* FINE RICERCA CARTA PER NOME */
 
     /* ++INIZIO MOSTRA LE CARTE OWNED/WISHED CON RELATIVI PULSANTI ADD/REMOVE++ */
-    // non e' un'operazione di backend ma gestisce la visualizzazione delle carte
-    // owned/wished
-    public void getOwnedOrWishedCards(String gameName, Boolean isOwnedOrWished) {
+
+    /**
+     * Metodo che trova le carte owned o wished dell'utente
+     * 
+     * @param isOwnedOrWished
+     */
+    public void getOwnedOrWishedCards(Boolean isOwnedOrWished) {
+
         // se true stampi le owned, se false stampi le wished
         if (isOwnedOrWished == true) {
-            List<Card> cardsOwned = this.loggedUser.getOwnedCards();
-            List<Card> localCards = new ArrayList<Card>();
-            for (Card card : cardsOwned) {
-                if (card.getGame().equalsIgnoreCase(this.gameName)) {
-                    localCards.add(card);
-                }
-            }
             this.cardListType = CardListType.SHOW_OWNED_CARDS;
-            view.showSearchAndFilter(localCards, null, null);
+            List<Card> currentGameOwnedCards = this.cardHandler.getOwnedCards(this.loggedUser, this.gameName);
+            view.showSearchAndFilter(currentGameOwnedCards, null, null);
         } else {
-            List<Card> cardsWished = this.loggedUser.getWishedCards();
-            List<Card> localCards = new ArrayList<Card>();
-            for (Card card : cardsWished) {
-                if (card.getGame().equalsIgnoreCase(this.gameName)) {
-                    localCards.add(card);
-                }
-            }
             this.cardListType = CardListType.SHOW_WISHED_CARDS;
-            view.showSearchAndFilter(localCards, null, null);
+            List<Card> currentGameWishedCards = this.cardHandler.getWishedCards(this.loggedUser, this.gameName);
+            view.showSearchAndFilter(currentGameWishedCards, null, null);
         }
     }
     /*--FINE MOSTRA LE CARTE OWNED CON RELATIVI PULSANTI ADD/REMOVE--*/
 
     /* ++INIZIO GESTISCI DECKS++ */
 
-    public void getDecks(User loggedUser, String gameName) {
+    public void getDecks() {
 
-        List<Deck> decks = new ArrayList<>();
-        Map<String, Deck> userDecks = loggedUser.getDecks();
-
-        if (userDecks != null && !userDecks.isEmpty()) {
-            for (Deck deck : userDecks.values()) {
-                if (deck.getGame().equalsIgnoreCase(gameName)) {
-                    decks.add(deck);
-                }
-            }
-        }
+        List<Deck> decks = this.deckHandler.getDecks(this.loggedUser, this.gameName);
         // richiama il metodo della view che mostra i decks cosi' aggiornare visivamente
         // la pagina
         view.showGrid(decks, ElementType.DECKS);
     }
 
     public void createDeck(String deckName) {
-
-        // creo il deck e lo aggiungo alla "lista" di deck dell'utente
-        backendService.createDeck(this.loggedUser, this.gameName, deckName);
-
-        // ora rendo persistente il deck nel database
-        saveChangesInDB(this.loggedUser);
+        this.deckHandler.createDeck(this.loggedUser, this.gameName, deckName);
     }
 
     public void deleteDeck(String deckName) {
 
-        // rimuovo il deck dalla "lista" di deck dell'utente
-        backendService.deleteDeck(this.loggedUser, deckName);
+        this.deckHandler.deleteDeck(this.loggedUser, deckName);
 
         // toglo dall'intefaccia il deck eliminato
-        getDecks(loggedUser, deckName);
+        getDecks();
 
-        // ora rendo persistente il deck nel database
-        saveChangesInDB(this.loggedUser);
     }
 
     public void addCardToDeck(Card card, String deckName) {
-
-        // aggiorna il deck dell'utente
-        backendService.addCardToDeck(this.loggedUser, deckName, card);
-
-        // salva le modifiche all'utente nel db
-        saveChangesInDB(this.loggedUser);
+        this.deckHandler.addCardToDeck(this.loggedUser, deckName, card);
     }
 
     public void removeCardFromDeck(Card card, String deckName) {
-
-        // aggiorna il deck dell'utente
-        backendService.removeCardFromDeck(this.loggedUser, deckName, card);
-
-        // salva le modifiche all'utente nel db
-        saveChangesInDB(this.loggedUser);
+        this.deckHandler.removeCardFromDeck(this.loggedUser, deckName, card);
     }
 
     /* --FINE GESTISCI DECKS-- */
 
     /* ++ INIZIO SCAMBIO ++ */
 
+    /**
+     * Retrieves the list of owners and wishers for a given card.
+     * 
+     * @param modalPanel The CardDetailsModalPanel to display the retrieved
+     *                   information.
+     * @param card       The card for which to retrieve the owners and wishers.
+     * @param isOwned    Specifies whether the card is owned or not.
+     * @param callback   The callback to be invoked with the retrieved owners and
+     *                   wishers list.
+     */
     public void getOwnersWishersList(CardDetailsModalPanel modalPanel, Card card, Boolean isOwned,
             AsyncCallback<Map<String, List<Card>>> callback) {
-        final Map<String, List<Card>> ownersWishersMap = new HashMap<>();
-
-        databaseService.getOwnersWishersOfCard(card, isOwned, new AsyncCallback<Map<String, List<Card>>>() {
+        this.cardHandler.getOwnersWishersList(this, card, true, new AsyncCallback<Map<String, List<Card>>>() {
             @Override
-            public void onSuccess(Map<String, List<Card>> dbownersWishersMap) {
-                ownersWishersMap.putAll(dbownersWishersMap);
-
-                // Richiama il metodo della vista che mostra le carte
-                // modalPanel.showOwnersWishers(ownersWishersMap, isOwned);
+            public void onSuccess(Map<String, List<Card>> ownersWishersMap) {
                 callback.onSuccess(ownersWishersMap);
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                // Gestisci l'errore durante la chiamata al servizio database
-                Window.alert("Errore HomeGameActivity.getOwnersWishersList: " + caught.getMessage());
-                callback.onFailure(caught);
             }
         });
     }
 
     public void getUserByUsername(String username, AsyncCallback<User> callback) {
-        databaseService.getUserByUsername(username, new AsyncCallback<User>() {
+
+        GetUserByUsername getUserByUsername = new GetUserByUsername(this.databaseService, username);
+        getUserByUsername.getUserByUsername(new AsyncCallback<User>() {
             @Override
             public void onSuccess(User user) {
                 callback.onSuccess(user);
@@ -236,50 +196,18 @@ public class HomeGameActivity extends AbstractActivity {
 
             @Override
             public void onFailure(Throwable caught) {
-                // Gestisci l'errore durante la chiamata al servizio database
-                Window.alert("Errore HomeGameActivity.getUserByUsername: " + caught.getMessage());
-                callback.onFailure(caught);
             }
         });
     }
 
     public void sendExchangeProposal(String counterparty, List<Card> proposedCards, List<Card> requestedCards) {
-        databaseService.sendExchangeProposal(this.loggedUser, counterparty, proposedCards, requestedCards,
-                new AsyncCallback<Boolean>() {
-                    @Override
-                    public void onSuccess(Boolean success) {
-                        Window.alert("Proposta di scambio inviata con successo");
-                    }
-
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        // Gestisci l'errore durante la chiamata al servizio database
-                        Window.alert("Errore HomeGameActivity.sendExchangeProposal: " + caught.getMessage());
-                    }
-                });
+        this.exchageHandler.sendExchangeProposal(this.loggedUser, counterparty, proposedCards, requestedCards);
 
     }
 
     /* -- FINE SCAMBIO -- */
 
     /* ++ METODI DI SUPPORTO ++ */
-
-    public void saveChangesInDB(User user) {
-        databaseService.saveChangesInDB(user, new AsyncCallback<Boolean>() {
-            @Override
-            public void onSuccess(Boolean success) {
-                // Aggiorna manualmente la lista dei decks nella sessione utente
-                Window.alert("Operazione eseguita con successo");
-            }
-
-            @Override
-            public void onFailure(Throwable caught) {
-                // Gestisci l'errore durante la chiamata al servizio database
-                Window.alert("Errore: " + caught.getMessage());
-            }
-        });
-    }
-
 
     public String getGameName() {
         return this.gameName;
@@ -292,7 +220,6 @@ public class HomeGameActivity extends AbstractActivity {
     public HomeGameView getView() {
         return this.view;
     }
-
 
     /* -- METODI DI SUPPORTO -- */
 

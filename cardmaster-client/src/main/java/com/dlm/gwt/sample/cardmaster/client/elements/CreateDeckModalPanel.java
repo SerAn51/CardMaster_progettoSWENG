@@ -68,7 +68,7 @@ public class CreateDeckModalPanel extends PopupPanel {
                 homeGameActivity.createDeck(deckName);
                 hide();
                 hidePopup.destroy();
-                homeGameActivity.getDecks(loggedUser, gameName);
+                homeGameActivity.getDecks();
             }
         });
 

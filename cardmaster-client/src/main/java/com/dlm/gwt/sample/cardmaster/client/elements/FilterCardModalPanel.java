@@ -1,7 +1,7 @@
 package com.dlm.gwt.sample.cardmaster.client.elements;
 
 import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
-import com.dlm.gwt.sample.cardmaster.client.backendService.filterer.CardFilterStrategy;
+import com.dlm.gwt.sample.cardmaster.client.backendService.filtererStrategy.CardFilterStrategy;
 import com.dlm.gwt.sample.cardmaster.client.utils.CardListType;
 import com.dlm.gwt.sample.cardmaster.client.utils.ElementType;
 import com.dlm.gwt.sample.cardmaster.client.view.HomeGameView;
