@@ -102,8 +102,7 @@ public class DecksGridView extends Composite implements GridViewStrategy {
 
             HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
 
-            ManageDeckModalPanel manageDeckModalPanel = new ManageDeckModalPanel(homeGameActivity.getLoggedUser(),
-                    this.gameName, this.homeGameActivity, deck.getName(), hidePopup);
+            ManageDeckModalPanel manageDeckModalPanel = new ManageDeckModalPanel(this.gameName, this.homeGameActivity, deck.getName(), hidePopup);
             manageDeckModalPanel.center();
             manageDeckModalPanel.show();
 
@@ -137,8 +136,7 @@ public class DecksGridView extends Composite implements GridViewStrategy {
 
         createDeckButton.addClickHandler(event -> {
             HidePopupPanelClickingOutside hidePopup = new HidePopupPanelClickingOutside();
-            CreateDeckModalPanel createDeckModalPanel = new CreateDeckModalPanel(homeGameActivity.getLoggedUser(),
-                    this.gameName, this.homeGameActivity, hidePopup);
+            CreateDeckModalPanel createDeckModalPanel = new CreateDeckModalPanel(this.gameName, this.homeGameActivity, hidePopup);
             createDeckModalPanel.center();
             createDeckModalPanel.show();
 

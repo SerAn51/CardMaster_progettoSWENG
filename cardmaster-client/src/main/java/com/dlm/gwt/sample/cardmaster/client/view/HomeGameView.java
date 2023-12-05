@@ -65,7 +65,7 @@ public class HomeGameView extends Composite {
         VerticalPanel windowPanel = new VerticalPanel();
 
         /* Header */
-        HeaderPanelCustom headerPanel = new HeaderPanelCustom(loggedUser, this.gameName);
+        HeaderPanelCustom headerPanel = new HeaderPanelCustom(this.gameName);
         windowPanel.add(headerPanel.createHeaderPanel());
 
         sidebar.setStyleName("sidebar");

@@ -45,7 +45,7 @@ public class HomeView extends Composite {
         VerticalPanel containerPanel = new VerticalPanel();
         VerticalPanel mainPanel = new VerticalPanel();
 
-        HeaderPanelCustom headerPanel = new HeaderPanelCustom(loggedUser, "");
+        HeaderPanelCustom headerPanel = new HeaderPanelCustom("");
         mainPanel.add(headerPanel.createHeaderPanel());
 
         // Label con il titolo "Scegli il gioco"

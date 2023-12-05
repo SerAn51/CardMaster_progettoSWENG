@@ -7,13 +7,14 @@ import java.util.Map;
 
 import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
+import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 
 public class ExchangeProposalModalPanel extends PopupPanel {
 
-    private User loggedUser;
+    private User loggedUser = SessionUser.getInstance().getSessionUser();
     private Card cardLoggedUserWant;
     private String counterpartyUsername;
     private HomeGameActivity homeGameActivity;
@@ -24,7 +25,6 @@ public class ExchangeProposalModalPanel extends PopupPanel {
     public ExchangeProposalModalPanel(Card cardLoggedUserWant, String counterpartyUsername,
             HomeGameActivity homeGameActivity, HidePopupPanelClickingOutside hidePopup) {
 
-        this.loggedUser = homeGameActivity.getLoggedUser();
         this.cardLoggedUserWant = cardLoggedUserWant;
         this.counterpartyUsername = counterpartyUsername;
         this.homeGameActivity = homeGameActivity;
