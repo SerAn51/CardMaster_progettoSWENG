@@ -123,18 +123,12 @@ public class CardDetailsModalPanel extends PopupPanel {
 
         Label ownersLabel = new Label("Utenti che la possiedono");
         Label wishersLabel = new Label("Utenti che la desiderano");
-        Label otherOwnersLabel = new Label("(escluso/a te)");
-        Label otherWishersLabel = new Label("(escluso/a te)");
 
         ownersContainer.add(ownersLabel);
-        ownersContainer.add(otherOwnersLabel);
         wishersContainer.add(wishersLabel);
-        wishersContainer.add(otherWishersLabel);
 
         ownersLabel.setStyleName("titleCardDetailsLabel");
         wishersLabel.setStyleName("titleCardDetailsLabel");
-        otherOwnersLabel.setStyleName("otherTitleCardDetailsLabel");
-        otherWishersLabel.setStyleName("otherTitleCardDetailsLabel");
 
         // al click del bottone, aggiungere la carta alle owned
         addOwnedButton.addClickHandler(event -> {
@@ -282,6 +276,14 @@ public class CardDetailsModalPanel extends PopupPanel {
         Label cardIsPromoLabel = new Label("Promo: " + magicCard.getIsPromo());
         Label cardIsReprintLabel = new Label("Reprint: " + magicCard.getIsReprint());
 
+        cardArtistLabel.setStyleName("cardDetailLabel");
+        cardRarityLabel.setStyleName("cardDetailLabel");
+        cardHasFoilLabel.setStyleName("cardDetailLabel");
+        cardIsAlternativeLabel.setStyleName("cardDetailLabel");
+        cardIsFullArtLabel.setStyleName("cardDetailLabel");
+        cardIsPromoLabel.setStyleName("cardDetailLabel");
+        cardIsReprintLabel.setStyleName("cardDetailLabel");
+
         detailsContainer.add(cardArtistLabel);
         detailsContainer.add(cardRarityLabel);
         detailsContainer.add(cardHasFoilLabel);
@@ -299,6 +301,13 @@ public class CardDetailsModalPanel extends PopupPanel {
         Label cardIsReverseLabel = new Label("Reverse: " + pokemonCard.getReverse());
         Label cardIsWPromoLabel = new Label("W Promo: " + pokemonCard.getWPromo());
 
+        cardRarityLabel.setStyleName("cardDetailLabel");
+        cardIsFirstEditionLabel.setStyleName("cardDetailLabel");
+        cardIsHoloLabel.setStyleName("cardDetailLabel");
+        cardIsNormalLabel.setStyleName("cardDetailLabel");
+        cardIsReverseLabel.setStyleName("cardDetailLabel");
+        cardIsWPromoLabel.setStyleName("cardDetailLabel");
+
         detailsContainer.add(cardRarityLabel);
         detailsContainer.add(cardIsFirstEditionLabel);
         detailsContainer.add(cardIsHoloLabel);
@@ -309,6 +318,8 @@ public class CardDetailsModalPanel extends PopupPanel {
 
     private void showYugiohCardDetails(YugiohCard yugiohCard, Panel detailsContainer) {
         Label cardRaceLabel = new Label("Razza: " + yugiohCard.getRace());
+
+        cardRaceLabel.setStyleName("cardDetailLabel");
 
         detailsContainer.add(cardRaceLabel);
     }
