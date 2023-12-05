@@ -48,7 +48,7 @@ public class HomeGameActivity extends AbstractActivity {
     /* ++INIZIO MOSTRA TUTTE LE CARTE CON RELATIVI PULSANTI ADD/REMOVE++ */
 
     public void showCardDetailsModalPanel(Card card) {
-        CardDetailsModalPanel modalPanel = new CardDetailsModalPanel(this.loggedUser, card, this.gameName,
+        CardDetailsModalPanel modalPanel = new CardDetailsModalPanel(card, this.gameName,
                 this.cardListType);
         modalPanel.center();
         modalPanel.show();

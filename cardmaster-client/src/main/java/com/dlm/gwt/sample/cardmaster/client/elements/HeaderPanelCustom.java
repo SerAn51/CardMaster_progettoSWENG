@@ -26,13 +26,12 @@ public class HeaderPanelCustom {
 
     private ProfileModalPanel modal = null;
     private HTMLPanel glassPanel = null;
-    private User loggedUser;
+    private User loggedUser = SessionUser.getInstance().getSessionUser();
     private String gameNameHome;
 
     // Passare esattamente ""(stringa vuota) || Magic || Pokemon || Yugioh, e' case
     // sensitive
-    public HeaderPanelCustom(User loggedUser, String gameNameHome) {
-        this.loggedUser = loggedUser;
+    public HeaderPanelCustom(String gameNameHome) {
         this.gameNameHome = gameNameHome;
     }
 
@@ -123,7 +122,7 @@ public class HeaderPanelCustom {
                     }
                 } else {
                     // Crea la finestra modale
-                    modal = new ProfileModalPanel(loggedUser);
+                    modal = new ProfileModalPanel();
                     modal.addStyleName("headerCustom-modal"); // Aggiungi la classe show quando mostri la finestra
                                                               // modale
                     modal.setPopupPositionAndShow(new PositionCallback() {

@@ -2,6 +2,7 @@ package com.dlm.gwt.sample.cardmaster.client.elements;
 
 import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
+import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -13,16 +14,15 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ManageDeckModalPanel extends PopupPanel {
 
-    private User loggedUser;
+    private User loggedUser = SessionUser.getInstance().getSessionUser();
     private String gameName;
     private HomeGameActivity homeGameActivity;
     private String deckName;
     private HidePopupPanelClickingOutside hidePopup;
 
-    public ManageDeckModalPanel(User loggedUser, String gameName, HomeGameActivity homeGameActivity, String deckName,
+    public ManageDeckModalPanel(String gameName, HomeGameActivity homeGameActivity, String deckName,
             HidePopupPanelClickingOutside hidePopup) {
 
-        this.loggedUser = loggedUser;
         this.gameName = gameName;
         this.homeGameActivity = homeGameActivity;
         this.deckName = deckName;

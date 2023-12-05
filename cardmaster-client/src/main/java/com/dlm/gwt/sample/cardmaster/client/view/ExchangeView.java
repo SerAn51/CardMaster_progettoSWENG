@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -47,7 +48,7 @@ public class ExchangeView extends Composite {
 
     private VerticalPanel exchangePanel() {
         VerticalPanel panel = new VerticalPanel();
-        HeaderPanelCustom headerPanel = new HeaderPanelCustom(loggedUser, "");
+        HeaderPanelCustom headerPanel = new HeaderPanelCustom("");
         panel.add(headerPanel.createHeaderPanel());
 
         Label exchangeWelcomeLabel = null;
@@ -56,10 +57,11 @@ public class ExchangeView extends Composite {
         Boolean thereAreExchanges = loggedUser.getExchangeProposals().size() > 0;
         if (thereAreExchanges) {
             exchangeWelcomeLabel = new Label(
-                    "Hai " + loggedUser.getExchangeProposals().size() + " proposte di scambio!");
+                    "Hai " + loggedUser.getExchangeProposals().size() + " propost"
+                            + (loggedUser.getExchangeProposals().size() == 1 ? "a" : "e") + " di scambio!");
             exchangeWelcomeLabel.setStyleName("exchangeWelcomeLabelWithExchanges");
             panel.add(exchangeWelcomeLabel);
-            VerticalPanel receivedExchangePanel = buildExchangePanel();
+            Panel receivedExchangePanel = buildExchangePanel();
             panel.add(receivedExchangePanel);
         } else {
             exchangeWelcomeLabel = new Label("Non hai proposte di scambio");
@@ -75,50 +77,54 @@ public class ExchangeView extends Composite {
         return panel;
     }
 
-    private VerticalPanel buildExchangePanel() {
-        VerticalPanel exchangePanel = new VerticalPanel();
+    private Panel buildExchangePanel() {
+        Panel exchangePanel = new HorizontalPanel();
         exchangePanel.setStyleName("exchangePanel");
-
-        Label exchangeRecivedTitleLabel = new Label("Proposte di scambio ricevute");
-        exchangeRecivedTitleLabel.setStyleName("exchangeRecivedTitleLabel");
-
-        exchangePanel.add(exchangeRecivedTitleLabel);
 
         for (ExchangeProposal exchangeProposal : loggedUser.getExchangeProposals()) {
 
-            VerticalPanel exchangeProposalPanel = new VerticalPanel();
+            Panel exchangeProposalPanel = new FlowPanel();
             exchangeProposalPanel.setStyleName("exchangeProposalPanel");
 
             // Mostra le informazioni dello scambio
             Label proponentLabel = new Label("Utente proponente: " + exchangeProposal.getProponent().getUsername());
+            proponentLabel.setStyleName("labelTitle");
             exchangeProposalPanel.add(proponentLabel);
 
             List<Card> requestedCards = exchangeProposal.getrequestedCards();
             Label requestedCardLabel = new Label((requestedCards.size() > 1 ? "Carte richieste" : "Carta richiesta")
                     + ":");
+            requestedCardLabel.setStyleName("labelTitle");
             exchangeProposalPanel.add(requestedCardLabel);
             for (Card requestedCard : requestedCards) {
-                Label requestedCardInfoLabel = new Label("- " + getCardEssentialInformation(requestedCard));
-                exchangeProposalPanel.add(requestedCardInfoLabel);
+                Panel cardDetailsPanel = new FlowPanel();
+                cardDetailsPanel = createCardPanel(requestedCard);
+                // cardDetailsPanel.setStyleName("cardDetailsPanel");
+                exchangeProposalPanel.add(cardDetailsPanel);
             }
 
             List<Card> proposedCards = exchangeProposal.getProposedCards();
 
             if (proposedCards.size() == 0) {
                 Label proposedCardLabel = new Label("Carte proposte: nessuna");
+                proposedCardLabel.setStyleName("label");
                 exchangeProposalPanel.add(proposedCardLabel);
             } else {
                 Label proposedCardLabel = new Label((proposedCards.size() > 1 ? "Carte proposte" : "Carta proposta")
                         + ":");
+                proposedCardLabel.setStyleName("labelTitle");
                 exchangeProposalPanel.add(proposedCardLabel);
                 for (Card proposedCard : proposedCards) {
-                    Label proposedCardInfoLabel = new Label("- " + getCardEssentialInformation(proposedCard));
-                    exchangeProposalPanel.add(proposedCardInfoLabel);
+                    Panel proposedCardInfoPanel = new FlowPanel();
+                    proposedCardInfoPanel = createCardPanel(proposedCard);
+                    // proposedCardInfoPanel.setStyleName("cardDetailsPanel");
+                    exchangeProposalPanel.add(proposedCardInfoPanel);
                 }
             }
 
             // Mostra i bottoni per accettare/rifiutare lo scambio
-            HorizontalPanel buttonsPanel = new HorizontalPanel();
+            Panel buttonsPanel = new HorizontalPanel();
+            buttonsPanel.setStyleName("acceptDeclineButtonsPanel");
             Button acceptButton = new Button("Accetta");
             acceptButton.setStyleName("acceptButton");
             acceptButton.addClickHandler(event -> {
@@ -147,11 +153,27 @@ public class ExchangeView extends Composite {
         return exchangePanel;
     }
 
-    private String getCardEssentialInformation(Card card) {
-        return card.getName() + "(" + card.getGame() + ")" + " [" + card.getCondition() + " - "
-                + (card.getConditionDescription().isEmpty() ? "nessuna descrizione fornita"
-                        : card.getConditionDescription())
-                + "]";
+    private Panel createCardPanel(Card card) {
+        Panel cardPanel = new FlowPanel();
+        cardPanel.setStyleName("cardPanel");
+
+        Label nameLabel = new Label(card.getName());
+        Label gameLabel = new Label(card.getGame());
+        Label conditionLabel = new Label(card.getCondition());
+        Label descriptionLabel = new Label(card.getConditionDescription().isEmpty() ? "nessuna descrizione fornita"
+                : card.getConditionDescription());
+
+        nameLabel.setStyleName("label");
+        gameLabel.setStyleName("label");
+        conditionLabel.setStyleName("label");
+        descriptionLabel.setStyleName("label");
+
+        cardPanel.add(nameLabel);
+        cardPanel.add(gameLabel);
+        cardPanel.add(conditionLabel);
+        cardPanel.add(descriptionLabel);
+
+        return cardPanel;
     }
 
 }

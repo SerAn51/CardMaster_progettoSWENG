@@ -2,6 +2,7 @@ package com.dlm.gwt.sample.cardmaster.client.elements;
 
 import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
 import com.dlm.gwt.sample.cardmaster.shared.card.Deck;
+import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
@@ -15,7 +16,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class CreateDeckModalPanel extends PopupPanel {
 
-    public CreateDeckModalPanel(User loggedUser, String gameName, HomeGameActivity homeGameActivity,
+    private User loggedUser = SessionUser.getInstance().getSessionUser();
+
+    public CreateDeckModalPanel(String gameName, HomeGameActivity homeGameActivity,
             HidePopupPanelClickingOutside hidePopup) {
 
         // TODO: togli gli input superflui

@@ -11,6 +11,7 @@ import com.dlm.gwt.sample.cardmaster.shared.card.PokemonCard;
 import com.dlm.gwt.sample.cardmaster.shared.card.YugiohCard;
 import com.dlm.gwt.sample.cardmaster.shared.services.DatabaseService;
 import com.dlm.gwt.sample.cardmaster.shared.services.DatabaseServiceAsync;
+import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.core.client.GWT;
@@ -30,14 +31,13 @@ public class CardDetailsModalPanel extends PopupPanel {
     private HorizontalPanel ownersWishersContainer;
     private VerticalPanel ownersContainer;
     private VerticalPanel wishersContainer;
-    private User loggedUser;
+    private User loggedUser = SessionUser.getInstance().getSessionUser();
 
-    public CardDetailsModalPanel(User loggedUser, Card card, String gameName, CardListType listType) {
+    public CardDetailsModalPanel(Card card, String gameName, CardListType listType) {
 
         databaseServiceAsync = GWT.create(DatabaseService.class);
         this.homeGameActivity = new HomeGameActivity(null, databaseServiceAsync, gameName);
         this.gameName = gameName;
-        this.loggedUser = loggedUser;
 
         // Contenuto della finestra modale
         HorizontalPanel content = new HorizontalPanel();

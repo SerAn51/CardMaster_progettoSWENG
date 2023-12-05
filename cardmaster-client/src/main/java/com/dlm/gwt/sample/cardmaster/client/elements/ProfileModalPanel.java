@@ -1,6 +1,7 @@
 package com.dlm.gwt.sample.cardmaster.client.elements;
 
 import com.dlm.gwt.sample.cardmaster.client.ViewRouter;
+import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Button;
@@ -13,7 +14,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ProfileModalPanel extends PopupPanel {
 
-    public ProfileModalPanel(User loggedUser) {
+    private User loggedUser = SessionUser.getInstance().getSessionUser();
+
+    public ProfileModalPanel() {
         // Contenuto della finestra modale
         VerticalPanel content = new VerticalPanel();
 
