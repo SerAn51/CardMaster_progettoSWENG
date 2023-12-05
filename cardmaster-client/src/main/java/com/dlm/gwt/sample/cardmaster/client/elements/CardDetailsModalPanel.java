@@ -36,7 +36,7 @@ public class CardDetailsModalPanel extends PopupPanel {
     public CardDetailsModalPanel(Card card, String gameName, CardListType listType) {
 
         databaseServiceAsync = GWT.create(DatabaseService.class);
-        this.homeGameActivity = new HomeGameActivity(null, databaseServiceAsync, gameName);
+        this.homeGameActivity = new HomeGameActivity(null, gameName, databaseServiceAsync);
         this.gameName = gameName;
 
         // Contenuto della finestra modale
@@ -261,7 +261,7 @@ public class CardDetailsModalPanel extends PopupPanel {
                 }
 
             }
-            
+
             ownersContainer.add(scrollablePanelOwner);
             wishersContainer.add(scrollablePanelWisher);
         }

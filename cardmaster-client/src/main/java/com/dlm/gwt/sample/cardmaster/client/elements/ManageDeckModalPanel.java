@@ -66,7 +66,7 @@ public class ManageDeckModalPanel extends PopupPanel {
                     homeGameActivity.removeCardFromDeck(card, this.deckName);
                     hide();
                     hidePopup.destroy();
-                    homeGameActivity.getDecks(loggedUser, gameName);
+                    homeGameActivity.getDecks();
                 });
 
                 removeCardButton.setStyleName("removeCardFromDeck");
@@ -120,7 +120,7 @@ public class ManageDeckModalPanel extends PopupPanel {
                         homeGameActivity.addCardToDeck(card, this.deckName);
                         hide();
                         hidePopup.destroy();
-                        homeGameActivity.getDecks(loggedUser, gameName);
+                        homeGameActivity.getDecks();
                     });
 
                     addCardButton.setStyleName("addCardToDeck");

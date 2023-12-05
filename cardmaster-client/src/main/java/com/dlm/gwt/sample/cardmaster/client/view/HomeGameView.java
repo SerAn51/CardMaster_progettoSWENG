@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
-import com.dlm.gwt.sample.cardmaster.client.backendService.filterer.CardFilterStrategy;
-import com.dlm.gwt.sample.cardmaster.client.backendService.filterer.MagicCardFilterStrategy;
-import com.dlm.gwt.sample.cardmaster.client.backendService.filterer.PokemonCardFilterStrategy;
-import com.dlm.gwt.sample.cardmaster.client.backendService.filterer.YugiohCardFilterStrategy;
+import com.dlm.gwt.sample.cardmaster.client.backendService.filtererStrategy.CardFilterStrategy;
+import com.dlm.gwt.sample.cardmaster.client.backendService.filtererStrategy.MagicCardFilterStrategy;
+import com.dlm.gwt.sample.cardmaster.client.backendService.filtererStrategy.PokemonCardFilterStrategy;
+import com.dlm.gwt.sample.cardmaster.client.backendService.filtererStrategy.YugiohCardFilterStrategy;
 import com.dlm.gwt.sample.cardmaster.client.elements.FilterCardModalPanel;
 import com.dlm.gwt.sample.cardmaster.client.elements.HeaderPanelCustom;
 import com.dlm.gwt.sample.cardmaster.client.elements.HidePopupPanelClickingOutside;
@@ -18,8 +18,6 @@ import com.dlm.gwt.sample.cardmaster.client.view.Grid.GridViewStrategy;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
 import com.dlm.gwt.sample.cardmaster.shared.services.DatabaseService;
 import com.dlm.gwt.sample.cardmaster.shared.services.DatabaseServiceAsync;
-import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
-import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Display;
@@ -31,7 +29,6 @@ import com.google.gwt.user.client.ui.*;
 
 public class HomeGameView extends Composite {
 
-    private User loggedUser = SessionUser.getInstance().getSessionUser();
     private final DatabaseServiceAsync databaseServiceAsync = GWT.create(DatabaseService.class);
     private HomeGameActivity homeGameActivity;
     private VerticalPanel mainPanel;
@@ -49,7 +46,7 @@ public class HomeGameView extends Composite {
     public HomeGameView(String gameName) {
 
         this.gameName = gameName;
-        this.homeGameActivity = new HomeGameActivity(this, databaseServiceAsync, gameName);
+        this.homeGameActivity = new HomeGameActivity(this, gameName, databaseServiceAsync);
 
         FlowPanel containerPanel = new FlowPanel();
         containerPanel.setStyleName("homePanel" + gameName);
@@ -113,15 +110,15 @@ public class HomeGameView extends Composite {
         Widget[] buttonsArray = { showAllCardsButton, showOwnedCardsButton, showWishedCardsButton, showDecksButton };
 
         showAllCardsButton.addClickHandler(event -> {
-            homeGameActivity.getAllCards(this.gameName);
+            homeGameActivity.getAllCards();
             updateButtonColors(showAllCardsButton, buttonsArray);
         });
         showOwnedCardsButton.addClickHandler(event -> {
-            homeGameActivity.getOwnedOrWishedCards(this.gameName, true);
+            homeGameActivity.getOwnedOrWishedCards(true);
             updateButtonColors(showOwnedCardsButton, buttonsArray);
         });
         showWishedCardsButton.addClickHandler(event -> {
-            homeGameActivity.getOwnedOrWishedCards(this.gameName, false);
+            homeGameActivity.getOwnedOrWishedCards(false);
             updateButtonColors(showWishedCardsButton, buttonsArray);
         });
         showDecksButton.addClickHandler(event -> {
@@ -135,7 +132,7 @@ public class HomeGameView extends Composite {
                 filterCardsButton.setVisible(false);
                 filterVisible = false;
             }
-            homeGameActivity.getDecks(this.loggedUser, this.gameName);
+            homeGameActivity.getDecks();
             updateButtonColors(showDecksButton, buttonsArray);
         });
 
@@ -321,6 +318,10 @@ public class HomeGameView extends Composite {
 
         hidePopup.initialize(filterCardModalPanel);
     }
-
     /*--FINE RICERCA/FILTRI CARTE--*/
+
+    public String getGameName() {
+        return this.gameName;
+    }
+
 }
