@@ -251,6 +251,9 @@ public class HomeGameView extends Composite {
         searchCardButton.addClickHandler(event -> {
             // Al clic sul pulsante, prendi il testo dalla TextBox
             String searchText = searchCardTextBox.getText();
+            searchCardTextBox.setText("");
+            // Setta la strategia di ricerca
+            setSearchFilterStrategy();
             // Ora posso utilizzare la variabile 'searchText' per passarla a showCards che
             // mostrerà solo le carte che nel nome contengono searchText
             homeGameActivity.getCardByName(cards, searchText);
@@ -289,14 +292,7 @@ public class HomeGameView extends Composite {
         filterCardsButton.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                // Imposta la strategia in base al gioco corrente
-                if ("magic".equalsIgnoreCase(gameName)) {
-                    setCardFilterStrategy(new MagicCardFilterStrategy());
-                } else if ("pokemon".equalsIgnoreCase(gameName)) {
-                    setCardFilterStrategy(new PokemonCardFilterStrategy());
-                } else if ("yugioh".equalsIgnoreCase(gameName)) {
-                    setCardFilterStrategy(new YugiohCardFilterStrategy());
-                }
+                setSearchFilterStrategy();
                 showFilterPopup(cards);
             }
         });
@@ -305,6 +301,17 @@ public class HomeGameView extends Composite {
         filterVisible = true;
 
         return filterCardsButton;
+    }
+
+    private void setSearchFilterStrategy() {
+        // Imposta la strategia in base al gioco corrente
+        if ("magic".equalsIgnoreCase(gameName)) {
+            setCardFilterStrategy(new MagicCardFilterStrategy());
+        } else if ("pokemon".equalsIgnoreCase(gameName)) {
+            setCardFilterStrategy(new PokemonCardFilterStrategy());
+        } else if ("yugioh".equalsIgnoreCase(gameName)) {
+            setCardFilterStrategy(new YugiohCardFilterStrategy());
+        }
     }
 
     private void showFilterPopup(List<Card> cards) {

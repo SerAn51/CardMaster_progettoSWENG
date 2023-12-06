@@ -11,9 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.dlm.gwt.sample.cardmaster.client.ViewRouter;
+import com.dlm.gwt.sample.cardmaster.client.backendService.BackendService;
 import com.dlm.gwt.sample.cardmaster.client.view.ExchangeView;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
-import com.dlm.gwt.sample.cardmaster.shared.card.Deck;
 import com.dlm.gwt.sample.cardmaster.shared.card.ExchangeProposal;
 import com.dlm.gwt.sample.cardmaster.shared.card.MagicCard;
 import com.dlm.gwt.sample.cardmaster.shared.card.PokemonCard;
@@ -48,6 +48,7 @@ public class ExchangeActivity extends AbstractActivity {
 
     public void performExchange(User loggedUser, User proponentUser,
             ExchangeProposal exchangeProposal) {
+        BackendService backendService = new BackendService(databaseService);
         // 1. aggiungo a loggedUser le carte proposte, costruendo tali carte usando
         // le informazioni di quelle in exchangeProposal.getProposedCards()
         // 2. aggiungo a proponentUser le carte che loggedUser vuole, costruendo tali
@@ -151,7 +152,7 @@ public class ExchangeActivity extends AbstractActivity {
                     // elimini la prima che trovi e ti fermi
 
                     // elimina la carta dai deck in cui è contenuta
-                    removeCard(loggedUser, loggedUserOwnedCard);
+                    backendService.removeCardFromUserOwnedOrWished(proponentUser, cardProponentWant, true);
 
                     break;
                 }
@@ -178,7 +179,7 @@ public class ExchangeActivity extends AbstractActivity {
                     // rimuovere in modo sicuro
                     // durante l'iterazione
                     // elimini la prima che trovi e ti fermi
-                    removeCard(proponentUser, proponentUserOwnedCard);
+                    backendService.removeCardFromUserOwnedOrWished(proponentUser, proponentUserOwnedCard, true);
 
                     break;
                 }
@@ -245,34 +246,6 @@ public class ExchangeActivity extends AbstractActivity {
         String token = "exchange";
         History.newItem(token);
         new ViewRouter().handleRouteChange(token);
-    }
-
-    private void removeCard(User userRemove, Card card) {
-
-        removeCardFromDeck(userRemove, card);
-
-        // controlla se la carta è presente in qualche proposta di scambio e rimuovila
-        databaseService.checkExchangesAfterRemoveCard(userRemove, card, new AsyncCallback<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                // Aggiorna manualmente la lista dei decks nella sessione utente
-                Window.alert("Carta rimossa con successo");
-            }
-
-            @Override
-            public void onFailure(Throwable caught) {
-                // Gestisci l'errore durante la chiamata al servizio database
-                Window.alert("Errore HomeGameActivity.removeCard: " + caught.getMessage());
-            }
-        });
-    }
-
-    private void removeCardFromDeck(User user, Card card) {
-        for (Deck deck : user.getDecks().values()) {
-            if (deck.getCards().contains(card)) {
-                deck.getCards().remove(card);
-            }
-        }
     }
 
 }

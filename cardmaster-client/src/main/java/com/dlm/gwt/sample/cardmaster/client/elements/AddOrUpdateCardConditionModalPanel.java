@@ -137,28 +137,20 @@ public class AddOrUpdateCardConditionModalPanel extends PopupPanel {
 
         // la carta nel tempo puo' essere solo peggiorata nelle condizioni
 
-        if (numberActualCondition == 1) {
-            conditionListBox.setVisible(false);
-            Label noConditionLabel = new Label("Non puoi peggiorare la condizione della carta");
-            noConditionLabel.setStyleName("label");
-            addDetailContainer.add(noConditionLabel);
-        } else {
-            for (int i = numberActualCondition; i >= 0; i--) {
-                if (i == 4) {
-                    conditionListBox.addItem("4 (in ottime condizioni)");
-                }
-                if (i == 3) {
-                    conditionListBox.addItem("3 (in buone condizioni)");
-                }
-                if (i == 2) {
-                    conditionListBox.addItem("2 (parzialmente rovinata)");
-                }
-                if (i == 1) {
-                    conditionListBox.addItem("1 (molto rovinata)");
-                }
+        for (int i = numberActualCondition; i >= 0; i--) {
+            if (i == 4) {
+                conditionListBox.addItem("4 (in ottime condizioni)");
+            }
+            if (i == 3) {
+                conditionListBox.addItem("3 (in buone condizioni)");
+            }
+            if (i == 2) {
+                conditionListBox.addItem("2 (parzialmente rovinata)");
+            }
+            if (i == 1) {
+                conditionListBox.addItem("1 (molto rovinata)");
             }
         }
-        
 
         addDetailContainer.add(chooseConditionLabel);
         addDetailContainer.add(conditionListBox);
@@ -180,8 +172,6 @@ public class AddOrUpdateCardConditionModalPanel extends PopupPanel {
         charCountLabel.setStyleName("label");
         updateCharCount();
 
-        
-
         Button confirmConditionButton = new Button("Conferma");
         confirmConditionButton.setStyleName("confirmButton");
 
@@ -193,7 +183,7 @@ public class AddOrUpdateCardConditionModalPanel extends PopupPanel {
             }
             hide();
             hidePopup.destroy();
-            
+
             homeGameActivity.updateCardCondition();
         });
 

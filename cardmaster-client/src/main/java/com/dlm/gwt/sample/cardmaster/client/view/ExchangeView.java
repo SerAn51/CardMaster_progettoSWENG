@@ -3,6 +3,7 @@ package com.dlm.gwt.sample.cardmaster.client.view;
 import java.util.List;
 
 import com.dlm.gwt.sample.cardmaster.client.activity.ExchangeActivity;
+import com.dlm.gwt.sample.cardmaster.client.cardLittleInfoDisplayBuilder.LittleCardDisplayUtil;
 import com.dlm.gwt.sample.cardmaster.client.elements.HeaderPanelCustom;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
 import com.dlm.gwt.sample.cardmaster.shared.card.ExchangeProposal;
@@ -12,8 +13,11 @@ import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -152,27 +156,9 @@ public class ExchangeView extends Composite {
         return exchangePanel;
     }
 
-    private Panel createCardPanel(Card card) {
-        Panel cardPanel = new FlowPanel();
-        cardPanel.setStyleName("cardPanel");
-
-        Label nameLabel = new Label(card.getName());
-        Label gameLabel = new Label(card.getGame());
-        Label conditionLabel = new Label(card.getCondition());
-        Label descriptionLabel = new Label(card.getConditionDescription().isEmpty() ? "nessuna descrizione fornita"
-                : card.getConditionDescription());
-
-        nameLabel.setStyleName("label");
-        gameLabel.setStyleName("label");
-        conditionLabel.setStyleName("label");
-        descriptionLabel.setStyleName("label");
-
-        cardPanel.add(nameLabel);
-        cardPanel.add(gameLabel);
-        cardPanel.add(conditionLabel);
-        cardPanel.add(descriptionLabel);
-
-        return cardPanel;
+    private HorizontalPanel createCardPanel(Card card) {
+        LittleCardDisplayUtil cardDisplayUtil = new LittleCardDisplayUtil(card);
+        return cardDisplayUtil.createCardPanel();
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.dlm.gwt.sample.cardmaster.client.activity.HomeGameActivity;
+import com.dlm.gwt.sample.cardmaster.client.cardLittleInfoDisplayBuilder.LittleCardDisplayUtil;
 import com.dlm.gwt.sample.cardmaster.shared.card.Card;
 import com.dlm.gwt.sample.cardmaster.shared.user.SessionUser;
 import com.dlm.gwt.sample.cardmaster.shared.user.User;
@@ -129,42 +130,11 @@ public class ExchangeProposalModalPanel extends PopupPanel {
 
         // Itera sulle carte di loggedUser
         for (Card card : loggedUser.getOwnedCards()) {
-            HorizontalPanel cardContainer = new HorizontalPanel();
-            cardContainer.setStyleName("cardContainer");
-            cardContainer.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-
-            HTML imageContainerBackCardButton = new HTML("<div class='backCardImage'></div>");
-            if (card.getGame().equalsIgnoreCase("Magic")) {
-                imageContainerBackCardButton.setStyleName("backCardImageMagic");
-            } else if (card.getGame().equalsIgnoreCase("Pokemon")) {
-                imageContainerBackCardButton.setStyleName("backCardImagePokemon");
-            } else if (card.getGame().equals("Yugioh")) {
-                imageContainerBackCardButton.setStyleName("backCardImageYugioh");
-            }
-            VerticalPanel cardInfoContainer = new VerticalPanel();
-            Label nameLabel = new Label(card.getName());
-            nameLabel.setStyleName("nameLabel");
-            Label conditionLabel = new Label("Condizione: " + card.getCondition());
-            conditionLabel.setStyleName("conditionLabel");
-            Label conditionDescriptionLabel = new Label(
-                    "Descrizione: " + ((card.getConditionDescription().equals("")) ? "Nessuna"
-                            : card.getConditionDescription()));
-            conditionDescriptionLabel.setStyleName("conditionLabel");
-
-            CheckBox cardCheckBox = new CheckBox();
-            cardCheckBox.setStyleName("cardCheckBox");
-
-            cardInfoContainer.add(nameLabel);
-            cardInfoContainer.add(conditionLabel);
-            cardInfoContainer.add(conditionDescriptionLabel);
-
-            cardContainer.add(imageContainerBackCardButton);
-            cardContainer.add(cardInfoContainer);
-            cardContainer.add(cardCheckBox);
-
+            LittleCardDisplayUtil cardDisplayUtil = new LittleCardDisplayUtil(card);
+            HorizontalPanel cardContainer = cardDisplayUtil.createCardPanelWithCheckBox();
             // Associa l'oggetto Card alla CheckBox nella mappa (la chiave e' il riferimento
             // alla memoria)
-            proposedCardsMap.put(cardCheckBox, card);
+            proposedCardsMap.put(cardDisplayUtil.getCardCheckBox(), card);
 
             scrollableExchangePanel.add(cardContainer);
         }
@@ -196,26 +166,8 @@ public class ExchangeProposalModalPanel extends PopupPanel {
                 // stampa le carte che la controparte desidera
                 for (Card counterpartyWishedCard : user.getWishedCards()) {
 
-                    HorizontalPanel cardContainer = new HorizontalPanel();
-                    cardContainer.setStyleName("cardContainer");
-                    cardContainer.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-
-                    HTML imageContainerBackCardButton = new HTML("<div class='backCardImage'></div>");
-                    if (counterpartyWishedCard.getGame().equalsIgnoreCase("Magic")) {
-                        imageContainerBackCardButton.setStyleName("backCardImageMagic");
-                    } else if (counterpartyWishedCard.getGame().equalsIgnoreCase("Pokemon")) {
-                        imageContainerBackCardButton.setStyleName("backCardImagePokemon");
-                    } else if (counterpartyWishedCard.getGame().equals("Yugioh")) {
-                        imageContainerBackCardButton.setStyleName("backCardImageYugioh");
-                    }
-                    VerticalPanel cardInfoContainer = new VerticalPanel();
-                    Label nameLabel = new Label(counterpartyWishedCard.getName());
-                    nameLabel.setStyleName("nameLabel");
-
-                    cardInfoContainer.add(nameLabel);
-
-                    cardContainer.add(imageContainerBackCardButton);
-                    cardContainer.add(cardInfoContainer);
+                    LittleCardDisplayUtil cardDisplayUtil = new LittleCardDisplayUtil(counterpartyWishedCard);
+                    HorizontalPanel cardContainer = cardDisplayUtil.createCardPanelWithOnlyName();
 
                     scrollableExchangePanel.add(cardContainer);
                 }
@@ -266,38 +218,10 @@ public class ExchangeProposalModalPanel extends PopupPanel {
                         cardRecurrence++;
                         continue;
                     }
-                    HorizontalPanel cardContainer = new HorizontalPanel();
-                    cardContainer.setStyleName("cardContainer");
-                    cardContainer.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+                    LittleCardDisplayUtil cardDisplayUtil = new LittleCardDisplayUtil(otherOwnedCard);
+                    HorizontalPanel cardContainer = cardDisplayUtil.createCardPanelWithCheckBox();
 
-                    HTML imageContainerBackCardButton = new HTML("<div class='backCardImage'></div>");
-                    if (otherOwnedCard.getGame().equalsIgnoreCase("Magic")) {
-                        imageContainerBackCardButton.setStyleName("backCardImageMagic");
-                    } else if (otherOwnedCard.getGame().equalsIgnoreCase("Pokemon")) {
-                        imageContainerBackCardButton.setStyleName("backCardImagePokemon");
-                    } else if (otherOwnedCard.getGame().equals("Yugioh")) {
-                        imageContainerBackCardButton.setStyleName("backCardImageYugioh");
-                    }
-                    VerticalPanel cardInfoContainer = new VerticalPanel();
-                    Label nameLabel = new Label(otherOwnedCard.getName());
-                    nameLabel.setStyleName("nameLabel");
-                    Label conditionLabel = new Label("Condizione: " + otherOwnedCard.getCondition());
-                    conditionLabel.setStyleName("conditionLabel");
-                    Label conditionDescriptionLabel = new Label(
-                            "Descrizione: " + ((otherOwnedCard.getConditionDescription().equals("")) ? "Nessuna"
-                                    : otherOwnedCard.getConditionDescription()));
-                    conditionDescriptionLabel.setStyleName("conditionLabel");
-                    cardInfoContainer.add(nameLabel);
-                    cardInfoContainer.add(conditionLabel);
-                    cardInfoContainer.add(conditionDescriptionLabel);
-
-                    CheckBox cardCheckBox = new CheckBox();
-                    cardCheckBox.addStyleName("cardCheckBox");
-                    cardContainer.add(imageContainerBackCardButton);
-                    cardContainer.add(cardInfoContainer);
-                    cardContainer.add(cardCheckBox);
-
-                    requestedCardsMap.put(cardCheckBox, otherOwnedCard);
+                    requestedCardsMap.put(cardDisplayUtil.getCardCheckBox(), otherOwnedCard);
                     scrollableExchangePanel.add(cardContainer);
 
                 }
