@@ -20,8 +20,6 @@ public class CreateDeckModalPanel extends PopupPanel {
 
     public CreateDeckModalPanel(String gameName, HomeGameActivity homeGameActivity,
             HidePopupPanelClickingOutside hidePopup) {
-
-        // TODO: togli gli input superflui
         
         // Contenuto della finestra modale
         Panel content = new VerticalPanel();
@@ -29,7 +27,6 @@ public class CreateDeckModalPanel extends PopupPanel {
         FlowPanel initDeckContainer = new FlowPanel();
         initDeckContainer.setStyleName("popupContainer");
 
-        // TODO: faccio scegliere il nome del deck
         Label chooseDeckNameLabel = new Label("Scegli il nome del deck:");
         chooseDeckNameLabel.setStyleName("bigLabelPopup");
         initDeckContainer.add(chooseDeckNameLabel);

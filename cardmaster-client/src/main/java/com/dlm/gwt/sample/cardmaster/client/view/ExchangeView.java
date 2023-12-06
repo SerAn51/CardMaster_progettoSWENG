@@ -20,7 +20,6 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-//TODO: fix windpw panel
 public class ExchangeView extends Composite {
 
     private VerticalPanel mainPanel;

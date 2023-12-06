@@ -50,10 +50,8 @@ public class CardDetailsModalPanel extends PopupPanel {
         ownersContainer = new VerticalPanel();
         ownersContainer.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
         ownersContainer.setStyleName("ownersContainer");
-        // TODO: questo deve essere scrollabile
         wishersContainer = new VerticalPanel();
         wishersContainer.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-        // TODO: questo deve essere scrollabile
 
         Label cardDetailsLabel = new Label("Dettagli della carta");
         cardDetailsLabel.setStyleName("titleCardDetailsLabel");
@@ -152,7 +150,6 @@ public class CardDetailsModalPanel extends PopupPanel {
             addOrUpdateCardConditionModalPanel(card, true);
         });
 
-        // homeGameActivity.getOwnersWishersList(this, card, true);
         homeGameActivity.getOwnersWishersList(this, card, true, new AsyncCallback<Map<String, List<Card>>>() {
             @Override
             public void onSuccess(Map<String, List<Card>> ownersWishersMap) {
@@ -204,6 +201,8 @@ public class CardDetailsModalPanel extends PopupPanel {
             Panel scrollablePanelOwner = new VerticalPanel();
             scrollablePanelOwner.setStyleName("scrollablePanel");
 
+            Boolean someoneOwnCard = false;
+            Boolean someoneWishCard = false;
             // mostra gli utenti che la possiedono e la condizione della carta
             for (Map.Entry<String, List<Card>> entry : ownersWishersList.entrySet()) {
                 String counterparty = entry.getKey();
@@ -211,11 +210,8 @@ public class CardDetailsModalPanel extends PopupPanel {
 
                 if (!counterparty.equalsIgnoreCase(loggedUser.getUsername())) {
                     if (isOwned) {
-                        if (cardList.size() == 0) {
-                            Label noOwnedCardsLabel = new Label("Nessuno possiede questa carta");
-                            noOwnedCardsLabel.setStyleName("ownerWisherLabel");
-                            ownersContainer.add(noOwnedCardsLabel);
-                        } else {
+                        if (!(cardList.size() == 0)) {
+                            someoneOwnCard = true;
                             for (Card specificCard : cardList) {
                                 // non mostrare l'utente loggato
 
@@ -249,17 +245,25 @@ public class CardDetailsModalPanel extends PopupPanel {
                         int numberOfWishedCards = cardList.size();
 
                         if (numberOfWishedCards > 0) {
+                            someoneWishCard = true;
                             Label wisherLabel = new Label(counterparty + " - x" + numberOfWishedCards);
                             wisherLabel.setStyleName("ownerWisherLabel");
                             scrollablePanelWisher.add(wisherLabel);
-                        } else {
-                            Label noWishedCardsLabel = new Label("Nessuno desidera questa carta");
-                            noWishedCardsLabel.setStyleName("ownerWisherLabel");
-                            wishersContainer.add(noWishedCardsLabel);
                         }
                     }
                 }
 
+            }
+
+            if (someoneOwnCard == false) {
+                Label noOwnedCardsLabel = new Label("Nessuno possiede questa carta");
+                noOwnedCardsLabel.setStyleName("ownerWisherLabel");
+                ownersContainer.add(noOwnedCardsLabel);
+            }
+            if (someoneWishCard == false) {
+                Label noWishedCardsLabel = new Label("Nessuno desidera questa carta");
+                noWishedCardsLabel.setStyleName("ownerWisherLabel");
+                wishersContainer.add(noWishedCardsLabel);
             }
 
             ownersContainer.add(scrollablePanelOwner);

@@ -45,7 +45,6 @@ public class SignUpView extends Composite {
             // Inizializzazione del widget della vista con il pannello contenitore
             initWidget(container);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
