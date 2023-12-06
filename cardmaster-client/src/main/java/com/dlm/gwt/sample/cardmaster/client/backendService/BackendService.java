@@ -11,8 +11,6 @@ public class BackendService {
 
     private final DatabaseServiceAsync databaseService;
 
-    // TODO: suddividere BackendService in più classi: una per le operazioni sulle
-    // carte, una per le operazioni sui deck, una per le operazioni di filtro
     public BackendService(DatabaseServiceAsync databaseService) {
         this.databaseService = databaseService;
     }

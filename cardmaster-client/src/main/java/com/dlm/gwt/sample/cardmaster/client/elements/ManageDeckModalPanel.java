@@ -59,6 +59,7 @@ public class ManageDeckModalPanel extends PopupPanel {
                 Panel cardInfo = new VerticalPanel();
                 Panel cardDetails = new VerticalPanel();
                 Label cardName = new Label(card.getName());
+                cardName.setStyleName("nameLabel");
                 Label cardCondition = new Label(card.getCondition());
                 Panel buttonContainerPanel = new HorizontalPanel();
                 Button removeCardButton = new Button("Remove");
@@ -81,7 +82,6 @@ public class ManageDeckModalPanel extends PopupPanel {
                 scrollableCards.add(cardInfo);
             }
         } else {
-            // FIXME: richiama il placeholder del homeGameActivity
             Label noCards = new Label("Non ci sono carte nel deck");
             noCards.setStyleName("noCardsDeck");
             scrollableCards.add(noCards);
@@ -112,6 +112,7 @@ public class ManageDeckModalPanel extends PopupPanel {
 
                     Panel cardInfo = new VerticalPanel();
                     Label cardName = new Label(card.getName());
+                    cardName.setStyleName("nameLabel");
                     Label cardCondition = new Label(card.getCondition());
                     Panel cardDetails = new VerticalPanel();
                     Panel buttonContainerPanel = new HorizontalPanel();
@@ -136,7 +137,6 @@ public class ManageDeckModalPanel extends PopupPanel {
                     scrollableCards.add(cardInfo);
                 }
             }
-            // FIXME: richiama il placeholder del homeGameActivity
         }
         chooseCardContainer.add(scrollableCards);
         content.add(chooseCardContainer);

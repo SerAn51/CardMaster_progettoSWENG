@@ -151,7 +151,6 @@ public class ExchangeActivity extends AbstractActivity {
                     // elimini la prima che trovi e ti fermi
 
                     // elimina la carta dai deck in cui è contenuta
-                    // FIXME: non funziona
                     removeCard(loggedUser, loggedUserOwnedCard);
 
                     break;
@@ -179,7 +178,6 @@ public class ExchangeActivity extends AbstractActivity {
                     // rimuovere in modo sicuro
                     // durante l'iterazione
                     // elimini la prima che trovi e ti fermi
-                    // FIXME: non funziona
                     removeCard(proponentUser, proponentUserOwnedCard);
 
                     break;

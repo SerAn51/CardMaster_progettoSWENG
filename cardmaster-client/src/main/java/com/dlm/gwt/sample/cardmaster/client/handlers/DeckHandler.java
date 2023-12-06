@@ -22,7 +22,6 @@ public class DeckHandler {
     }
 
     public List<Deck> getDecks(User loggedUser, String gameName) {
-        // TODO:sposta sta roba in cardHandler
         List<Deck> decks = new ArrayList<>();
         Map<String, Deck> userDecks = loggedUser.getDecks();
 

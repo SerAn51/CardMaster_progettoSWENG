@@ -99,8 +99,6 @@ public class Database {
                 } else if (gameName.equalsIgnoreCase("Yugioh")) {
                     yugiohCards.add(card);
                 } else {
-                    // TODO: gestire bene l'errore
-                    //System.out.println("ERRORE: IL NOME DEL GIOCO NON E' VALIDO");
                 }
 
             }

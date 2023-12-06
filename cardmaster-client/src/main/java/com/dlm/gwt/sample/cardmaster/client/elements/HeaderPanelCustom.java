@@ -206,8 +206,6 @@ public class HeaderPanelCustom {
         return headerPanel;
     }
 
-    // TODO: singleton (statico), metodo in ViewRouter
-    // TODO: metti in una activity
     private void logout(ViewRouter viewRouter) {
         // torna alla pagina di login impostando a null il valore dell'utente di
         // sessione

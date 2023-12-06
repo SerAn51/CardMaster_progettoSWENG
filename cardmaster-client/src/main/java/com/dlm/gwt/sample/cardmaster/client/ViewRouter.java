@@ -38,7 +38,6 @@ public class ViewRouter implements ValueChangeHandler<String> {
         }
     }
 
-    // TODO: accorpare metodi nello switch case
     public void handleRouteChange(String token) {
         switch (token) {
             case "login":

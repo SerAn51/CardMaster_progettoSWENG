@@ -143,7 +143,7 @@ public class AddOrUpdateCardConditionModalPanel extends PopupPanel {
             noConditionLabel.setStyleName("label");
             addDetailContainer.add(noConditionLabel);
         } else {
-            for (int i = numberActualCondition - 1; i >= 0; i--) {
+            for (int i = numberActualCondition; i >= 0; i--) {
                 if (i == 4) {
                     conditionListBox.addItem("4 (in ottime condizioni)");
                 }
