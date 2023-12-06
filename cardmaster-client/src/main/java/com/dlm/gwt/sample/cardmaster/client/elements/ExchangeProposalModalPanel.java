@@ -110,7 +110,7 @@ public class ExchangeProposalModalPanel extends PopupPanel {
     private Panel chooseCardForProposalContainerCreator() {
         Panel chooseCardForProposalContainer = new VerticalPanel();
         chooseCardForProposalContainer.setStyleName("chooseCardForProposalContainer");
-        Label carteDaOffrire = new Label("Carte da offrire");
+        Label carteDaOffrire = new Label("Carte da offrire per " + cardLoggedUserWant.getName());
         carteDaOffrire.setStyleName("exchangeTitleLabel");
         chooseCardForProposalContainer.add(carteDaOffrire);
 

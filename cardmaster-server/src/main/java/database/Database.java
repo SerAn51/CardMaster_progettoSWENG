@@ -17,12 +17,14 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import com.google.gwt.user.client.Window;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 import org.mapdb.DB;
+import org.mapdb.DBException;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 
@@ -66,72 +68,88 @@ public class Database {
                     uploadJson(workingDirectory, "Pokemon");
                     uploadJson(workingDirectory, "Yugioh");
                 }
-
+            } catch (DBException.VolumeIOError volumeIOError) {
+                // Gestisci l'errore di I/O specifico qui
+                Window.alert(
+                        "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
             } catch (IOException e) {
-                //System.out.println("Errore durante la lettura del json: " + e.getMessage());
+                // System.out.println("Errore durante la lettura del json: " + e.getMessage());
             } catch (Exception e) {
-                //System.out.println("Errore durante l'apertura del database: " + e.getMessage());
+                // System.out.println("Errore durante l'apertura del database: " +
+                // e.getMessage());
             }
         }
     }
 
     public void uploadJson(String workingDirectory, String gameName)
             throws JsonIOException, JsonSyntaxException, FileNotFoundException {
-        // Leggi il file JSON
-        String lowercaseGameName = gameName.toLowerCase();
-        JsonElement jsonElement = JsonParser.parseReader(new FileReader(workingDirectory +
-                "/src/main/java/database/json/" + lowercaseGameName + ".json"));
+        try {
+            // Leggi il file JSON
+            String lowercaseGameName = gameName.toLowerCase();
+            JsonElement jsonElement = JsonParser.parseReader(new FileReader(workingDirectory +
+                    "/src/main/java/database/json/" + lowercaseGameName + ".json"));
 
-        if (jsonElement.isJsonArray()) {
-            JsonArray jsonArray = jsonElement.getAsJsonArray();
+            if (jsonElement.isJsonArray()) {
+                JsonArray jsonArray = jsonElement.getAsJsonArray();
 
-            for (JsonElement cardElement : jsonArray) {
-                JsonObject cardObject = cardElement.getAsJsonObject();
+                for (JsonElement cardElement : jsonArray) {
+                    JsonObject cardObject = cardElement.getAsJsonObject();
 
-                /* Utilizzo la factory per creare le carte */
-                CardFactoryCreator cardFactory = new CardFactoryCreator(cardObject, gameName);
-                Card card = cardFactory.getCard();
+                    /* Utilizzo la factory per creare le carte */
+                    CardFactoryCreator cardFactory = new CardFactoryCreator(cardObject, gameName);
+                    Card card = cardFactory.getCard();
 
+                    if (gameName.equalsIgnoreCase("Magic")) {
+                        magicCards.add(card);
+                    } else if (gameName.equalsIgnoreCase("Pokemon")) {
+                        pokemonCards.add(card);
+                    } else if (gameName.equalsIgnoreCase("Yugioh")) {
+                        yugiohCards.add(card);
+                    } else {
+                    }
+
+                }
+                // salva nel db
+                // open();
+                // ricorsione che si interrompe subito
+                Map<Integer, Card> map = (Map<Integer, Card>) db.hashMap(lowercaseGameName + "_cards").createOrOpen();
+                int card_id = 0;
                 if (gameName.equalsIgnoreCase("Magic")) {
-                    magicCards.add(card);
+                    for (Card card : magicCards) {
+                        map.put(card_id, card);
+                        card_id++;
+                    }
                 } else if (gameName.equalsIgnoreCase("Pokemon")) {
-                    pokemonCards.add(card);
+                    for (Card card : pokemonCards) {
+                        map.put(card_id, card);
+                        card_id++;
+                    }
                 } else if (gameName.equalsIgnoreCase("Yugioh")) {
-                    yugiohCards.add(card);
-                } else {
+                    for (Card card : yugiohCards) {
+                        map.put(card_id, card);
+                        card_id++;
+                    }
                 }
-
+                db.commit();
+                // close();
             }
-            // salva nel db
-            // open();
-            // ricorsione che si interrompe subito
-            Map<Integer, Card> map = (Map<Integer, Card>) db.hashMap(lowercaseGameName + "_cards").createOrOpen();
-            int card_id = 0;
-            if (gameName.equalsIgnoreCase("Magic")) {
-                for (Card card : magicCards) {
-                    map.put(card_id, card);
-                    card_id++;
-                }
-            } else if (gameName.equalsIgnoreCase("Pokemon")) {
-                for (Card card : pokemonCards) {
-                    map.put(card_id, card);
-                    card_id++;
-                }
-            } else if (gameName.equalsIgnoreCase("Yugioh")) {
-                for (Card card : yugiohCards) {
-                    map.put(card_id, card);
-                    card_id++;
-                }
-            }
-            db.commit();
-            // close();
+        } catch (DBException.VolumeIOError volumeIOError) {
+            // Gestisci l'errore di I/O specifico qui
+            Window.alert(
+                    "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
         }
     }
 
     // metodo per chiudere il database se esiste ed e' chiuso
     public synchronized void close() {
-        if (db != null && !db.isClosed()) {
-            db.close();
+        try {
+            if (db != null && !db.isClosed()) {
+                db.close();
+            }
+        } catch (DBException.VolumeIOError volumeIOError) {
+            // Gestisci l'errore di I/O specifico qui
+            Window.alert(
+                    "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
         }
     }
 
@@ -145,6 +163,10 @@ public class Database {
 
             userMap.put(username, user); // qui sfrutto il fatto che User sia serializable
             db.commit();
+        } catch (DBException.VolumeIOError volumeIOError) {
+            // Gestisci l'errore di I/O specifico qui
+            Window.alert(
+                    "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -168,7 +190,10 @@ public class Database {
                     loggedUser = dbUser;
                 }
             }
-
+        } catch (DBException.VolumeIOError volumeIOError) {
+            // Gestisci l'errore di I/O specifico qui
+            Window.alert(
+                    "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
         } finally {
             close();
 
@@ -180,6 +205,7 @@ public class Database {
     // Input: magic, pokemon, yugioh
     public List<Card> getCards(String gameName) {
         String lowercaseGameName = gameName.toLowerCase();
+        List<Card> cardList = new ArrayList<>(); // Inizializza la lista qui
 
         try {
             open();
@@ -191,16 +217,19 @@ public class Database {
                     .createOrOpen();
 
             // Estrai le carte dalla mappa e crea una lista
-            List<Card> cardList = new ArrayList<>();
-
             for (Card card : map.values()) {
                 cardList.add(card);
             }
-            return cardList;
+        } catch (DBException.VolumeIOError volumeIOError) {
+            // Gestisci l'errore di I/O specifico qui
+            Window.alert(
+                    "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
         } finally {
             close(); // Chiudi il database nel blocco finally per garantire la chiusura anche in caso
                      // di eccezioni
         }
+
+        return cardList; // Ritorna la lista di carte, anche se vuota in caso di errore
     }
 
     /* ++ INIIZO SCAMBIO ++ */
@@ -226,6 +255,10 @@ public class Database {
                 ownersWishersMap.put(user.getUsername(), istancesOfCard);
             }
 
+        } catch (DBException.VolumeIOError volumeIOError) {
+            // Gestisci l'errore di I/O specifico qui
+            Window.alert(
+                    "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -248,6 +281,10 @@ public class Database {
         try {
             Map<String, User> userMap = openUserMap();
             counterpartyUser = userMap.get(counterpartyUsername);
+        } catch (DBException.VolumeIOError volumeIOError) {
+            // Gestisci l'errore di I/O specifico qui
+            Window.alert(
+                    "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -274,6 +311,10 @@ public class Database {
         try {
             open(); // Apri il database
             userMap = (Map<String, User>) db.hashMap("user").createOrOpen();
+        } catch (DBException.VolumeIOError volumeIOError) {
+            // Gestisci l'errore di I/O specifico qui
+            Window.alert(
+                    "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -294,6 +335,10 @@ public class Database {
             db.commit(); // Salva le modifiche nel database
 
             success = true;
+        } catch (DBException.VolumeIOError volumeIOError) {
+            // Gestisci l'errore di I/O specifico qui
+            Window.alert(
+                    "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -341,6 +386,10 @@ public class Database {
                 }
             }
             success = true;
+        } catch (DBException.VolumeIOError volumeIOError) {
+            // Gestisci l'errore di I/O specifico qui
+            Window.alert(
+                    "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -365,6 +414,10 @@ public class Database {
         Map<String, User> userMap = openUserMap();
         try {
             user = userMap.get(username);
+        } catch (DBException.VolumeIOError volumeIOError) {
+            // Gestisci l'errore di I/O specifico qui
+            Window.alert(
+                    "Errore del Database. Potrebbe essere dettato da problemi di permessi, spazio su disco insufficiente o problemi hardware. Per favore riprova");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
